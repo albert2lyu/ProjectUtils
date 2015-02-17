@@ -60,7 +60,7 @@ public class CacheUtils {
      * @return
      */
     public boolean checkCacheExists(String cacheFileName) {
-        return new File(cachePath, cacheFileName).exists();
+        return new File(cachePath + cacheFileName).exists();
     }
 
     /**
@@ -73,7 +73,7 @@ public class CacheUtils {
         if (!checkCacheExists(cacheFileName)) {
             return false;
         }
-        long lastModified = FileUtils.getInstance(mContext).getFileLastModifiedTime(new File(cachePath, cacheFileName));
+        long lastModified = FileUtils.getInstance(mContext).getFileLastModifiedTime(new File(cachePath + cacheFileName));
         return (System.currentTimeMillis() - lastModified) > FAIL_TIME;
     }
 

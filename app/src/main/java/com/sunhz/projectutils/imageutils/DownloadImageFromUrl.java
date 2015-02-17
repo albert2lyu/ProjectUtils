@@ -43,14 +43,12 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
 
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
         downloadCallBack.onPreExecute();
     }
 
 
     @Override
     protected void onPostExecute(Bitmap result) {
-        super.onPostExecute(result);
         downloadCallBack.onPostExecute(result);
     }
 
