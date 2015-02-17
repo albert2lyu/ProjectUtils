@@ -183,7 +183,7 @@ public class ImageUtils {
      * @throws IOException
      */
     public static void bitmapToFile(Bitmap bitmap, File file) throws IOException {
-        if (!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         FileOutputStream fileOutputStream = null;
@@ -341,6 +341,8 @@ public class ImageUtils {
             is.close();
         }
     }
+
+
 
 
 }

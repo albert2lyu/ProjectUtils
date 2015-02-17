@@ -55,6 +55,29 @@ public class CacheUtils {
     }
 
     /**
+     * 检查缓存是否存在
+     *
+     * @return
+     */
+    public boolean checkCacheExists(String cacheFileName) {
+        return new File(cachePath, cacheFileName).exists();
+    }
+
+    /**
+     * 检查缓存是否过期
+     *
+     * @param cacheFileName
+     * @return true:已经过期,false:还没有过期
+     */
+    public boolean checkCacheFailTime(String cacheFileName) {
+        if (!checkCacheExists(cacheFileName)) {
+            return false;
+        }
+        long lastModified = FileUtils.getInstance(mContext).getFileLastModifiedTime(new File(cachePath, cacheFileName));
+        return (System.currentTimeMillis() - lastModified) > FAIL_TIME;
+    }
+
+    /**
      * 存储str缓存
      *
      * @param cacheName 缓存名
@@ -80,11 +103,8 @@ public class CacheUtils {
             throw new Exception("cache 为空");
         }
 
-        if (failTimeFlag) {
-            long lastModified = FileUtils.getInstance(mContext).getFileLastModifiedTime(file);
-            if (System.currentTimeMillis() - lastModified > FAIL_TIME) {
-                throw new Exception("cache 已经过期");
-            }
+        if (failTimeFlag && checkCacheFailTime(cacheName)) {
+            throw new Exception("cache 已经过期");
         }
         return cacheContent;
     }

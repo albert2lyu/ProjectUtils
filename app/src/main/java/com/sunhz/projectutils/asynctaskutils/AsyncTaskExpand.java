@@ -6,7 +6,7 @@ import android.os.AsyncTask;
  * 拓展的AsyncTask,随意控制线程并串行
  * Created by Spencer on 15/2/3.
  */
-public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTask {
+public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
     private boolean flag = SERIAL;
 
@@ -21,7 +21,7 @@ public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTas
     public static final boolean SERIAL = false;
 
     /**
-     * 控制是否并行,若系统不支持,便自动为串行
+     * 控制是否并行
      *
      * @param flag AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
      */
@@ -31,13 +31,19 @@ public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTas
     }
 
 
-    @Override
-    protected void onPostExecute(Object o) {
+    /**
+     * 在AsyncTask基础进行了封装
+     *
+     * @param params
+     * @return
+     */
+    public AsyncTask<Params, Progress, Result> executeExpand(Params... params) {
         if (flag) {
-            super.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, o);
+            return super.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
         } else {
-            super.onPostExecute(o);
+            return super.execute(params);
         }
-
     }
+
+
 }
