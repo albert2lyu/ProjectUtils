@@ -39,15 +39,12 @@ public class FileUtils {
 
     private static FileUtils fileUtils;
 
-    private Context mContext;
-
-    private FileUtils(Context mContext) {
-        this.mContext = mContext;
+    private FileUtils() {
     }
 
-    public synchronized static FileUtils getInstance(Context mContext) {
+    public synchronized static FileUtils getInstance() {
         if (fileUtils == null) {
-            fileUtils = new FileUtils(mContext);
+            fileUtils = new FileUtils();
         }
         return fileUtils;
     }
@@ -165,7 +162,7 @@ public class FileUtils {
      * @return
      * @throws IOException
      */
-    public String getAssetFileContent(String fileName) throws Exception {
+    public String getAssetFileContent(Context mContext,String fileName) throws Exception {
         return InputStream2String(mContext.getResources().getAssets().open(fileName));
     }
 
@@ -294,7 +291,7 @@ public class FileUtils {
      * @return true:保存成功
      * @throws IOException
      */
-    public boolean InitFileToSDCard(int rawId, String fileSavePath) throws IOException {
+    public boolean InitFileToSDCard(Context mContext,int rawId, String fileSavePath) throws IOException {
         InputStream inputStream = null;
         try {
             inputStream = mContext.getResources().openRawResource(rawId); // 这里就是Raw文件引用位置
@@ -313,7 +310,7 @@ public class FileUtils {
      * @return true:保存成功
      * @throws Exception
      */
-    public boolean InitAssetsFileToSDCard(String assetsFileName, String fileSavePath)
+    public boolean InitAssetsFileToSDCard(Context mContext,String assetsFileName, String fileSavePath)
             throws IOException {
         if (assetsFileName == null) {
             return false;

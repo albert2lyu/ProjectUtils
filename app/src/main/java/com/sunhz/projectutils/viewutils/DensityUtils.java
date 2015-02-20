@@ -48,7 +48,7 @@ public class DensityUtils {
      * 获取屏幕宽度和高度，单位为px
      *
      * @param mContext
-     * @return
+     * @return point.x : 宽度,point.y : 高度
      */
     public static Point getScreenMetrics(Context mContext) {
         DisplayMetrics dm = mContext.getResources().getDisplayMetrics();

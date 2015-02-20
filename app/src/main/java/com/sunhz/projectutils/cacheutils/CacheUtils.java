@@ -73,7 +73,7 @@ public class CacheUtils {
         if (!checkCacheExists(cacheFileName)) {
             return false;
         }
-        long lastModified = FileUtils.getInstance(mContext).getFileLastModifiedTime(new File(cachePath + cacheFileName));
+        long lastModified = FileUtils.getInstance().getFileLastModifiedTime(new File(cachePath + cacheFileName));
         return (System.currentTimeMillis() - lastModified) > FAIL_TIME;
     }
 
@@ -85,7 +85,7 @@ public class CacheUtils {
      * @throws IOException
      */
     public void saveStringCache(String cacheName, String content) throws IOException {
-        FileUtils.getInstance(mContext).write(new File(cachePath, cacheName), content);
+        FileUtils.getInstance().write(new File(cachePath, cacheName), content);
     }
 
     /**
@@ -97,7 +97,7 @@ public class CacheUtils {
      */
     public String getStringCache(String cacheName, boolean failTimeFlag) throws Exception {
         File file = new File(cachePath, cacheName);
-        String cacheContent = FileUtils.getInstance(mContext).read(file);
+        String cacheContent = FileUtils.getInstance().read(file);
 
         if (TextUtils.isEmpty(cacheContent)) {
             throw new Exception("cache 为空");
@@ -110,7 +110,7 @@ public class CacheUtils {
     }
 
     public void clearAllCache() {
-        FileUtils.getInstance(mContext).deleteDir(new File(cachePath));
+        FileUtils.getInstance().deleteDir(new File(cachePath));
     }
 
     public String getCachePath() {
