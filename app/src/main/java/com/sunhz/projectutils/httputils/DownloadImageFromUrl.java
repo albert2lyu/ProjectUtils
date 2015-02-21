@@ -1,4 +1,4 @@
-package com.sunhz.projectutils.imageutils;
+package com.sunhz.projectutils.httputils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

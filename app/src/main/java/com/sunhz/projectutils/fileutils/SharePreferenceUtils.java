@@ -64,4 +64,8 @@ public class SharePreferenceUtils {
         return mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).getFloat(key, -1);
     }
 
+    public boolean contains(String spName,String key){
+        return mContext.getSharedPreferences(spName,Context.MODE_PRIVATE).contains(key);
+    }
+
 }

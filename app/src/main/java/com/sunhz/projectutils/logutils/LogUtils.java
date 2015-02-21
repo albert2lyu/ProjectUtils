@@ -57,7 +57,7 @@ public class LogUtils {
                 new File(fileFolderPath).mkdirs();
             }
             String filePath = fileFolderPath + File.separator + fileName;
-            FileUtils.getInstance(mContext).write(new File(filePath), result);
+            FileUtils.getInstance().write(new File(filePath), result);
         } catch (Exception e) {
             Log.e("", "an error occured while writing report file...", e);
         }
