@@ -27,20 +27,26 @@ public class FirstStartUtils {
         return firstStartUtils;
     }
 
+    public void init() {
+        SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext);
+        if (!sharePreferenceUtils.contains(FIRST_START_FLAG, FIRST_START_FLAG)) {
+            sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
+        } else {
+            sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
+        }
+    }
+
+
     /**
      * 判断当前app是否是第一次启动
+     * <p/>
+     * 需要在application的OnCreate中调用init方法
      *
      * @return true:第一次启动,false:不是第一次启动
      */
     public boolean checkIsFirstStart() {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext);
-        boolean result = !sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG);
-
-        if (result) {
-            sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
-        }
-
-        return result;
+        return !sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG);
     }
 
 }

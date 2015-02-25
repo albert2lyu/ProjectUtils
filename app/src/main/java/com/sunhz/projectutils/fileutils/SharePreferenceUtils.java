@@ -24,12 +24,22 @@ public class SharePreferenceUtils {
                 .commit();
     }
 
+    public void saveLongAppend(String spName, String key, long content) {
+        mContext.getSharedPreferences(spName, Context.MODE_APPEND).edit().putLong(key, content)
+                .commit();
+    }
+
     public long getLong(String spName, String key) {
         return mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).getLong(key, -1);
     }
 
     public void saveInt(String spName, String key, int content) {
         mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().putLong(key, content)
+                .commit();
+    }
+
+    public void saveIntAppend(String spName, String key, int content) {
+        mContext.getSharedPreferences(spName, Context.MODE_APPEND).edit().putInt(key, content)
                 .commit();
     }
 
@@ -42,12 +52,22 @@ public class SharePreferenceUtils {
                 .commit();
     }
 
+    public void saveBooleanAppend(String spName, String key, boolean content) {
+        mContext.getSharedPreferences(spName, Context.MODE_APPEND).edit().putBoolean(key, content)
+                .commit();
+    }
+
     public boolean getBoolean(String spName, String key) {
         return mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).getBoolean(key, false);
     }
 
     public void saveString(String spName, String key, String content) {
         mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().putString(key, content)
+                .commit();
+    }
+
+    public void saveStringAppend(String spName, String key, String content) {
+        mContext.getSharedPreferences(spName, Context.MODE_APPEND).edit().putString(key, content)
                 .commit();
     }
 
@@ -60,12 +80,21 @@ public class SharePreferenceUtils {
                 .commit();
     }
 
+    public void saveFloatAppend(String spName, String key, float content) {
+        mContext.getSharedPreferences(spName, Context.MODE_APPEND).edit().putFloat(key, content)
+                .commit();
+    }
+
     public float getFloat(String spName, String key) {
         return mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).getFloat(key, -1);
     }
 
-    public boolean contains(String spName,String key){
-        return mContext.getSharedPreferences(spName,Context.MODE_PRIVATE).contains(key);
+    public boolean contains(String spName, String key) {
+        return mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).contains(key);
+    }
+
+    public void clear(String spName) {
+        mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().clear().commit();
     }
 
 }

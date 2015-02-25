@@ -107,7 +107,7 @@ public class SDCardUtils {
      * @return 创建得到的目录
      */
     public File createAbsoluteSDDir(String absoluteDirName) {
-        File dir = new File(getSDCardPath(),absoluteDirName);
+        File dir = new File(getSDCardPath(), absoluteDirName);
         dir.mkdir();
         return dir;
     }
