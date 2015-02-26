@@ -11,4 +11,6 @@ public class AppController {
      * 程序异常退出时的提示文案
      */
     public final static String CRASH_HANLDER_CONTENT = "程序异常退出,请重新打开";
+
+    public final static int NET_TIMEOUT = 5000;
 }

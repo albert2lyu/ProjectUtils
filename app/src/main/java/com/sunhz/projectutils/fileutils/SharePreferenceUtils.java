@@ -13,7 +13,7 @@ public class SharePreferenceUtils {
     }
 
     public synchronized static SharePreferenceUtils getInstance(Context mContext) {
-        if (sharePreferenceUtils != null) {
+        if (sharePreferenceUtils == null) {
             sharePreferenceUtils = new SharePreferenceUtils(mContext);
         }
         return sharePreferenceUtils;
@@ -34,7 +34,7 @@ public class SharePreferenceUtils {
     }
 
     public void saveInt(String spName, String key, int content) {
-        mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().putLong(key, content)
+        mContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().putInt(key, content)
                 .commit();
     }
 

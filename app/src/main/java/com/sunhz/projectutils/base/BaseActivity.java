@@ -4,8 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
+import com.sunhz.projectutils.AppController;
 
 public class BaseActivity extends FragmentActivity {
 
@@ -18,6 +22,17 @@ public class BaseActivity extends FragmentActivity {
         this.mContext = this;
         this.volleyQueue = Volley.newRequestQueue(mContext);
         BaseApplication.getInstance().addActivity(this);
+    }
+
+    /**
+     * 添加请求到volley队列中
+     * @param request
+     */
+    public void volleyAdd(Request request) {
+        int socketTimeout = AppController.NET_TIMEOUT;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        request.setRetryPolicy(policy);
+        volleyQueue.add(request);
     }
 
     @Override

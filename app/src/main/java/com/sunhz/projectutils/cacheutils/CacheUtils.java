@@ -70,7 +70,7 @@ public class CacheUtils {
      * @return true:已经过期,false:还没有过期
      */
     public boolean checkCacheFailTime(String cacheFileName) {
-        if (!checkCacheExists(cacheFileName)) {
+        if (checkCacheExists(cacheFileName)) {
             return false;
         }
         long lastModified = FileUtils.getInstance().getFileLastModifiedTime(new File(cachePath + cacheFileName));

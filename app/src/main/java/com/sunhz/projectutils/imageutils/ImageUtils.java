@@ -338,7 +338,8 @@ public class ImageUtils {
             is = new FileInputStream(new File(filePath));
             return BitmapDrawable.createFromStream(is, null);
         } finally {
-            is.close();
+            if (is != null)
+                is.close();
         }
     }
 
