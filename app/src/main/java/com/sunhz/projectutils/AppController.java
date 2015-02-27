@@ -12,5 +12,8 @@ public class AppController {
      */
     public final static String CRASH_HANLDER_CONTENT = "程序异常退出,请重新打开";
 
-    public final static int NET_TIMEOUT = 5000;
+    /**
+     * 网络超时 3秒
+     */
+    public final static int NET_TIMEOUT = 3000;
 }

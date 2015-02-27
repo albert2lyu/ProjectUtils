@@ -26,6 +26,7 @@ public class BaseActivity extends FragmentActivity {
 
     /**
      * 添加请求到volley队列中
+     *
      * @param request
      */
     public void volleyAdd(Request request) {

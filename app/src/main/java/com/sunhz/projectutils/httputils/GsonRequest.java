@@ -14,7 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.JsonSyntaxException;
-import com.sunhz.projectutils.jsonutils.JsonUtils;
+import com.sunhz.projectutils.jsonutils.GsonUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success((T) JsonUtils.getInstance().jsonToObject(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
+            return Response.success((T) GsonUtils.getInstance().jsonToObject(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JsonSyntaxException e) {

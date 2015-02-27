@@ -14,6 +14,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.sunhz.projectutils.AppController;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class ImageUtils {
 
@@ -342,6 +346,22 @@ public class ImageUtils {
                 is.close();
         }
     }
+
+    /**
+     * 获取网络图片
+     * @param imgUrl
+     * @return inputStream
+     * @throws IOException
+     */
+    public static InputStream getNetImage(String imgUrl) throws IOException {
+        URL url = new URL(imgUrl);
+        URLConnection urlConnection = url.openConnection();
+        urlConnection.setConnectTimeout(AppController.NET_TIMEOUT);
+        urlConnection.setReadTimeout(AppController.NET_TIMEOUT);
+        InputStream inputStream = urlConnection.getInputStream();
+        return inputStream;
+    }
+
 
 
 }

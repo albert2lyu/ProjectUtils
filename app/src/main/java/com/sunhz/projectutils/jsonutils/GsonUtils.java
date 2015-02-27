@@ -7,8 +7,9 @@
  */
 package com.sunhz.projectutils.jsonutils;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
@@ -16,20 +17,20 @@ import java.util.List;
  * 使用Gson,解析
  * Created by Spencer on 15/2/3.
  */
-public class JsonUtils {
-    private static JsonUtils jsonUtils;
+public class GsonUtils {
+    private static GsonUtils gsonUtils;
     private static Gson gson;
 
-    private JsonUtils() {
+    private GsonUtils() {
 
     }
 
-    public synchronized static JsonUtils getInstance() {
-        if (jsonUtils == null || gson == null) {
-            jsonUtils = new JsonUtils();
+    public synchronized static GsonUtils getInstance() {
+        if (gsonUtils == null || gson == null) {
+            gsonUtils = new GsonUtils();
             gson = new Gson();
         }
-        return jsonUtils;
+        return gsonUtils;
     }
 
     /**
@@ -50,12 +51,23 @@ public class JsonUtils {
      * @return object
      */
     public <T> T jsonToObject(String json, Class clazz) {
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
         return (T) gson.fromJson(json, clazz);
     }
 
-    public <T> List<T> jsonToObjectList(String json) {
-        return gson.fromJson(json,
-                new TypeToken<List<T>>() {
-                }.getType());
+    /**
+     * 将json转位list
+     * @param json json
+     * @param classT 需要的List的泛型 如:List<Object> , 就在classT参数处,填写Object.class
+     * @param <T>
+     * @return List<T>
+     */
+    public <T> List<T> jsonToObjectList(String json, Class<T> classT) {
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+        return gson.fromJson(json, new ListOfSomething<T>(classT));
     }
 }
