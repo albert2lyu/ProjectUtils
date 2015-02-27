@@ -19,16 +19,16 @@ import java.util.List;
  */
 public class GsonUtils {
     private static GsonUtils gsonUtils;
-    private static Gson gson;
+    private Gson gson;
 
     private GsonUtils() {
-
+        gson = new Gson();
     }
 
     public synchronized static GsonUtils getInstance() {
-        if (gsonUtils == null || gson == null) {
+        if (gsonUtils == null) {
             gsonUtils = new GsonUtils();
-            gson = new Gson();
+
         }
         return gsonUtils;
     }
@@ -59,7 +59,8 @@ public class GsonUtils {
 
     /**
      * 将json转位list
-     * @param json json
+     *
+     * @param json   json
      * @param classT 需要的List的泛型 如:List<Object> , 就在classT参数处,填写Object.class
      * @param <T>
      * @return List<T>
