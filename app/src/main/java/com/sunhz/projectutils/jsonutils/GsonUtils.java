@@ -50,11 +50,11 @@ public class GsonUtils {
      * @param clazz 需要转换成的类型
      * @return object
      */
-    public <T> T jsonToObject(String json, Class clazz) {
+    public <T> T jsonToObject(String json, Class<T> clazz) {
         if (TextUtils.isEmpty(json)) {
             return null;
         }
-        return (T) gson.fromJson(json, clazz);
+        return  gson.fromJson(json, clazz);
     }
 
     /**

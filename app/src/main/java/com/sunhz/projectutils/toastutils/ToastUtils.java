@@ -57,8 +57,8 @@ public class ToastUtils {
 
     /**
      * 描述：在线程中提示文本信息.
-     *
-     * @param toast
+     * @param context
+     * @param text
      */
     public static void showToastInThread(final Activity context,
                                          final String text) {
