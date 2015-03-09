@@ -71,4 +71,14 @@ public class GsonUtils {
         }
         return gson.fromJson(json, new ListOfSomething<T>(classT));
     }
+
+    /**
+     * object 转 jsonStr
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public <T> String objectToJsonStr(T t) {
+        return gson.toJson(t);
+    }
 }

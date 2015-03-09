@@ -15,5 +15,5 @@ public class AppController {
     /**
      * 网络超时 3秒
      */
-    public final static int NET_TIMEOUT = 3000;
+    public final static int NET_TIMEOUT = 10000;
 }

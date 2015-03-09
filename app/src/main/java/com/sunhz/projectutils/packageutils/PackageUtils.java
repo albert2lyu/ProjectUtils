@@ -2,9 +2,13 @@ package com.sunhz.projectutils.packageutils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 包管理工具
@@ -54,12 +58,32 @@ public class PackageUtils {
         mContext.startActivity(intent);
     }
 
-    public void getAllPackageName() {
-        //TODO:获取手机全部应用程序报名
+    /**
+     * 获取应用全部包名
+     *
+     * @return List<String>
+     */
+    public List<String> getAllPackageName() {
+        PackageManager packageManager = mContext.getPackageManager();
+        List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
+        List<String> packageNameList = new ArrayList<String>();
+        for (PackageInfo packageInfo : packageInfoList) {
+            packageNameList.add(packageInfo.packageName);
+        }
+        return packageNameList;
     }
 
     public String getMyApplicationPackageName() {
         return mContext.getPackageName();
+    }
+
+    public String getMyApplicationVersionName() {
+        try {
+            return mContext.getPackageManager().getPackageInfo(getMyApplicationPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import com.sunhz.projectutils.fileutils.SDCardUtils;
 import com.sunhz.projectutils.packageutils.PackageUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -55,6 +56,15 @@ public class CacheUtils {
     }
 
     /**
+     * 检查缓存文件是否存在,如果存在并检查是否过期
+     * @param cacheFileName
+     * @return
+     */
+    public boolean checkCacheExistsAndFailTime(String cacheFileName) {
+        return checkCacheExists(cacheFileName) && checkCacheFailTime(cacheFileName);
+    }
+
+    /**
      * 检查缓存是否存在
      *
      * @return
@@ -67,14 +77,14 @@ public class CacheUtils {
      * 检查缓存是否过期
      *
      * @param cacheFileName
-     * @return true:已经过期,false:还没有过期
+     * @return true:还没有过期,false:已经过期
      */
     public boolean checkCacheFailTime(String cacheFileName) {
         if (checkCacheExists(cacheFileName)) {
-            return false;
+            return true;
         }
         long lastModified = FileUtils.getInstance().getFileLastModifiedTime(new File(cachePath + cacheFileName));
-        return (System.currentTimeMillis() - lastModified) > FAIL_TIME;
+        return (System.currentTimeMillis() - lastModified) < FAIL_TIME;
     }
 
     /**
@@ -85,6 +95,7 @@ public class CacheUtils {
      * @throws IOException
      */
     public void saveStringCache(String cacheName, String content) throws IOException {
+        check(cacheName);
         FileUtils.getInstance().write(new File(cachePath, cacheName), content);
     }
 
@@ -97,6 +108,11 @@ public class CacheUtils {
      */
     public String getStringCache(String cacheName, boolean failTimeFlag) throws Exception {
         File file = new File(cachePath, cacheName);
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("文件不存在:" + file.toString());
+        }
+
         String cacheContent = FileUtils.getInstance().read(file);
 
         if (TextUtils.isEmpty(cacheContent)) {
@@ -109,11 +125,53 @@ public class CacheUtils {
         return cacheContent;
     }
 
+    /**
+     * 删除全部缓存
+     */
     public void clearAllCache() {
         FileUtils.getInstance().deleteDir(new File(cachePath));
     }
 
+    /**
+     * 获取缓存大小
+     */
+    public String getCacheSize() {
+        try {
+            long size = FileUtils.getInstance().getDirectorySize(new File(cachePath));
+            if (size == -1) {
+                return "无缓存";
+            } else {
+                return FileUtils.getInstance().formetFileSize(size);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String getCachePath() {
         return cachePath;
+    }
+
+    /**
+     * 检查缓存文件夹是否存在,检查保存缓存的文件是否存在
+     *
+     * @param cacheName
+     */
+    private void check(String cacheName) {
+        try {
+
+            File cachePathTemp = new File(cachePath);
+            if (!cachePathTemp.exists()) {
+                cachePathTemp.mkdirs();
+            }
+
+            File cacheFileTemp = new File(cachePath, cacheName);
+            if (!cacheFileTemp.exists()) {
+                cacheFileTemp.createNewFile();
+            }
+        } catch (IOException e) {
+        }
     }
 }
