@@ -57,6 +57,7 @@ public class CacheUtils {
 
     /**
      * 检查缓存文件是否存在,如果存在并检查是否过期
+     *
      * @param cacheFileName
      * @return
      */
@@ -119,7 +120,7 @@ public class CacheUtils {
             throw new Exception("cache 为空");
         }
 
-        if (failTimeFlag && checkCacheFailTime(cacheName)) {
+        if (failTimeFlag && !checkCacheFailTime(cacheName)) {
             throw new Exception("cache 已经过期");
         }
         return cacheContent;

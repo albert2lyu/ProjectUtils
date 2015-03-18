@@ -54,7 +54,7 @@ public class GsonUtils {
         if (TextUtils.isEmpty(json)) {
             return null;
         }
-        return  gson.fromJson(json, clazz);
+        return gson.fromJson(json, clazz);
     }
 
     /**
@@ -74,6 +74,7 @@ public class GsonUtils {
 
     /**
      * object 转 jsonStr
+     *
      * @param t
      * @param <T>
      * @return

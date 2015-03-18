@@ -349,6 +349,7 @@ public class ImageUtils {
 
     /**
      * 获取网络图片
+     *
      * @param imgUrl
      * @return inputStream
      * @throws IOException
@@ -361,7 +362,6 @@ public class ImageUtils {
         InputStream inputStream = urlConnection.getInputStream();
         return inputStream;
     }
-
 
 
 }
