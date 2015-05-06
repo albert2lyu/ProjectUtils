@@ -1,26 +1,16 @@
 package com.sunhz.projectutils.base;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import java.util.ArrayList;
+import com.orhanobut.logger.LogLevel;
+import com.orhanobut.logger.Logger;
+import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.CrashHandler;
 
 public class BaseApplication extends Application {
 
-    private Context mContext;
-
-    private static BaseApplication baseApplication;
-
-    private ArrayList<Activity> actList = new ArrayList<Activity>();
-
-    public synchronized static BaseApplication getInstance() {
-        if (baseApplication == null) {
-            baseApplication = new BaseApplication();
-        }
-        return baseApplication;
-    }
-
+    protected Context mContext;
 
     @Override
     public void onCreate() {
@@ -28,20 +18,12 @@ public class BaseApplication extends Application {
         this.mContext = this;
 
 
-//        if (!DebugController.isDebug) {
-//            CrashHandler.getInstance(mContext).init();
-//        }
+        if (!Constance.isDebug) { // 正是环境
+            CrashHandler.getInstance(mContext).init();
+            Logger.init().setLogLevel(LogLevel.NONE);
+        } else { // 开发环境
+            Logger.init().setLogLevel(LogLevel.FULL);
+        }
     }
 
-    public void addActivity(Activity activity) {
-        actList.add(activity);
-    }
-
-    public void removeActivity(Activity activity) {
-        actList.remove(activity);
-    }
-
-    public ArrayList<Activity> getAllActivity() {
-        return actList;
-    }
 }

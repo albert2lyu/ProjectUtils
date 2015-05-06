@@ -10,6 +10,7 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -17,8 +18,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/libs/android-support-v4.jar')
-    compile files('libs/gson-2.3.1.jar')
-    compile files('libs/volley.jar')
-    compile files('libs/picasso-2.5.0.jar')
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.mcxiaoke.volley:library:1.0.15'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.orhanobut:logger:1.8'
 }

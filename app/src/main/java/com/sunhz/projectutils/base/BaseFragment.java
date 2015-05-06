@@ -2,18 +2,16 @@ package com.sunhz.projectutils.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
-import com.sunhz.projectutils.ActivityManager;
 import com.sunhz.projectutils.Constance;
 
-public class BaseActivity extends FragmentActivity implements Base {
+public class BaseFragment extends Fragment implements Base {
 
     protected Context mContext;
     protected Activity mActivity;
@@ -21,18 +19,15 @@ public class BaseActivity extends FragmentActivity implements Base {
     private RetryPolicy policy;
 
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
 
-        this.mContext = this;
-        this.mActivity = this;
-
+        mContext = activity.getBaseContext();
+        mActivity = activity;
         this.volleyQueue = Volley.newRequestQueue(mContext);
 
         int socketTimeout = Constance.TimeInApplication.NET_TIMEOUT;
         policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-
-        ActivityManager.addActivity(this);
     }
 
     /**
@@ -42,30 +37,15 @@ public class BaseActivity extends FragmentActivity implements Base {
      */
     @Override
     public void volleyAdd(Request request) {
+
         request.setRetryPolicy(policy);
         volleyQueue.add(request);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         volleyQueue.cancelAll(mContext);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ActivityManager.removeActivity(this);
-    }
 }

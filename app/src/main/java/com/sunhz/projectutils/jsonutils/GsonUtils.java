@@ -43,6 +43,7 @@ public class GsonUtils {
         return gson.toJson(t);
     }
 
+
     /**
      * string 转换成 对象
      *
@@ -61,7 +62,7 @@ public class GsonUtils {
      * 将json转位list
      *
      * @param json   json
-     * @param classT 需要的List的泛型 如:List<Object> , 就在classT参数处,填写Object.class
+     * @param classT 需要的List的泛型类型 如:List<Object> , 就在classT参数处,填写Object.class
      * @param <T>
      * @return List<T>
      */
@@ -70,16 +71,5 @@ public class GsonUtils {
             return null;
         }
         return gson.fromJson(json, new ListOfSomething<T>(classT));
-    }
-
-    /**
-     * object 转 jsonStr
-     *
-     * @param t
-     * @param <T>
-     * @return
-     */
-    public <T> String objectToJsonStr(T t) {
-        return gson.toJson(t);
     }
 }

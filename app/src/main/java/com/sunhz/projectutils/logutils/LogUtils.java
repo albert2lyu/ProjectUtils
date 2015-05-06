@@ -1,10 +1,10 @@
 package com.sunhz.projectutils.logutils;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
-import com.sunhz.projectutils.DebugController;
+import com.orhanobut.logger.Logger;
+import com.sunhz.projectutils.cacheutils.CacheUtils;
 import com.sunhz.projectutils.fileutils.FileUtils;
 
 import java.io.File;
@@ -15,6 +15,8 @@ import java.io.Writer;
 public class LogUtils {
 
     private static Context mContext;
+
+    private static final String LOG_FOLDER_NAME = "log";
 
     private LogUtils() {
     }
@@ -52,98 +54,45 @@ public class LogUtils {
         try {
             long timestamp = System.currentTimeMillis();
             String fileName = "ex-" + timestamp;
-            String fileFolderPath = Environment.getExternalStorageDirectory() + File.separator + mContext.getPackageName() + File.separator + "log";
+            String fileFolderPath = CacheUtils.getInstance(mContext).getOtherCachePath() + LOG_FOLDER_NAME;
             if (!new File(fileFolderPath).exists()) {
                 new File(fileFolderPath).mkdirs();
             }
             String filePath = fileFolderPath + File.separator + fileName;
-            FileUtils.getInstance().write(new File(filePath), result);
+            FileUtils.write(new File(filePath), result);
         } catch (Exception e) {
             Log.e("", "an error occured while writing report file...", e);
         }
     }
 
-    public static void e(Context mcontext, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        e(getTag(mcontext), errorMsg);
+    public static void e(String errorMsg) {
+        Logger.e(errorMsg);
     }
 
-    public static void e(String tag, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        Log.e(tag, errorMsg);
+    public static void d(String errorMsg) {
+        Logger.d(errorMsg);
     }
 
-    public static void d(Context mcontext, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        d(getTag(mcontext), errorMsg);
+    public static void w(String errorMsg) {
+        Logger.w(errorMsg);
     }
 
-    public static void d(String tag, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        Log.d(tag, errorMsg);
+    public static void i(String errorMsg) {
+        Logger.i(errorMsg);
     }
 
-    public static void w(Context mcontext, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        w(getTag(mcontext), errorMsg);
+
+    public static void v(String errorMsg) {
+        Logger.v(errorMsg);
     }
 
-    public static void w(String tag, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        Log.w(tag, errorMsg);
+
+    public static void json(String json) {
+        Logger.json(json);
     }
 
-    public static void w(String tag, String errorMsg, Throwable throwable) {
-
-        writeExceptionLog(throwable);
-        if (!DebugController.isDebug) {
-            return;
-        }
-        w(tag, errorMsg);
+    public static void xml(String xml) {
+        Logger.xml(xml);
     }
 
-    public static void i(Context mcontext, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        i(getTag(mcontext), errorMsg);
-    }
-
-    public static void i(String tag, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        Log.i(tag, errorMsg);
-    }
-
-    public static void v(Context mcontext, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        v(getTag(mcontext), errorMsg);
-    }
-
-    public static void v(String tag, String errorMsg) {
-        if (!DebugController.isDebug) {
-            return;
-        }
-        Log.v(tag, errorMsg);
-    }
-
-    private static String getTag(Context mcontext) {
-
-        return mcontext != null ? mcontext.getClass().getSimpleName() : LogUtils.class.getSimpleName();
-    }
 }

@@ -12,22 +12,15 @@ public class FirstStartUtils {
 
     private static final String FIRST_START_FLAG = "firstStartFlag";
 
-    private static FirstStartUtils firstStartUtils;
 
-    private Context mContext;
-
-    private FirstStartUtils(Context mContext) {
-        this.mContext = mContext;
+    private FirstStartUtils() {
     }
 
-    public static FirstStartUtils getInstance(Context mContext) {
-        if (firstStartUtils == null) {
-            firstStartUtils = new FirstStartUtils(mContext);
-        }
-        return firstStartUtils;
-    }
 
-    public void init() {
+    /**
+     * 初始化方法，需要在application的onCreate中调用
+     */
+    public void init(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext);
         if (!sharePreferenceUtils.contains(FIRST_START_FLAG, FIRST_START_FLAG)) {
             sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
@@ -40,11 +33,11 @@ public class FirstStartUtils {
     /**
      * 判断当前app是否是第一次启动
      * <p/>
-     * 需要在application的OnCreate中调用init方法
+     * 需要在application的OnCreate中调用FirstStartUtils.init()方法
      *
      * @return true:第一次启动,false:不是第一次启动
      */
-    public boolean checkIsFirstStart() {
+    public boolean checkIsFirstStart(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext);
         return !sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG);
     }

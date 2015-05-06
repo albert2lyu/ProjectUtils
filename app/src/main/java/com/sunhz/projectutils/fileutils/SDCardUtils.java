@@ -11,25 +11,18 @@ import java.io.IOException;
  */
 public class SDCardUtils {
 
-    private static SDCardUtils sdCardUtils;
 
     private SDCardUtils() {
 
     }
 
-    public synchronized static SDCardUtils getInstance() {
-        if (sdCardUtils == null) {
-            sdCardUtils = new SDCardUtils();
-        }
-        return sdCardUtils;
-    }
 
     /**
      * 返回sd卡的路径
      *
      * @return sd卡路径
      */
-    public String getSDCardPath() {
+    public static synchronized String getSDCardPath() {
         return Environment.getExternalStorageDirectory().getPath();
     }
 
@@ -38,7 +31,7 @@ public class SDCardUtils {
      *
      * @return true:存在,flase:不存在
      */
-    public boolean checkSDCard() {
+    public static synchronized boolean checkSDCard() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
@@ -47,7 +40,7 @@ public class SDCardUtils {
      *
      * @return true:可写入,false:不可写入
      */
-    public boolean isSdCardWrittenable() {
+    public static synchronized boolean isSdCardWrittenable() {
         return android.os.Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED);
     }
@@ -57,7 +50,7 @@ public class SDCardUtils {
      *
      * @return sd卡剩余空间
      */
-    public long getAvailableStorage() {
+    public static synchronized long getAvailableStorage() {
         String storageDirectory = null;
         storageDirectory = getSDCardPath();
         try {
@@ -75,7 +68,7 @@ public class SDCardUtils {
      * @return
      * @throws Exception
      */
-    public boolean isAvailableStorage(long currentFileSize) throws Exception {
+    public static synchronized boolean isAvailableStorage(long currentFileSize) throws Exception {
         // / 检测sd卡是否存在
         if (!checkSDCard()) {
             throw new Exception("sd卡不存在");
@@ -94,7 +87,7 @@ public class SDCardUtils {
      * @param fileName 要创建的文件名
      * @return 创建得到的文件
      */
-    public File createSDFile(String fileName) throws IOException {
+    public static synchronized File createSDFile(String fileName) throws IOException {
         File file = new File(getSDCardPath() + File.separator + fileName);
         file.createNewFile();
         return file;
@@ -106,7 +99,7 @@ public class SDCardUtils {
      * @param absoluteDirName 要创建的目录名
      * @return 创建得到的目录
      */
-    public File createAbsoluteSDDir(String absoluteDirName) {
+    public static synchronized File createAbsoluteSDDir(String absoluteDirName) {
         File dir = new File(getSDCardPath(), absoluteDirName);
         dir.mkdir();
         return dir;

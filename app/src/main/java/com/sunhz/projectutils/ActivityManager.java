@@ -3,9 +3,7 @@ package com.sunhz.projectutils;
 import android.app.Activity;
 import android.content.Context;
 
-import com.sunhz.projectutils.base.BaseApplication;
-
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * activity 管理器
@@ -13,6 +11,7 @@ import java.util.List;
  */
 public class ActivityManager {
 
+    private static ArrayList<Activity> actList = new ArrayList<Activity>();
 
     /**
      * 关掉所有activity
@@ -20,13 +19,24 @@ public class ActivityManager {
      * @param mContext
      */
     public static void closeAllActivity(Context mContext) {
-        List<Activity> activityList = BaseApplication.getInstance().getAllActivity();
-        for (int i = 0; i < activityList.size(); i++) {
-            Activity activity = activityList.get(i);
+        for (int i = 0; i < actList.size(); i++) {
+            Activity activity = actList.get(i);
             if (activity != null) {
                 activity.finish();
             }
         }
+    }
+
+    public static void addActivity(Activity activity) {
+        actList.add(activity);
+    }
+
+    public static void removeActivity(Activity activity) {
+        actList.remove(activity);
+    }
+
+    public static ArrayList<Activity> getAllActivity() {
+        return actList;
     }
 
 }

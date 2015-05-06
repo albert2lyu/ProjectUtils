@@ -6,14 +6,31 @@
 
 其中使用了一些其他的开源项目:
 
-	Gson:https://code.google.com/p/google-gson/
+[com.android.support-v4](https://developer.android.com/tools/support-library/features.html "com.android.support:support-v4:21.0.0")
 
-	ViewFinder:https://gist.github.com/stormzhang/37dc0b94be61eb6c015c
+[Gson](https://code.google.com/p/google-gson/ "com.google.code.gson:gson:2.3.1")
 
-本项目中引用的jar包:
+[Volley](https://developer.android.com/training/volley/index.html "com.mcxiaoke.volley:library:1.0.15")
 
-	GSON-2.3.1.jar
+[Picasso](http://square.github.io/picasso/ "com.squareup.picasso:picasso:2.5.2")
 
-	Android-support-v4.jar
+[logger](https://github.com/orhanobut/logger "com.orhanobut:logger:1.8")
+	
 
-所以若用到,上述jar包便不用再次添加.
+
+所以若用到以上功能,上述引用便可不用再次添加.
+
+```
+/sdcard
+  - package name (程序包名)
+      - cache (缓存目录)
+          - cacheData (缓存数据)
+          - cacheImage (缓存图片)
+          - cacheOther (缓存其他东西)
+              - log (程序异常崩溃日志)
+
+      - download (下载目录)
+          - downloadData (下载数据)
+          - downloadImage (下载图片)
+          - downloadOther (下载其他东西)
+```

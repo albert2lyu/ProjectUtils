@@ -3,9 +3,9 @@ package com.sunhz.projectutils;
 
 import android.content.Context;
 import android.os.Looper;
-import android.widget.Toast;
 
 import com.sunhz.projectutils.logutils.LogUtils;
+import com.sunhz.projectutils.toastutils.ToastUtils;
 
 /**
  * 用于程序异常时处理,保存错误日志等
@@ -65,7 +65,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(mContext, AppController.CRASH_HANLDER_CONTENT, Toast.LENGTH_LONG).show();
+                ToastUtils.showToast(mContext, R.string.application_crash_alter_text);
                 Looper.loop();
                 // 关闭所有activity
                 ActivityManager.closeAllActivity(mContext);

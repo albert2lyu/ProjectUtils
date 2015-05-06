@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 
 import com.sunhz.projectutils.asynctaskutils.AsyncTaskExpand;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -35,7 +36,7 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
             InputStream input = new java.net.URL(imageUrl).openStream();
             // Decode Bitmap
             bitmap = BitmapFactory.decodeStream(input);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return bitmap;

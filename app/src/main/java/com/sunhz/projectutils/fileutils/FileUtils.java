@@ -42,12 +42,6 @@ public class FileUtils {
     private FileUtils() {
     }
 
-    public synchronized static FileUtils getInstance() {
-        if (fileUtils == null) {
-            fileUtils = new FileUtils();
-        }
-        return fileUtils;
-    }
 
     /**
      * 写入对象到指定路径
@@ -57,7 +51,7 @@ public class FileUtils {
      * @param filePath 文件路径
      * @throws IOException
      */
-    public void writeObjectToFile(Serializable obj, String fileName, String filePath)
+    public static synchronized void writeObjectToFile(Serializable obj, String fileName, String filePath)
             throws IOException {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
@@ -80,7 +74,7 @@ public class FileUtils {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public Object readObjectToFile(String fileName, String filePath) throws IOException,
+    public static synchronized Object readObjectToFile(String fileName, String filePath) throws IOException,
             ClassNotFoundException {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -100,7 +94,7 @@ public class FileUtils {
      * @param filePath 文件的路径
      * @return 文件拓展名
      */
-    public String getFileSuffix(String filePath) {
+    public static synchronized String getFileSuffix(String filePath) {
         return filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
     }
 
@@ -110,27 +104,27 @@ public class FileUtils {
      * @param absolutePackagePath 文件的绝对路径
      * @return true:存在,false:不存在
      */
-    public boolean isFileExist(String absolutePackagePath) {
+    public static synchronized boolean isFileExist(String absolutePackagePath) {
         return new File(absolutePackagePath).exists();
     }
 
     /**
-     * 判断当前路径下是否是一个文件夹
+     * 判断当前路径是否是一个文件夹
      *
      * @param file 路径
      * @return true:是文件夹,false:不是文件夹
      */
-    public boolean isDirectory(File file) {
+    public static synchronized boolean isDirectory(File file) {
         return file.isDirectory();
     }
 
     /**
-     * 判断当前路径下是否是一个文件
+     * 判断当前路径是否是一个文件
      *
      * @param file 路径
      * @return true:是文件,false:不是文件
      */
-    public boolean isFile(File file) {
+    public static synchronized boolean isFile(File file) {
         return file.isFile();
     }
 
@@ -140,7 +134,7 @@ public class FileUtils {
      * @param path 将要删除的文件目录
      * @return true:删除成功,false:删除失败
      */
-    public boolean deleteDir(File path) {
+    public static synchronized boolean deleteDir(File path) {
         if (path.isDirectory()) {
             String[] children = path.list();
             //递归删除目录中的子目录下
@@ -162,7 +156,7 @@ public class FileUtils {
      * @return
      * @throws IOException
      */
-    public String getAssetFileContent(Context mContext, String fileName) throws Exception {
+    public static synchronized String getAssetFileContent(Context mContext, String fileName) throws Exception {
         return InputStream2String(mContext.getResources().getAssets().open(fileName));
     }
 
@@ -173,7 +167,7 @@ public class FileUtils {
      * @return
      * @throws Exception
      */
-    public String InputStream2String(InputStream inputStream) throws IOException {
+    public static synchronized String InputStream2String(InputStream inputStream) throws IOException {
         if (inputStream == null) {
             throw new NullPointerException();
         }
@@ -201,7 +195,7 @@ public class FileUtils {
      * @throws IOException
      * @throws SAXException
      */
-    public Document XmlByDomj4(File file) throws ParserConfigurationException, SAXException,
+    public static synchronized Document XmlByDomj4(File file) throws ParserConfigurationException, SAXException,
             IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
@@ -216,7 +210,7 @@ public class FileUtils {
      * @return 内容
      * @throws Exception
      */
-    public String read(InputStream is, String encodeStr) throws IOException {
+    public static synchronized String read(InputStream is, String encodeStr) throws IOException {
         ByteArrayOutputStream out = null;
         try {
             out = new ByteArrayOutputStream();
@@ -240,7 +234,7 @@ public class FileUtils {
      * @return str
      * @throws IOException
      */
-    public String read(File file) throws IOException {
+    public static synchronized String read(File file) throws IOException {
         InputStreamReader inputReader = null;
         BufferedReader bufferReader = null;
         OutputStream outputStream = null;
@@ -271,7 +265,7 @@ public class FileUtils {
      * @param writeData
      * @throws IOException
      */
-    public void write(File file, String writeData) throws IOException {
+    public static synchronized void write(File file, String writeData) throws IOException {
         FileWriter fw = null;
         BufferedWriter writer = null;
         try {
@@ -292,7 +286,7 @@ public class FileUtils {
      * @return true:保存成功
      * @throws IOException
      */
-    public boolean InitFileToSDCard(Context mContext, int rawId, String fileSavePath) throws IOException {
+    public static synchronized boolean InitFileToSDCard(Context mContext, int rawId, String fileSavePath) throws IOException {
         InputStream inputStream = null;
         try {
             inputStream = mContext.getResources().openRawResource(rawId); // 这里就是Raw文件引用位置
@@ -311,7 +305,7 @@ public class FileUtils {
      * @return true:保存成功
      * @throws Exception
      */
-    public boolean InitAssetsFileToSDCard(Context mContext, String assetsFileName, String fileSavePath)
+    public static synchronized boolean InitAssetsFileToSDCard(Context mContext, String assetsFileName, String fileSavePath)
             throws IOException {
         if (assetsFileName == null) {
             return false;
@@ -333,8 +327,12 @@ public class FileUtils {
      * @param fileSavePath
      * @throws IOException
      */
-    public void SaveInputStreamToFile(InputStream inputStream, String fileSavePath)
+    public static synchronized void SaveInputStreamToFile(InputStream inputStream, String fileSavePath)
             throws IOException {
+        File file = new File(fileSavePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         FileOutputStream fos = null;
         try {
             int len = 4096;
@@ -358,7 +356,7 @@ public class FileUtils {
      * @param targetFile 目标文件
      * @throws IOException
      */
-    public void copyFile(File sourceFile, File targetFile) throws IOException {
+    public static synchronized void copyFile(File sourceFile, File targetFile) throws IOException {
         BufferedInputStream inBuff = null;
         BufferedOutputStream outBuff = null;
         try {
@@ -390,7 +388,7 @@ public class FileUtils {
      * @param targetDir 目标文件夹
      * @throws IOException
      */
-    public void copyDirectiory(String sourceDir, String targetDir) throws IOException {
+    public static synchronized void copyDirectiory(String sourceDir, String targetDir) throws IOException {
         // 新建目标目录
         (new File(targetDir)).mkdirs();
         // 获取源文件夹当前下的文件或目录
@@ -420,7 +418,7 @@ public class FileUtils {
      * @param strPath 目标文件夹
      * @return
      */
-    public List<String> refreshFileList(String strPath) {
+    public static synchronized List<String> refreshFileList(String strPath) {
         List<String> filelist = new ArrayList<String>();
         File dir = new File(strPath);
         File[] files = dir.listFiles();
@@ -442,7 +440,7 @@ public class FileUtils {
      * @param strPath 文件路径
      * @return 路径下所有文件的名字
      */
-    public List<String> queryFileNameList(String strPath) {
+    public static synchronized List<String> queryFileNameList(String strPath) {
         List<String> filelist = new ArrayList<String>();
         File dir = new File(strPath);
         File[] files = dir.listFiles();
@@ -465,7 +463,7 @@ public class FileUtils {
      * @return 流对象
      * @throws IOException
      */
-    public FileInputStream openInputStream(File file) throws IOException {
+    public static synchronized FileInputStream openInputStream(File file) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
                 throw new IOException("File '" + file + "' exists but is a directory");
@@ -486,7 +484,7 @@ public class FileUtils {
      * @return 文本文件中行的集合
      * @throws IOException
      */
-    public List<String> readLines(File file) throws IOException {
+    public static synchronized List<String> readLines(File file) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
@@ -504,7 +502,7 @@ public class FileUtils {
      * @return 文本文件中行的集合
      * @throws IOException
      */
-    public List<String> readLines(File file, String encoding) throws IOException {
+    public static synchronized List<String> readLines(File file, String encoding) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
@@ -521,7 +519,7 @@ public class FileUtils {
      * @return 内容的行集合
      * @throws IOException
      */
-    public List<String> readLines(InputStream input) throws IOException {
+    public static synchronized List<String> readLines(InputStream input) throws IOException {
         return readLines(new InputStreamReader(input));
     }
 
@@ -533,7 +531,7 @@ public class FileUtils {
      * @return 内容的行集合
      * @throws IOException
      */
-    public List<String> readLines(InputStream input, String encoding) throws IOException {
+    public static synchronized List<String> readLines(InputStream input, String encoding) throws IOException {
         return readLines(new InputStreamReader(input, encoding));
     }
 
@@ -544,7 +542,7 @@ public class FileUtils {
      * @return 内容的行集合
      * @throws IOException
      */
-    public List<String> readLines(Reader input) throws IOException {
+    public static synchronized List<String> readLines(Reader input) throws IOException {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(input);
@@ -568,7 +566,7 @@ public class FileUtils {
      * @return 若文件不存在, 返回-1.若文件存在,则正常返回文件大小.
      * @throws Exception
      */
-    public long getFileSizes(File file) throws IOException {
+    public static synchronized long getFileSizes(File file) throws IOException {
         long size = -1;
         if (file.exists()) {
             FileInputStream fis = null;
@@ -590,7 +588,7 @@ public class FileUtils {
      * .
      * @throws Exception
      */
-    public long getDirectorySize(File file) throws Exception// 取得文件夹大小
+    public static synchronized long getDirectorySize(File file) throws Exception// 取得文件夹大小
     {
         long size = -1;
         if (file.isDirectory() && file.exists()) {
@@ -616,7 +614,7 @@ public class FileUtils {
      * @param fileSize 文件大小
      * @return 文件大小和单位
      */
-    public String formetFileSize(long fileSize) {
+    public static synchronized String formetFileSize(long fileSize) {
         DecimalFormat df = new DecimalFormat("#.00");
         String fileSizeString = "";
         if (fileSize < 1024) {
@@ -637,7 +635,7 @@ public class FileUtils {
      * @param file 文件夹路径
      * @return 文件个数(不包含文件夹)
      */
-    public long getFileInDirectoryNumber(File file) {
+    public static synchronized long getFileInDirectoryNumber(File file) {
         long fileNumber = 0;
         File flist[] = file.listFiles();
         fileNumber = flist.length;
@@ -657,7 +655,7 @@ public class FileUtils {
      * @param from 原始后缀名(包含.)
      * @param to   修改后的后缀名(包含.)
      */
-    public void reNameAllFileInDirectory(String path, String from, String to) {
+    public static synchronized void reNameAllFileInDirectory(String path, String from, String to) {
         File f = new File(path);
         File[] fs = f.listFiles();
         for (int i = 0; i < fs.length; ++i) {
@@ -681,7 +679,7 @@ public class FileUtils {
      * @return byte数组
      * @throws IOException
      */
-    public byte[] inputStreamToByteArray(InputStream inputStream) throws IOException {
+    public static synchronized byte[] inputStreamToByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = null;
         try {
             byteArrayOutputStream = new ByteArrayOutputStream();
@@ -703,16 +701,18 @@ public class FileUtils {
      * @param byteArray 待转换byte数组
      * @return InputStream
      */
-    public InputStream byteArrayToInputStream(byte[] byteArray) {
+    public static synchronized InputStream byteArrayToInputStream(byte[] byteArray) {
         return new ByteArrayInputStream(byteArray);
     }
 
     /**
      * 获取文件的最后修改时间
      *
+     * return 0，为文件不存在
+     *
      * @return long
      */
-    public long getFileLastModifiedTime(File file) {
+    public static synchronized long getFileLastModifiedTime(File file) {
         return file.lastModified();
     }
 

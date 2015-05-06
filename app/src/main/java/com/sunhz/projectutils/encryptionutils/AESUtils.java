@@ -2,7 +2,7 @@ package com.sunhz.projectutils.encryptionutils;
 
 import android.text.TextUtils;
 
-import com.sunhz.projectutils.AppController;
+import com.sunhz.projectutils.Constance;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -20,14 +20,14 @@ public class AESUtils {
      */
     public static String Decrypt(String sSrc) throws Exception {
         // 判断Key是否正确
-        if (TextUtils.isEmpty(AppController.AESUtil_CLIENT_KEY)) {
-            throw new NullPointerException("AppController.AESUtil_CLIENT_KEY 不能为空");
+        if (TextUtils.isEmpty(Constance.Encryption.AES_UTILS_CLIENT_KEY)) {
+            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY 不能为空");
         }
         // 判断Key是否为16位
-        if (AppController.AESUtil_CLIENT_KEY.length() != 16) {
+        if (Constance.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
             throw new IllegalArgumentException("Key长度不是16位");
         }
-        byte[] raw = AppController.AESUtil_CLIENT_KEY.getBytes("ASCII");
+        byte[] raw = Constance.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
@@ -45,14 +45,14 @@ public class AESUtils {
      */
     public static String Encrypt(String sSrc) throws Exception {
         // 判断Key是否正确
-        if (TextUtils.isEmpty(AppController.AESUtil_CLIENT_KEY)) {
-            throw new NullPointerException("AppController.AESUtil_CLIENT_KEY 不能为空");
+        if (TextUtils.isEmpty(Constance.Encryption.AES_UTILS_CLIENT_KEY)) {
+            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY 不能为空");
         }
         // 判断Key是否为16位
-        if (AppController.AESUtil_CLIENT_KEY.length() != 16) {
+        if (Constance.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
             throw new IllegalArgumentException("Key长度不是16位");
         }
-        byte[] raw = AppController.AESUtil_CLIENT_KEY.getBytes("ASCII");
+        byte[] raw = Constance.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, AES);
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);

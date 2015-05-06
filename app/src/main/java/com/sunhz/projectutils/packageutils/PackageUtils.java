@@ -38,8 +38,7 @@ public class PackageUtils {
      */
     public void install(String apkFilePath) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(apkFilePath)),
-                "application/vnd.android.package-archive");
+        intent.setDataAndType(Uri.fromFile(new File(apkFilePath)),"application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
@@ -73,16 +72,37 @@ public class PackageUtils {
         return packageNameList;
     }
 
+    /**
+     * 获取当前app包名
+     * @return
+     */
     public String getMyApplicationPackageName() {
         return mContext.getPackageName();
     }
 
+    /**
+     * 获取当前app的版本名
+     * @return 如果获取失败，返回『空字符串』
+     */
     public String getMyApplicationVersionName() {
         try {
             return mContext.getPackageManager().getPackageInfo(getMyApplicationPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            return null;
+            return "";
+        }
+    }
+
+    /**
+     * 获取当前app的版本号
+     * @return 如果获取失败，返回『-1』
+     */
+    public int getMyApplicationVersionCode() {
+        try {
+            return mContext.getPackageManager().getPackageInfo(getMyApplicationPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 

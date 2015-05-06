@@ -1,7 +1,7 @@
 package com.sunhz.projectutils.httputils;
 
 
-import com.sunhz.projectutils.AppController;
+import com.sunhz.projectutils.Constance;
 import com.sunhz.projectutils.fileutils.FileUtils;
 
 import org.apache.http.HttpResponse;
@@ -36,9 +36,9 @@ public class HttpClient {
     public static InputStream getInputStreamInUIThread(String url) throws IOException {
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
         // 请求超时
-        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, AppController.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
         // 读取超时
-        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, AppController.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
@@ -59,7 +59,7 @@ public class HttpClient {
     public static String getStringInUIThread(String url) throws IOException {
         InputStream is = getInputStreamInUIThread(url);
         if (is != null) {
-            return FileUtils.getInstance().InputStream2String(is);
+            return FileUtils.InputStream2String(is);
         } else {
             throw new IllegalArgumentException("getStringInUIThread 返回结果为null");
         }
@@ -87,9 +87,9 @@ public class HttpClient {
         httpPost.setEntity(entity);
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
         // 请求超时
-        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, AppController.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
         // 读取超时
-        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, AppController.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
         HttpResponse response = client.execute(httpPost);
         if (response.getStatusLine().getStatusCode() == 200) {
             return response.getEntity().getContent();
@@ -110,7 +110,7 @@ public class HttpClient {
     public static String postStringInUIThread(String url, Map<String, String> params) throws IOException {
         InputStream is = postInputStreamInUIThread(url, params);
         if (is != null) {
-            return FileUtils.getInstance().InputStream2String(is);
+            return FileUtils.InputStream2String(is);
         } else {
             throw new IllegalArgumentException("postStringInUIThread 返回结果为null");
         }

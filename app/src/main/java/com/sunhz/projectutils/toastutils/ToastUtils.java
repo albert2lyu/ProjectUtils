@@ -14,11 +14,6 @@ import android.widget.Toast;
 public class ToastUtils {
 
     /**
-     * 显示Toast.
-     */
-    public static final int SHOW_TOAST = 0;
-
-    /**
      * 描述：Toast提示文本.
      *
      * @param text 文本
@@ -61,8 +56,7 @@ public class ToastUtils {
      * @param context
      * @param text
      */
-    public static void showToastInThread(final Activity context,
-                                         final String text) {
+    public static void showToastInThread(final Activity context, final String text) {
         context.runOnUiThread(new Runnable() {
 
             @Override

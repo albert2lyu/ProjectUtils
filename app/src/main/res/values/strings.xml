@@ -3,4 +3,5 @@
 
     <string name="app_name">ProjectUtils</string>
 
+    <string name="application_crash_alter_text">程序异常退出,请重新打开</string>
 </resources>
