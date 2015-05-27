@@ -14,26 +14,11 @@ import java.io.Writer;
 
 public class LogUtils {
 
-    private static Context mContext;
-
     private static final String LOG_FOLDER_NAME = "log";
 
     private LogUtils() {
     }
 
-    /**
-     * 初始化log管理器
-     */
-    public static void init(Context context) {
-        mContext = context;
-    }
-
-    private static void writeExceptionLog(Throwable ex) {
-        if (mContext == null) {
-            return;
-        }
-        writeExceptionLog(mContext, ex);
-    }
 
     /**
      * 保存错误信息到文件中
@@ -54,7 +39,7 @@ public class LogUtils {
         try {
             long timestamp = System.currentTimeMillis();
             String fileName = "ex-" + timestamp;
-            String fileFolderPath = CacheUtils.getInstance(mContext).getOtherCachePath() + LOG_FOLDER_NAME;
+            String fileFolderPath = CacheUtils.getInstance(mContext.getApplicationContext()).getOtherCachePath() + LOG_FOLDER_NAME;
             if (!new File(fileFolderPath).exists()) {
                 new File(fileFolderPath).mkdirs();
             }

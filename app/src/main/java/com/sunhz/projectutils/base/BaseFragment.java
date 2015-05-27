@@ -14,6 +14,7 @@ import com.sunhz.projectutils.Constance;
 public class BaseFragment extends Fragment implements Base {
 
     protected Context mContext;
+    protected Context mApplicationContext;
     protected Activity mActivity;
     protected RequestQueue volleyQueue;
     private RetryPolicy policy;
@@ -23,11 +24,11 @@ public class BaseFragment extends Fragment implements Base {
         super.onAttach(activity);
 
         mContext = activity.getBaseContext();
+        mApplicationContext = mContext.getApplicationContext();
         mActivity = activity;
-        this.volleyQueue = Volley.newRequestQueue(mContext);
 
-        int socketTimeout = Constance.TimeInApplication.NET_TIMEOUT;
-        policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        this.volleyQueue = Volley.newRequestQueue(mContext);
+        policy = new DefaultRetryPolicy(Constance.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
     }
 
     /**
@@ -37,7 +38,6 @@ public class BaseFragment extends Fragment implements Base {
      */
     @Override
     public void volleyAdd(Request request) {
-
         request.setRetryPolicy(policy);
         volleyQueue.add(request);
     }

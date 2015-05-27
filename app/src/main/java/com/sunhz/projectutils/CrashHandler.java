@@ -23,7 +23,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     public static CrashHandler getInstance(Context mContext) {
         if (crashHandler == null) {
-            crashHandler = new CrashHandler(mContext);
+            crashHandler = new CrashHandler(mContext.getApplicationContext());
         }
         return crashHandler;
     }
@@ -40,7 +40,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
 
-            // 如果不等待,程序出错的toat没办法弹出来
+            // 如果不等待,程序出错的toastt没办法弹出来
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -68,7 +68,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 ToastUtils.showToast(mContext, R.string.application_crash_alter_text);
                 Looper.loop();
                 // 关闭所有activity
-                ActivityManager.closeAllActivity(mContext);
+                ActivityManager.closeAllActivity();
             }
 
         }.start();

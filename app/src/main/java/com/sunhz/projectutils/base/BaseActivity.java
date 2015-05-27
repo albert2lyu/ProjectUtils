@@ -16,7 +16,9 @@ import com.sunhz.projectutils.Constance;
 public class BaseActivity extends FragmentActivity implements Base {
 
     protected Context mContext;
+    protected Context mApplicationContext;
     protected Activity mActivity;
+
     protected RequestQueue volleyQueue;
     private RetryPolicy policy;
 
@@ -25,12 +27,12 @@ public class BaseActivity extends FragmentActivity implements Base {
         super.onCreate(bundle);
 
         this.mContext = this;
+        this.mApplicationContext = getApplicationContext();
         this.mActivity = this;
 
         this.volleyQueue = Volley.newRequestQueue(mContext);
 
-        int socketTimeout = Constance.TimeInApplication.NET_TIMEOUT;
-        policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        policy = new DefaultRetryPolicy(Constance.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
         ActivityManager.addActivity(this);
     }

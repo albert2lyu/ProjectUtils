@@ -21,7 +21,7 @@ public class MediaUtils {
 
     public synchronized static MediaUtils getInstance(Context mContext) {
         if (mediaUtils == null) {
-            mediaUtils = new MediaUtils(mContext);
+            mediaUtils = new MediaUtils(mContext.getApplicationContext());
         }
         return mediaUtils;
     }

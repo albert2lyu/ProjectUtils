@@ -39,7 +39,7 @@ public class StatusBarUtils {
             obj = c.newInstance();
             field = c.getField("status_bar_height");
             x = Integer.parseInt(field.get(obj).toString());
-            statusBarHeight = mContext.getResources().getDimensionPixelSize(x);
+            statusBarHeight = mContext.getApplicationContext().getResources().getDimensionPixelSize(x);
             return statusBarHeight;
         } catch (Exception e) {
             e.printStackTrace();

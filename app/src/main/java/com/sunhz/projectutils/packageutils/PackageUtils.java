@@ -26,7 +26,7 @@ public class PackageUtils {
 
     public static PackageUtils getInstance(Context mContext) {
         if (packageUtils == null) {
-            packageUtils = new PackageUtils(mContext);
+            packageUtils = new PackageUtils(mContext.getApplicationContext());
         }
         return packageUtils;
     }

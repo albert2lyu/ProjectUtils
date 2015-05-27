@@ -1,7 +1,6 @@
 package com.sunhz.projectutils;
 
 import android.app.Activity;
-import android.content.Context;
 
 import java.util.ArrayList;
 
@@ -15,10 +14,8 @@ public class ActivityManager {
 
     /**
      * 关掉所有activity
-     *
-     * @param mContext
      */
-    public static void closeAllActivity(Context mContext) {
+    public static void closeAllActivity() {
         for (int i = 0; i < actList.size(); i++) {
             Activity activity = actList.get(i);
             if (activity != null) {

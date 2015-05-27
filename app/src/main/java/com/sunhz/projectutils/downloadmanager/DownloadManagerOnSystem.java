@@ -55,7 +55,7 @@ public class DownloadManagerOnSystem {
      */
     public static DownloadManagerOnSystem getInstance(Context mContext) {
         if (downloadManagerOnSystem == null) {
-            downloadManagerOnSystem = new DownloadManagerOnSystem(mContext);
+            downloadManagerOnSystem = new DownloadManagerOnSystem(mContext.getApplicationContext());
         }
         return downloadManagerOnSystem;
     }

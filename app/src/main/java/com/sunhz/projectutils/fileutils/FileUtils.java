@@ -37,7 +37,6 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class FileUtils {
 
-    private static FileUtils fileUtils;
 
     private FileUtils() {
     }
@@ -157,7 +156,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static synchronized String getAssetFileContent(Context mContext, String fileName) throws Exception {
-        return InputStream2String(mContext.getResources().getAssets().open(fileName));
+        return InputStream2String(mContext.getApplicationContext().getResources().getAssets().open(fileName));
     }
 
     /**
@@ -289,7 +288,7 @@ public class FileUtils {
     public static synchronized boolean InitFileToSDCard(Context mContext, int rawId, String fileSavePath) throws IOException {
         InputStream inputStream = null;
         try {
-            inputStream = mContext.getResources().openRawResource(rawId); // 这里就是Raw文件引用位置
+            inputStream = mContext.getApplicationContext().getResources().openRawResource(rawId); // 这里就是Raw文件引用位置
             SaveInputStreamToFile(inputStream, fileSavePath);
         } finally {
             if (inputStream != null) inputStream.close();
@@ -312,7 +311,7 @@ public class FileUtils {
         }
         InputStream inputStream = null;
         try {
-            inputStream = mContext.getResources().getAssets().open(assetsFileName);
+            inputStream = mContext.getApplicationContext().getResources().getAssets().open(assetsFileName);
             SaveInputStreamToFile(inputStream, fileSavePath);
         } finally {
             if (inputStream != null) inputStream.close();

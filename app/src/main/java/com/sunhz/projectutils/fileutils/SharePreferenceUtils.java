@@ -14,7 +14,7 @@ public class SharePreferenceUtils {
 
     public synchronized static SharePreferenceUtils getInstance(Context mContext) {
         if (sharePreferenceUtils == null) {
-            sharePreferenceUtils = new SharePreferenceUtils(mContext);
+            sharePreferenceUtils = new SharePreferenceUtils(mContext.getApplicationContext());
         }
         return sharePreferenceUtils;
     }

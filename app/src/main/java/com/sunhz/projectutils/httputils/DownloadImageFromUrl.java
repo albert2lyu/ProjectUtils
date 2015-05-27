@@ -54,8 +54,8 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
     }
 
     public interface DownloadCallBack {
-        public void onPreExecute();
+        void onPreExecute();
 
-        public void onPostExecute(Bitmap result);
+        void onPostExecute(Bitmap result);
     }
 }

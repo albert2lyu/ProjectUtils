@@ -21,7 +21,7 @@ public class DeviceUtils {
      * @return
      */
     public static synchronized String getDeviceID(Context mContext) {
-        return ((TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        return ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
     }
 
     /**

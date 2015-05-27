@@ -19,7 +19,7 @@ public class CheckInternetUtils {
     public synchronized static CheckInternetUtils getInstance(Context mContext) {
 
         if (checkInternet == null) {
-            checkInternet = new CheckInternetUtils(mContext);
+            checkInternet = new CheckInternetUtils(mContext.getApplicationContext());
         }
         return checkInternet;
     }

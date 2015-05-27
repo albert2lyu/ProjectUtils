@@ -380,7 +380,7 @@ public class ImageUtils {
         opt.inPurgeable = true;
         opt.inInputShareable = true;
         // 获取资源图片
-        InputStream is = mContext.getResources().openRawResource(resId);
+        InputStream is = mContext.getApplicationContext().getResources().openRawResource(resId);
         return BitmapFactory.decodeStream(is, null, opt);
     }
 
@@ -392,7 +392,7 @@ public class ImageUtils {
      * @return drawable
      */
     public static Drawable getResourceDrawable(Context mContext, int resId) {
-        return mContext.getResources().getDrawable(resId);
+        return mContext.getApplicationContext().getResources().getDrawable(resId);
     }
 
 

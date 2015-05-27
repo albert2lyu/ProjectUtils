@@ -58,7 +58,7 @@ public class CacheUtils {
 
     public synchronized static CacheUtils getInstance(Context mContext) {
         if (cacheUtils == null) {
-            cacheUtils = new CacheUtils(mContext);
+            cacheUtils = new CacheUtils(mContext.getApplicationContext());
         }
         return cacheUtils;
     }
