@@ -197,6 +197,9 @@ public class CacheUtils {
      * @return true:还没有过期,false:已经过期
      */
     public boolean checkCacheFailTime(String cacheFileName, CacheType cacheType) {
+	if(!checkCacheExists(cacheFileName,cacheType)){
+		return false;
+	}
         long lastModified = 0;
         switch (cacheType) {
             case DATA:
