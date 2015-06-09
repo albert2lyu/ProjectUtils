@@ -19,22 +19,19 @@ public class BaseActivity extends FragmentActivity implements Base {
     protected Context mApplicationContext;
     protected Activity mActivity;
 
-    protected RequestQueue volleyQueue;
-    private RetryPolicy policy;
+    protected RequestQueue volleyQueue = Volley.newRequestQueue(mContext);
+    private RetryPolicy policy = new DefaultRetryPolicy(Constance.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        ActivityManager.addActivity(this);
+
         this.mContext = this;
         this.mApplicationContext = getApplicationContext();
         this.mActivity = this;
 
-        this.volleyQueue = Volley.newRequestQueue(mContext);
-
-        policy = new DefaultRetryPolicy(Constance.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-
-        ActivityManager.addActivity(this);
     }
 
     /**

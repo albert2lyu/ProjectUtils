@@ -8,6 +8,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 21
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -15,6 +16,7 @@ android {
         }
     }
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

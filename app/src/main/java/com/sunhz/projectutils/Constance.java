@@ -8,7 +8,7 @@ public final class Constance {
      * 这个标志只能在android studio中使用
      * 若想在eclipse中使用,请将eclipse的自动编译关闭
      */
-    public static final boolean isDebug = BuildConfig.DEBUG;
+    public static final boolean IS_DEBUG = BuildConfig.DEBUG;
 
     /**
      * 加密相关常量
@@ -35,6 +35,7 @@ public final class Constance {
          */
         public final static int CACHE_FAIL_TIME = 1000 * 60 * 60 * 24; // 一天
     }
+
 
 
 }

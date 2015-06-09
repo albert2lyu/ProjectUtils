@@ -18,7 +18,7 @@ public class BaseApplication extends Application {
         this.mContext = this;
 
 
-        if (!Constance.isDebug) { // 正是环境
+        if (!Constance.IS_DEBUG) { // 正式环境
             CrashHandler.getInstance(mContext).init();
             Logger.init().setLogLevel(LogLevel.NONE);
         } else { // 开发环境
