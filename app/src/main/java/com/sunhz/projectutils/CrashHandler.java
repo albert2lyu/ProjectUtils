@@ -40,7 +40,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
 
-            // 如果不等待,程序出错的toastt没办法弹出来
+            // 如果不等待,程序出错的toast没办法弹出来
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {

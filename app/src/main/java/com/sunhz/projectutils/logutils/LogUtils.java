@@ -50,27 +50,34 @@ public class LogUtils {
         }
     }
 
-    public static void e(String errorMsg) {
-        Logger.e(errorMsg);
+    public static void e(String msg, Object... args) {
+        Logger.e(msg, args);
     }
 
-    public static void d(String errorMsg) {
-        Logger.d(errorMsg);
+    public static void e(Throwable throwable) {
+        throwable.printStackTrace();
     }
 
-    public static void w(String errorMsg) {
-        Logger.w(errorMsg);
+    public static void d(String msg, Object... args) {
+        Logger.d(msg, args);
     }
 
-    public static void i(String errorMsg) {
-        Logger.i(errorMsg);
+    public static void w(String msg, Object... args) {
+        Logger.w(msg, args);
+    }
+
+    public static void i(String msg, Object... args) {
+        Logger.i(msg, args);
     }
 
 
-    public static void v(String errorMsg) {
-        Logger.v(errorMsg);
+    public static void v(String msg, Object... args) {
+        Logger.v(msg, args);
     }
 
+    public static void wtf(String msg, Object... args) {
+        Logger.wtf(msg, args);
+    }
 
     public static void json(String json) {
         Logger.json(json);
@@ -79,5 +86,6 @@ public class LogUtils {
     public static void xml(String xml) {
         Logger.xml(xml);
     }
+
 
 }
