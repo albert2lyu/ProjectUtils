@@ -17,7 +17,7 @@
 ```
 
 ## 问题汇总
-```
+
     项目中的LogUtils类是封装使用了orhanobut的logger工具库。
     logger这个项目会将Log从新排版，并将log用表格的方式展示出来。
 
@@ -29,7 +29,6 @@
 
     不过用这个logger的好处是，我们在打印普通信息log的时候也能够方便的找到打印log的代码位置，并且用漂亮的表格将我们需要的信息打印到控制台上。
     并且ProjectUtils使用LogUtils类封装了logger后已经对LogUtils进行了统一管理。方便我们在release和debug版本间任意切换。避免了出现忘记了删除log语句的问题。
-```
 
 ## 目录结构说明
 ```
