@@ -34,3 +34,13 @@
           - downloadImage (下载图片)
           - downloadOther (下载其他东西)
 ```
+
+```java
+    // 在引用ProjectUtils的项目中的BaseApplication的onCreate方法中加入如下代码
+    if (!BuildConfig.DEBUG) { // 正式环境
+        CrashHandler.getInstance(mContext).init();
+        Logger.init().setLogLevel(LogLevel.NONE);
+    } else { // 开发环境
+        Logger.init().setLogLevel(LogLevel.FULL);
+    }
+```
