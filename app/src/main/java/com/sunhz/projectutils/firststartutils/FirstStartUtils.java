@@ -20,7 +20,7 @@ public class FirstStartUtils {
     /**
      * 初始化方法，需要在application的onCreate中调用
      */
-    public void init(Context mContext) {
+    public static void init(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext.getApplicationContext());
         if (!sharePreferenceUtils.contains(FIRST_START_FLAG, FIRST_START_FLAG)) {
             sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
@@ -37,9 +37,18 @@ public class FirstStartUtils {
      *
      * @return true:第一次启动,false:不是第一次启动
      */
-    public boolean checkIsFirstStart(Context mContext) {
+    public static boolean checkIsFirstStart(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext.getApplicationContext());
         return !sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG);
+    }
+
+    /**
+     * 重置标识
+     * @param mContext
+     */
+    public static void restFirstStart(Context mContext) {
+        SharePreferenceUtils preferenceUtils = SharePreferenceUtils.getInstance(mContext);
+        preferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
     }
 
 }

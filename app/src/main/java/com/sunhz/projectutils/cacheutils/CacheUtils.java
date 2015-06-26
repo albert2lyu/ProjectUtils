@@ -1,6 +1,7 @@
 package com.sunhz.projectutils.cacheutils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.sunhz.projectutils.Constance;
 import com.sunhz.projectutils.fileutils.FileUtils;
@@ -8,6 +9,7 @@ import com.sunhz.projectutils.fileutils.SDCardUtils;
 import com.sunhz.projectutils.packageutils.PackageUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -17,10 +19,10 @@ import java.io.IOException;
  * <p/>
  * sdcard下
  * - package name (程序包名)
- * - cache (缓存目录)
- * - dataCache (缓存数据)
- * - imageCache (缓存图片)
- * - otherCache (缓存其他东西)
+ * -- cache (缓存目录)
+ * --- dataCache (缓存数据)
+ * --- imageCache (缓存图片)
+ * --- otherCache (缓存其他东西)
  */
 public class CacheUtils {
 
@@ -165,6 +167,7 @@ public class CacheUtils {
      * 检查缓存是否存在,是否过期
      *
      * @param cacheFileName
+     * @param cacheType     CacheType.XXX
      * @return true:存在,没有过期. false:不存在/过期/存在但过期
      */
     public boolean checkCacheExistsAndFailTime(String cacheFileName, CacheType cacheType) {
@@ -197,9 +200,9 @@ public class CacheUtils {
      * @return true:还没有过期,false:已经过期
      */
     public boolean checkCacheFailTime(String cacheFileName, CacheType cacheType) {
-	if(!checkCacheExists(cacheFileName,cacheType)){
-		return false;
-	}
+        if (!checkCacheExists(cacheFileName, cacheType)) {
+            return false;
+        }
         long lastModified = 0;
         switch (cacheType) {
             case DATA:
@@ -233,6 +236,61 @@ public class CacheUtils {
      */
     public void saveStringCacheToOtherFolder(String content, String cacheName) throws IOException {
         FileUtils.write(new File(otherCachePath, cacheName), content);
+    }
+
+
+    /**
+     * 从Data目录下,获取string缓存
+     *
+     * @param cacheName    缓存名字
+     * @param failTimeFlag 过期时间是否生效,CacheUtils.CHECK_FAIL_TIME(true):生效,CacheUtils.NOT_CHECK_FAIL_TIME(false):不生效
+     * @return
+     */
+    public String getStringCacheToDataCacheFolder(String cacheName, boolean failTimeFlag) throws Exception {
+        File file = new File(dataCachePath, cacheName);
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("文件不存在:" + file.toString());
+        }
+
+        if (failTimeFlag && !checkCacheFailTime(cacheName, CacheType.DATA)) {
+            throw new Exception("cache 已经过期");
+        }
+
+        String cacheContent = FileUtils.read(file);
+
+        if (TextUtils.isEmpty(cacheContent)) {
+            throw new Exception("cache 为空");
+        }
+
+        return cacheContent;
+    }
+
+    /**
+     * 从Other目录下,获取string缓存
+     *
+     * @param cacheName    缓存名字
+     * @param failTimeFlag 过期时间是否生效,CacheUtils.CHECK_FAIL_TIME(true):生效,CacheUtils.NOT_CHECK_FAIL_TIME(false):不生效
+     * @return
+     */
+    public String getStringCacheToOtherCacheFolder(String cacheName, boolean failTimeFlag) throws Exception {
+        File file = new File(otherCachePath, cacheName);
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("文件不存在:" + file.toString());
+        }
+
+        if (failTimeFlag && !checkCacheFailTime(cacheName, CacheType.DATA)) {
+            throw new Exception("cache 已经过期");
+        }
+
+        String cacheContent = FileUtils.read(file);
+
+        if (TextUtils.isEmpty(cacheContent)) {
+            throw new Exception("cache 为空");
+        }
+
+        return cacheContent;
     }
 
 

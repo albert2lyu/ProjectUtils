@@ -6,7 +6,11 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f65ce37d-08b1-46c4-8744-1a2b7cee8e84" name="Default" comment="" />
+    <list default="true" id="f65ce37d-08b1-46c4-8744-1a2b7cee8e84" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ProjectUtils.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -1198,7 +1202,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/base/Base.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/devicesutils/DeviceUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/fileutils/FileUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/httputils/DownloadImageFromUrl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/imageutils/ImageUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/intentUtils/IntentUtils.java" />
@@ -1206,7 +1209,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/viewutils/DensityUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/viewutils/StatusBarUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/ActivityManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/downloadmanager/DownloadManagerOnSystem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/fileutils/SharePreferenceUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/mediautils/MediaUtils.java" />
@@ -1220,6 +1222,8 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/logutils/LogUtils.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java" />
       </list>
     </option>
   </component>
@@ -1264,6 +1268,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1284,8 +1289,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -1985,6 +1988,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2269,7 +2273,6 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33090615" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277439" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2285,6 +2288,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970452" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277439" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2490,31 +2494,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/fileutils/FileUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="158" column="42" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/fileutils/SharePreferenceUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="117" selection-start-line="40" selection-start-column="117" selection-end-line="40" selection-end-column="117" />
         </state>
       </provider>
     </entry>
@@ -2602,13 +2585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67783093">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/downloadmanager/DownloadManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2169059">
@@ -2648,7 +2624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2169059">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2656,7 +2631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2664,7 +2638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08133971">
           <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2672,7 +2645,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5151515">
           <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2680,7 +2652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5151515">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2688,27 +2659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0542265">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#1628#1629#0" expanded="true" />
-            <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#1712#1713#0" expanded="true" />
-            <element signature="e#1755#1756#0" expanded="true" />
-            <element signature="e#1811#1812#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#1993#1994#0" expanded="true" />
-            <element signature="e#2028#2029#0" expanded="true" />
-            <element signature="e#2085#2086#0" expanded="true" />
-            <element signature="e#2120#2121#0" expanded="true" />
-            <element signature="e#2178#2179#0" expanded="true" />
-            <element signature="e#2215#2216#0" expanded="true" />
-            <element signature="e#2259#2260#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#2334#2335#0" expanded="true" />
-            <element signature="e#2365#2366#0" expanded="true" />
-            <marker date="1434004942000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2719,7 +2669,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31323284">
           <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/fileutils/FileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.027113238">
+          <caret line="158" column="42" selection-start-line="158" selection-start-column="35" selection-end-line="158" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24082935">
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/cacheutils/CacheType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16267942">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sunhz/projectutils/firststartutils/FirstStartUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32216907">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
         </state>
       </provider>
     </entry>
