@@ -54,8 +54,9 @@ public class LogUtils {
         Logger.e(msg, args);
     }
 
-    public static void e(Throwable throwable) {
-        throwable.printStackTrace();
+    public static void e(Throwable throwable, String msg, Object... args) {
+        Logger.e(throwable, msg, args);
+
     }
 
     public static void d(String msg, Object... args) {

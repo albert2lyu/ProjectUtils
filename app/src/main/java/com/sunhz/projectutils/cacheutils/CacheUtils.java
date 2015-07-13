@@ -11,6 +11,8 @@ import com.sunhz.projectutils.packageutils.PackageUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 数据缓存管理
@@ -26,7 +28,14 @@ import java.io.IOException;
  */
 public class CacheUtils {
 
-    private static final int FAIL_TIME = Constance.TimeInApplication.CACHE_FAIL_TIME;
+    private static final long DAY = 1000 * 60 * 60 * 24; // 一天的毫秒数
+
+    private static final long FAIL_TIME = Constance.TimeInApplication.CACHE_FAIL_TIME;
+
+    /**
+     * 如果缓存有效时间设置为一整天,自动计算开关
+     */
+    public static final boolean AUTO_C_DAY = true;
 
     // 检查文件失效时间
     public static final Boolean CHECK_FAIL_TIME = true;
@@ -174,6 +183,10 @@ public class CacheUtils {
         return checkCacheExists(cacheFileName, cacheType) && checkCacheFailTime(cacheFileName, cacheType);
     }
 
+    public boolean checkCacheExistsAndFailTime(String cacheFilePath, String cacheFileName) {
+        return checkCacheExists(cacheFilePath, cacheFileName) && checkCacheFailTime(cacheFilePath, cacheFileName);
+    }
+
     /**
      * 检查缓存是否存在
      *
@@ -193,8 +206,22 @@ public class CacheUtils {
         }
     }
 
+    public boolean checkCacheExists(String cacheFilePath, String cacheFileName) {
+        return new File(cacheFilePath, cacheFileName).exists();
+    }
+
+
     /**
      * 检查缓存是否过期
+     * <p/>
+     * 如果缓存检查时间设置为24小时.
+     * 会自动从缓存当天的0时开始计算,一直到当天24时. 算完整一整天.
+     * <p/>
+     * 例: 2010年03月04日 13时34分35秒 将文件成功缓存到本地.
+     * 文件到2010年03月04日 24时0分0秒 文件将会自动过期.
+     * <p/>
+     * 如果需要24小时时间缓存,但不需要自动按照整天来计算缓存有效时间这项功能
+     * 可在 application 中将 CacheUtils.AUTO_C_DAY 设置为 false, 此属性默认为true
      *
      * @param cacheFileName
      * @return true:还没有过期,false:已经过期
@@ -217,7 +244,73 @@ public class CacheUtils {
         }
 
         if (lastModified != 0) {
-            return (System.currentTimeMillis() - lastModified) < FAIL_TIME;
+            if (FAIL_TIME == DAY && AUTO_C_DAY) { // 按天来区分缓存数据
+                Calendar nowCa = Calendar.getInstance();
+                int nowYear = nowCa.get(Calendar.YEAR);// 获取年份
+                int nowMonth = nowCa.get(Calendar.MONTH) + 1;// 获取月份
+                int nowDay = nowCa.get(Calendar.DATE);// 获取日
+
+                int nowResult = nowYear + nowMonth + nowDay;
+
+                Calendar lastModifiedCa = Calendar.getInstance();
+                lastModifiedCa.setTime(new Date(lastModified));
+                int lastModifiedYear = lastModifiedCa.get(Calendar.YEAR);// 获取年份
+                int lastModifiedMonth = lastModifiedCa.get(Calendar.MONTH) + 1;// 获取月份
+                int lastModifiedDay = lastModifiedCa.get(Calendar.DATE);// 获取日
+
+                int lastModifiedResult = lastModifiedYear - lastModifiedMonth - lastModifiedDay;
+
+                if (nowResult > lastModifiedResult) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+
+            } else {
+                return (System.currentTimeMillis() - lastModified) < FAIL_TIME;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkCacheFailTime(String cacheFilePath, String cacheFileName) {
+        if (!checkCacheExists(cacheFilePath, cacheFileName)) {
+            return false;
+        }
+
+        long lastModified = FileUtils.getFileLastModifiedTime(new File(cacheFilePath, cacheFileName));
+
+        if (lastModified != 0) {
+            if (FAIL_TIME == DAY && AUTO_C_DAY) { // 按天来区分缓存数据
+                Calendar nowCa = Calendar.getInstance();
+                int nowYear = nowCa.get(Calendar.YEAR);// 获取年份
+                int nowMonth = nowCa.get(Calendar.MONTH) + 1;// 获取月份
+                int nowDay = nowCa.get(Calendar.DATE);// 获取日
+
+                int nowResult = nowYear + nowMonth + nowDay;
+
+                Calendar lastModifiedCa = Calendar.getInstance();
+                lastModifiedCa.setTime(new Date(lastModified));
+                int lastModifiedYear = lastModifiedCa.get(Calendar.YEAR);// 获取年份
+                int lastModifiedMonth = lastModifiedCa.get(Calendar.MONTH) + 1;// 获取月份
+                int lastModifiedDay = lastModifiedCa.get(Calendar.DATE);// 获取日
+
+                int lastModifiedResult = lastModifiedYear - lastModifiedMonth - lastModifiedDay;
+
+                if (nowResult > lastModifiedResult) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+
+            } else {
+                return (System.currentTimeMillis() - lastModified) < FAIL_TIME;
+            }
+
         } else {
             return false;
         }
@@ -237,7 +330,6 @@ public class CacheUtils {
     public void saveStringCacheToOtherFolder(String content, String cacheName) throws IOException {
         FileUtils.write(new File(otherCachePath, cacheName), content);
     }
-
 
     /**
      * 从Data目录下,获取string缓存
@@ -291,6 +383,32 @@ public class CacheUtils {
         }
 
         return cacheContent;
+    }
+
+    /**
+     * 获取缓存大小
+     *
+     * @return
+     */
+    public String getCacheSize() {
+        File file = new File(rootCachePath);
+
+        try {
+            String cacheSize = FileUtils.formetFileSize(FileUtils.getDirectorySize(file));
+            cacheSize = cacheSize.equals("-1.00B") ? "0MB" : cacheSize;
+            return cacheSize;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0MB";
+        }
+    }
+
+    /**
+     * 清除缓存
+     */
+    public void clearAllCache() {
+        File file = new File(getRootCachePath());
+        FileUtils.deleteDir(file);
     }
 
 

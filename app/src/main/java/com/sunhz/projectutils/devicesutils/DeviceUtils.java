@@ -2,6 +2,7 @@ package com.sunhz.projectutils.devicesutils;
 
 import android.content.Context;
 import android.os.Build;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 /**
@@ -21,7 +22,11 @@ public class DeviceUtils {
      * @return
      */
     public static synchronized String getDeviceID(Context mContext) {
-        return ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        String deviceId = ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+        if (deviceId == null) {
+            deviceId = Settings.Secure.getString(mContext.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        }
+        return deviceId;
     }
 
     /**
