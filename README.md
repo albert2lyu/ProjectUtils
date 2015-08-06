@@ -60,4 +60,4 @@
 
 [logger_1.10](https://github.com/orhanobut/logger "com.orhanobut:logger:1.10")
 
-所以若用到以上功能,上述引用便可不用再次添加..
+所以若用到以上功能,上述引用便可不用再次添加.
