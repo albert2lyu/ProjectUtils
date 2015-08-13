@@ -16,7 +16,8 @@ public class ToastUtils {
     /**
      * 描述：Toast提示文本.
      *
-     * @param text 文本
+     * @param mContext Context
+     * @param text     文本
      */
     public static void showToast(Context mContext, String text) {
         if (!TextUtils.isEmpty(text)) {
@@ -28,7 +29,8 @@ public class ToastUtils {
     /**
      * 描述：Toast提示文本.
      *
-     * @param resId 文本的资源ID
+     * @param mContext Context
+     * @param resId    文本的资源ID
      */
     public static void showToast(Context mContext, int resId) {
         Toast.makeText(mContext.getApplicationContext(), mContext.getApplicationContext().getResources().getText(resId),
@@ -38,14 +40,15 @@ public class ToastUtils {
     /**
      * 描述：在线程中提示文本信息.
      *
-     * @param resId 要提示的字符串资源ID
+     * @param mActivity Activity
+     * @param resId     要提示的字符串资源ID
      */
-    public static void showToastInThread(final Activity mContext, final int resId) {
-        mContext.runOnUiThread(new Runnable() {
+    public static void showToastInThread(final Activity mActivity, final int resId) {
+        mActivity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
-                showToast(mContext, resId);
+                showToast(mActivity, resId);
             }
         });
     }
@@ -53,14 +56,15 @@ public class ToastUtils {
     /**
      * 描述：在线程中提示文本信息.
      *
-     * @param text
+     * @param mActivity Activity
+     * @param text      文本
      */
-    public static void showToastInThread(final Activity mContext, final String text) {
-        mContext.runOnUiThread(new Runnable() {
+    public static void showToastInThread(final Activity mActivity, final String text) {
+        mActivity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
-                showToast(mContext, text);
+                showToast(mActivity, text);
             }
         });
     }

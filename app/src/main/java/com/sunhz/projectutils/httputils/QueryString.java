@@ -5,8 +5,8 @@ package com.sunhz.projectutils.httputils;
  * Created by Spencer on 15/3/10.
  */
 
-import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class QueryString {
     private StringBuffer query = new StringBuffer();

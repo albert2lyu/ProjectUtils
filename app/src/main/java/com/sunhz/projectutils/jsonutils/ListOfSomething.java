@@ -1,8 +1,8 @@
 package com.sunhz.projectutils.jsonutils;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * GsonUtils依赖

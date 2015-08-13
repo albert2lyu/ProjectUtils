@@ -62,7 +62,7 @@ public class GsonUtils {
      * 将json转位list
      *
      * @param json   json
-     * @param classT 需要的List的泛型类型 如:List<Object> , 就在classT参数处,填写Object.class
+     * @param classT 需要的List的泛型类型 如:List<T> , 就在classT参数处,填写Object.class
      * @param <T>
      * @return List<T>
      */

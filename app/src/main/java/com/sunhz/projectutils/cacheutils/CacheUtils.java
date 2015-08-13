@@ -28,35 +28,23 @@ import java.util.Date;
  */
 public class CacheUtils {
 
-    private static final long DAY = 1000 * 60 * 60 * 24; // 一天的毫秒数
-
-    private static final long FAIL_TIME = Constance.TimeInApplication.CACHE_FAIL_TIME;
-
     /**
      * 如果缓存有效时间设置为一整天,自动计算开关
      */
     public static final boolean AUTO_C_DAY = true;
-
     // 检查文件失效时间
     public static final Boolean CHECK_FAIL_TIME = true;
-
     // 不检查文件失效时间
     public static final Boolean NOT_CHECK_FAIL_TIME = false;
-
-    private static CacheUtils cacheUtils;
-
-    private Context mContext;
-
+    private static final long DAY = 1000 * 60 * 60 * 24; // 一天的毫秒数
+    private static final long FAIL_TIME = Constance.TimeInApplication.CACHE_FAIL_TIME;
     // 缓存文件夹名字
     private static final String ROOT_DATA_FOLDER_NAME = "cache"; // 缓存根目录文件夹
-
     private static final String DATA_CACHE_FOLDER_NAME = "dataCache"; // 数据缓存
-
     private static final String IMAGE_CACHE_FOLDER_NAME = "imageCache"; // 图片缓存
-
     private static final String OTHER_CACHE_FOLDER_NAME = "otherCahce"; // 其他类型缓存
-
-
+    private static CacheUtils cacheUtils;
+    private Context mContext;
     // cache路径
     private String rootCachePath;
 
@@ -67,17 +55,16 @@ public class CacheUtils {
     private String otherCachePath;
 
 
+    private CacheUtils(Context mContext) {
+        this.mContext = mContext;
+        init();
+    }
+
     public synchronized static CacheUtils getInstance(Context mContext) {
         if (cacheUtils == null) {
             cacheUtils = new CacheUtils(mContext.getApplicationContext());
         }
         return cacheUtils;
-    }
-
-
-    private CacheUtils(Context mContext) {
-        this.mContext = mContext;
-        init();
     }
 
     /**

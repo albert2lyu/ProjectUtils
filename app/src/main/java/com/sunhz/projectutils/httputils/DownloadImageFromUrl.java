@@ -20,7 +20,8 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
     /**
      * 控制是否并行
      *
-     * @param flag AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
+     * @param flag             AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
+     * @param downloadCallBack 下载后的 call back
      */
     public DownloadImageFromUrl(boolean flag, DownloadCallBack downloadCallBack) {
         super(flag);

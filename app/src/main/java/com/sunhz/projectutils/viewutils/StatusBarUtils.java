@@ -6,27 +6,9 @@ import android.view.WindowManager;
 
 public class StatusBarUtils {
     /**
-     * 隐藏状态栏
-     */
-    private void hideStatusBar(Activity activity) {
-        WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
-        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        activity.getWindow().setAttributes(attrs);
-    }
-
-    /**
-     * 显示状态栏
-     *
-     * @param activity
-     */
-    private void showStatusBar(Activity activity) {
-        WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
-        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        activity.getWindow().setAttributes(attrs);
-    }
-
-    /**
      * 获取状态栏高度
+     *
+     * @param mContext Context
      */
     public static int getStatusBarHeight(Context mContext) {
         Class<?> c = null;
@@ -45,5 +27,27 @@ public class StatusBarUtils {
             e.printStackTrace();
         }
         return statusBarHeight;
+    }
+
+    /**
+     * 隐藏状态栏
+     *
+     * @param activity 当前 activity
+     */
+    private void hideStatusBar(Activity activity) {
+        WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
+        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        activity.getWindow().setAttributes(attrs);
+    }
+
+    /**
+     * 显示状态栏
+     *
+     * @param activity 当前 activity
+     */
+    private void showStatusBar(Activity activity) {
+        WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
+        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        activity.getWindow().setAttributes(attrs);
     }
 }

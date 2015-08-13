@@ -3,7 +3,6 @@ package com.sunhz.projectutils;
 public final class Constance {
 
 
-
     /**
      * 加密相关常量
      */
@@ -29,7 +28,6 @@ public final class Constance {
          */
         public final static int CACHE_FAIL_TIME = 1000 * 60 * 60 * 24; // 一天
     }
-
 
 
 }

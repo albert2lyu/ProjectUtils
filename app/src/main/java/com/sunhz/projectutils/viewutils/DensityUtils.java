@@ -8,6 +8,10 @@ public class DensityUtils {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     *
+     * @param mContext Context
+     * @param dpValue  需要计算的dp值
+     * @return 计算完成后的px值
      */
     public static int dip2px(Context mContext, float dpValue) {
         float scale = mContext.getApplicationContext().getResources().getDisplayMetrics().density;
@@ -16,6 +20,10 @@ public class DensityUtils {
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     *
+     * @param mContext Context
+     * @param pxValue  需要计算的px值
+     * @return 计算完成后的dp值
      */
     public static int px2dip(Context mContext, float pxValue) {
         float scale = mContext.getApplicationContext().getResources().getDisplayMetrics().density;
@@ -23,10 +31,11 @@ public class DensityUtils {
     }
 
     /**
-     * 将px值转换为sp值，保证文字大小不变
+     * * 将px值转换为sp值，保证文字大小不变
      *
-     * @param mContext
-     * @param pxValue  （DisplayMetrics类中属性scaledDensity）
+     * @param mContext Context
+     * @param pxValue  需要计算的px值
+     * @return 计算完成后的sp值
      */
     public static int px2sp(Context mContext, float pxValue) {
         float fontScale = mContext.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
@@ -36,8 +45,9 @@ public class DensityUtils {
     /**
      * 将sp值转换为px值，保证文字大小不变
      *
-     * @param mContext
-     * @param spValue  （DisplayMetrics类中属性scaledDensity）
+     * @param mContext Context
+     * @param spValue  需要计算的sp值
+     * @return 计算完成后的px值
      */
     public static int sp2px(Context mContext, float spValue) {
         float fontScale = mContext.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
@@ -47,7 +57,7 @@ public class DensityUtils {
     /**
      * 获取屏幕宽度和高度，单位为px
      *
-     * @param mContext
+     * @param mContext Context
      * @return point.x : 宽度,point.y : 高度
      */
     public static Point getScreenMetrics(Context mContext) {
@@ -61,8 +71,8 @@ public class DensityUtils {
     /**
      * 获取屏幕长宽比
      *
-     * @param mContext
-     * @return
+     * @param mContext Context
+     * @return 长宽比
      */
     public static float getScreenRate(Context mContext) {
         Point P = getScreenMetrics(mContext.getApplicationContext());

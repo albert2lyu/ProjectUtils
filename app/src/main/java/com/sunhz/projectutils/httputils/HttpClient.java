@@ -29,7 +29,7 @@ public class HttpClient {
     /**
      * get方式访问网络,需要在子线程中使用
      *
-     * @param url
+     * @param url url
      * @return 响应数据流
      * @throws IOException 在状态码返回非200的情况,便会抛出异常
      */
@@ -52,7 +52,7 @@ public class HttpClient {
     /**
      * get方式访问网络,需要在子线程中使用
      *
-     * @param url
+     * @param url url
      * @return 响应字符串
      * @throws IOException 在状态码返回非200的情况,或返回数据流为空,便会抛出异常
      */
@@ -68,8 +68,8 @@ public class HttpClient {
     /**
      * post方式访问网络,需要在子线程中使用
      *
-     * @param url
-     * @param params
+     * @param url    url
+     * @param params params
      * @return 响应数据流
      * @throws IOException 在状态码返回非200的情况,便会抛出异常
      */
@@ -102,8 +102,8 @@ public class HttpClient {
     /**
      * post方式访问网络,需要在子线程中使用
      *
-     * @param params
-     * @param url
+     * @param url    url
+     * @param params params
      * @return 响应字符串
      * @throws IOException 在状态码返回非200的情况,或返回数据流为空,便会抛出异常
      */

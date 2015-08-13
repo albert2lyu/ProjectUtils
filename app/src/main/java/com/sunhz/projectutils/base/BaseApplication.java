@@ -13,7 +13,6 @@ public class BaseApplication extends Application {
         this.mContext = this;
 
 
-
     }
 
 }

@@ -18,8 +18,8 @@ public class DeviceUtils {
     /**
      * 获取deviceID
      *
-     * @param mContext
-     * @return
+     * @param mContext Context
+     * @return deviceID, system version > 5.0 获取 ANDROID_ID , system version < 5.0 获取 DeviceId
      */
     public static synchronized String getDeviceID(Context mContext) {
         String deviceId = ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -39,18 +39,18 @@ public class DeviceUtils {
     }
 
     /**
-     * 获取版本
+     * 获取设备型号
      *
-     * @return
+     * @return 设备型号
      */
-    public static synchronized String getDeviceName() {
+    public static synchronized String getDeviceModel() {
         return Build.MODEL;
     }
 
     /**
      * 获取sdk level
      *
-     * @return
+     * @return sdk level
      */
     public static synchronized int getDeviceOS() {
         return Build.VERSION.SDK_INT;
@@ -59,7 +59,7 @@ public class DeviceUtils {
     /**
      * 获取手机主板类型
      *
-     * @return
+     * @return 手机主板类型
      */
     public static synchronized String getBoard() {
         return Build.BOARD;
@@ -68,7 +68,7 @@ public class DeviceUtils {
     /**
      * 获取android系统定制商
      *
-     * @return
+     * @return 系统定制商
      */
     public static synchronized String getBrand() {
         return Build.BRAND;
@@ -78,7 +78,7 @@ public class DeviceUtils {
     /**
      * 获取CPU指令集
      *
-     * @return
+     * @return CPU指令集
      */
     public static synchronized String getCPU_ABI() {
         return Build.CPU_ABI;
@@ -87,7 +87,7 @@ public class DeviceUtils {
     /**
      * 获取设备参数
      *
-     * @return
+     * @return 设备参数
      */
     public static synchronized String getDevice() {
         return Build.DEVICE;
@@ -96,7 +96,7 @@ public class DeviceUtils {
     /**
      * 获取显示屏参数
      *
-     * @return
+     * @return 显示屏参数
      */
     public static synchronized String getDisplay() {
         return Build.DISPLAY;
@@ -105,7 +105,7 @@ public class DeviceUtils {
     /**
      * 获取硬件名称
      *
-     * @return
+     * @return 硬件名称
      */
     public static synchronized String getFingerprint() {
         return Build.FINGERPRINT;
@@ -114,7 +114,7 @@ public class DeviceUtils {
     /**
      * 获取HOST
      *
-     * @return
+     * @return HOST
      */
     public static synchronized String getHost() {
         return Build.HOST;
@@ -123,7 +123,7 @@ public class DeviceUtils {
     /**
      * 获取修订版本
      *
-     * @return
+     * @return 修订版本
      */
     public static synchronized String getID() {
         return Build.ID;
@@ -132,7 +132,7 @@ public class DeviceUtils {
     /**
      * 获取硬件制造商
      *
-     * @return
+     * @return 硬件制造商
      */
     public static synchronized String getManufacturer() {
         return Build.MANUFACTURER;
@@ -141,7 +141,7 @@ public class DeviceUtils {
     /**
      * 获取手机制造商
      *
-     * @return
+     * @return 手机制造商
      */
     public static synchronized String getProduct() {
         return Build.PRODUCT;
@@ -150,7 +150,7 @@ public class DeviceUtils {
     /**
      * 获取描述build的标签
      *
-     * @return
+     * @return 描述build的标签
      */
     public static synchronized String getTags() {
         return Build.TAGS;
@@ -159,7 +159,7 @@ public class DeviceUtils {
     /**
      * 获取builder类型
      *
-     * @return
+     * @return builder类型
      */
     public static synchronized String getType() {
         return Build.TYPE;

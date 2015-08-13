@@ -8,17 +8,15 @@ import android.os.AsyncTask;
  */
 public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
-    private boolean flag = SERIAL;
-
     /**
      * 并行
      */
     public static final boolean PARALLEL = true;
-
     /**
      * 串行
      */
     public static final boolean SERIAL = false;
+    private boolean flag = SERIAL;
 
     /**
      * 控制是否并行
@@ -34,8 +32,8 @@ public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTas
     /**
      * 在AsyncTask基础进行了封装
      *
-     * @param params
-     * @return
+     * @param params params
+     * @return AsyncTask
      */
     public AsyncTask<Params, Progress, Result> executeExpand(Params... params) {
         if (flag) {

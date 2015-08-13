@@ -13,8 +13,8 @@ import com.sunhz.projectutils.toastutils.ToastUtils;
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    private Context mContext;
     private static CrashHandler crashHandler;
+    private Context mContext;
     private Thread.UncaughtExceptionHandler mDefaultHandler;
 
     private CrashHandler(Context mContext) {

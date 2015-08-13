@@ -44,6 +44,7 @@ public class FirstStartUtils {
 
     /**
      * 重置标识
+     *
      * @param mContext
      */
     public static void restFirstStart(Context mContext) {

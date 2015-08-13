@@ -32,26 +32,29 @@ public class DownloadManagerOnSystem {
     */
 
 
-    private Context mContext;
-
-    private DownloadCompleteCallBack downloadCompleteCallBack;
-
-    private long lastDownloadID;
-
     private static DownloadManagerOnSystem downloadManagerOnSystem;
-
     private static boolean regBrodcastReceiverFlag = false; // 用来判断是否已经注册过广播
+    private Context mContext;
+    private DownloadCompleteCallBack downloadCompleteCallBack;
+    private long lastDownloadID;
+    private BroadcastReceiver downloadBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            downloadCompleteCallBack.downloadCompleteCallBak(context, intent);
+        }
+    };
+
 
     private DownloadManagerOnSystem(Context mContext) {
         this.mContext = mContext;
     }
 
-
     /**
      * 使用时,要执行startDownloadFile,也要在界面销毁或下载完成时,执行endDownloadFile操作
      *
-     * @param mContext
-     * @return
+     * @param mContext Context
+     * @return DownloadManagerOnSystem
      */
     public static DownloadManagerOnSystem getInstance(Context mContext) {
         if (downloadManagerOnSystem == null) {
@@ -86,14 +89,6 @@ public class DownloadManagerOnSystem {
                 DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
-    private BroadcastReceiver downloadBroadcastReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            downloadCompleteCallBack.downloadCompleteCallBak(context, intent);
-        }
-    };
-
     public long getLastDownloadID() {
         return lastDownloadID;
     }
@@ -104,11 +99,6 @@ public class DownloadManagerOnSystem {
             mContext.unregisterReceiver(downloadBroadcastReceiver);
             regBrodcastReceiverFlag = false;
         }
-    }
-
-
-    public interface DownloadCompleteCallBack {
-        void downloadCompleteCallBak(Context context, Intent intent);
     }
 
     public DownloadManager getDownloadManager() {
@@ -140,6 +130,10 @@ public class DownloadManagerOnSystem {
         }
         cursor.close();
         return path;
+    }
+
+    public interface DownloadCompleteCallBack {
+        void downloadCompleteCallBak(Context context, Intent intent);
     }
 
 }

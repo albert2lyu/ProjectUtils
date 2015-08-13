@@ -8,9 +8,8 @@ import android.telephony.TelephonyManager;
 
 public class CheckInternetUtils {
 
-    private Context mContext;
-
     private static CheckInternetUtils checkInternet;
+    private Context mContext;
 
     public CheckInternetUtils(Context mContext) {
         this.mContext = mContext;

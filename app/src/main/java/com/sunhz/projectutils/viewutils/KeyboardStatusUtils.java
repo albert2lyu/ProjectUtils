@@ -9,7 +9,7 @@ import android.view.ViewTreeObserver;
 /**
  * 软键盘监听显示隐藏
  * <p/>
- * 从此地址发现代码:http://stackoverflow.com/a/26428753/3859747
+ * 参考代码地址:http://stackoverflow.com/a/26428753/3859747
  * 对监听监听和构造函数上做了修改,核心逻辑既然使用其原始代码.
  * Created by Spencer on 7/19/15.
  */
