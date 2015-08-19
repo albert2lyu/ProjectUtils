@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.fileutils;
 
 import android.os.Environment;
@@ -8,6 +23,7 @@ import java.io.IOException;
 
 /**
  * SD卡相关工具类
+ * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class SDCardUtils {
 
@@ -22,16 +38,16 @@ public class SDCardUtils {
      *
      * @return sd卡路径
      */
-    public static synchronized String getSDCardPath() {
+    public static String getSDCardPath() {
         return Environment.getExternalStorageDirectory().getPath();
     }
 
     /**
      * 检测Sd卡是否存在
      *
-     * @return true:存在,flase:不存在
+     * @return true:存在,false:不存在
      */
-    public static synchronized boolean checkSDCard() {
+    public static boolean checkSDCard() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
@@ -40,7 +56,7 @@ public class SDCardUtils {
      *
      * @return true:可写入,false:不可写入
      */
-    public static synchronized boolean isSdCardWrittenable() {
+    public static boolean isSdCardWrittenable() {
         return android.os.Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED);
     }
@@ -50,7 +66,7 @@ public class SDCardUtils {
      *
      * @return sd卡剩余空间
      */
-    public static synchronized long getAvailableStorage() {
+    public static long getAvailableStorage() {
         String storageDirectory = null;
         storageDirectory = getSDCardPath();
         try {
@@ -64,11 +80,11 @@ public class SDCardUtils {
     /**
      * 判断当前的sd空间是否可保存该文件
      *
-     * @param currentFileSize
-     * @return
-     * @throws Exception
+     * @param currentFileSize 当前文件大小
+     * @return 返回是否可保存
+     * @throws Exception 保存失败
      */
-    public static synchronized boolean isAvailableStorage(long currentFileSize) throws Exception {
+    public static boolean isAvailableStorage(long currentFileSize) throws Exception {
         // / 检测sd卡是否存在
         if (!checkSDCard()) {
             throw new Exception("sd卡不存在");
@@ -77,8 +93,8 @@ public class SDCardUtils {
         if (!isSdCardWrittenable()) {
             throw new Exception("sd卡不能执行写入操作");
         }
-        long avaliableSize = getAvailableStorage();
-        return Float.compare(avaliableSize, currentFileSize) == 1;
+        long availableSize = getAvailableStorage();
+        return Float.compare(availableSize, currentFileSize) == 1;
     }
 
     /**
@@ -86,22 +102,23 @@ public class SDCardUtils {
      *
      * @param fileName 要创建的文件名
      * @return 创建得到的文件
+     * @throws IOException 创建失败
      */
-    public static synchronized File createSDFile(String fileName) throws IOException {
+    public static File createSDFile(String fileName) throws IOException {
         File file = new File(getSDCardPath() + File.separator + fileName);
         file.createNewFile();
         return file;
     }
 
     /**
-     * 在SD卡上创建目录
+     * 在SD卡上创建目录,可多层级目录一起创建
      *
      * @param absoluteDirName 要创建的目录名
      * @return 创建得到的目录
      */
-    public static synchronized File createAbsoluteSDDir(String absoluteDirName) {
+    public static File createAbsoluteSDDir(String absoluteDirName) {
         File dir = new File(getSDCardPath(), absoluteDirName);
-        dir.mkdir();
+        dir.mkdirs();
         return dir;
     }
 

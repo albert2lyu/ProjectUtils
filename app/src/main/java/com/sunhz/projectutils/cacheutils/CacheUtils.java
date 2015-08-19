@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.cacheutils;
 
 import android.content.Context;
@@ -16,9 +31,7 @@ import java.util.Date;
 
 /**
  * 数据缓存管理
- * <p/>
  * 目录结构 : (!!!完整结构查看README.md!!!)
- * <p/>
  * sdcard下
  * - package name (程序包名)
  * -- cache (缓存目录)
@@ -126,44 +139,81 @@ public class CacheUtils {
     /**
      * 获取缓存根目录
      *
-     * @return
+     * @return Str
      */
-    public String getRootCachePath() {
+    public String getRootCachePathStr() {
         return rootCachePath;
+    }
+
+    /**
+     * 获取缓存根目录
+     *
+     * @return File
+     */
+    public File getRootCachePathFile() {
+        return new File(rootCachePath);
     }
 
     /**
      * 获取数据缓存根目录
      *
-     * @return
+     * @return Str
      */
-    public String getDataCachePath() {
+    public String getDataCachePathStr() {
         return dataCachePath;
+    }
+
+    /**
+     * 获取数据缓存根目录
+     *
+     * @return File
+     */
+    public File getDataCachePathFile() {
+        return new File(dataCachePath);
     }
 
     /**
      * 获取图片缓存根目录
      *
-     * @return
+     * @return Str
      */
-    public String getImageCachePath() {
+    public String getImageCachePathStr() {
         return imageCachePath;
+    }
+
+    /**
+     * 获取图片缓存根目录
+     *
+     * @return File
+     */
+    public File getImageCachePathFile() {
+        return new File(imageCachePath);
     }
 
     /**
      * 获取其他缓存根目录
      *
-     * @return
+     * @return Str
      */
-    public String getOtherCachePath() {
+    public String getOtherCachePathStr() {
         return otherCachePath;
     }
 
     /**
+     * 获取其他缓存根目录
+     *
+     * @return File
+     */
+    public File getOtherCachePathFile() {
+        return new File(otherCachePath);
+    }
+
+
+    /**
      * 检查缓存是否存在,是否过期
      *
-     * @param cacheFileName
-     * @param cacheType     CacheType.XXX
+     * @param cacheFileName 缓存文件名称
+     * @param cacheType     缓存类型 CacheType.XXX
      * @return true:存在,没有过期. false:不存在/过期/存在但过期
      */
     public boolean checkCacheExistsAndFailTime(String cacheFileName, CacheType cacheType) {
@@ -177,7 +227,9 @@ public class CacheUtils {
     /**
      * 检查缓存是否存在
      *
-     * @return
+     * @param cacheFileName 缓存文件名
+     * @param cacheType     缓存类型 CacheType.XXX
+     * @return true 存在, false 不存在
      */
     public boolean checkCacheExists(String cacheFileName, CacheType cacheType) {
 
@@ -200,17 +252,15 @@ public class CacheUtils {
 
     /**
      * 检查缓存是否过期
-     * <p/>
      * 如果缓存检查时间设置为24小时.
      * 会自动从缓存当天的0时开始计算,一直到当天24时. 算完整一整天.
-     * <p/>
      * 例: 2010年03月04日 13时34分35秒 将文件成功缓存到本地.
      * 文件到2010年03月04日 24时0分0秒 文件将会自动过期.
-     * <p/>
      * 如果需要24小时时间缓存,但不需要自动按照整天来计算缓存有效时间这项功能
      * 可在 application 中将 CacheUtils.AUTO_C_DAY 设置为 false, 此属性默认为true
      *
-     * @param cacheFileName
+     * @param cacheFileName 缓存文件名
+     * @param cacheType     缓存类型 CacheType.XXX
      * @return true:还没有过期,false:已经过期
      */
     public boolean checkCacheFailTime(String cacheFileName, CacheType cacheType) {
@@ -305,6 +355,10 @@ public class CacheUtils {
 
     /**
      * 保存字符串到数据缓存
+     *
+     * @param content   待保存内容
+     * @param cacheName 缓存文件名
+     * @throws IOException 保存失败
      */
     public void saveStringCacheToDataCacheFolder(String content, String cacheName) throws IOException {
         FileUtils.write(new File(dataCachePath, cacheName), content);
@@ -313,6 +367,10 @@ public class CacheUtils {
 
     /**
      * 保存字符串到其他缓存
+     *
+     * @param content   待保存内容
+     * @param cacheName 缓存文件名
+     * @throws IOException 保存失败
      */
     public void saveStringCacheToOtherFolder(String content, String cacheName) throws IOException {
         FileUtils.write(new File(otherCachePath, cacheName), content);
@@ -323,7 +381,8 @@ public class CacheUtils {
      *
      * @param cacheName    缓存名字
      * @param failTimeFlag 过期时间是否生效,CacheUtils.CHECK_FAIL_TIME(true):生效,CacheUtils.NOT_CHECK_FAIL_TIME(false):不生效
-     * @return
+     * @return 字符串缓存
+     * @throws Exception 异常情况(文件不存在,cache 已经过期,cache 为空 等其他错误)
      */
     public String getStringCacheToDataCacheFolder(String cacheName, boolean failTimeFlag) throws Exception {
         File file = new File(dataCachePath, cacheName);
@@ -350,7 +409,8 @@ public class CacheUtils {
      *
      * @param cacheName    缓存名字
      * @param failTimeFlag 过期时间是否生效,CacheUtils.CHECK_FAIL_TIME(true):生效,CacheUtils.NOT_CHECK_FAIL_TIME(false):不生效
-     * @return
+     * @return 字符串缓存
+     * @throws Exception 异常情况(文件不存在,cache 已经过期,cache 为空 等其他错误)
      */
     public String getStringCacheToOtherCacheFolder(String cacheName, boolean failTimeFlag) throws Exception {
         File file = new File(otherCachePath, cacheName);
@@ -375,7 +435,7 @@ public class CacheUtils {
     /**
      * 获取缓存大小
      *
-     * @return
+     * @return 已转换格式后的缓存大小
      */
     public String getCacheSize() {
         File file = new File(rootCachePath);
@@ -394,7 +454,7 @@ public class CacheUtils {
      * 清除缓存
      */
     public void clearAllCache() {
-        File file = new File(getRootCachePath());
+        File file = new File(getRootCachePathStr());
         FileUtils.deleteDir(file);
     }
 

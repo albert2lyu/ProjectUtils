@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.base;
 
 import android.app.Activity;
@@ -11,6 +26,10 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
 import com.sunhz.projectutils.Constance;
 
+/**
+ * Base fragment
+ * Created by Spencer (www.spencer-dev.com) on 15/2/3.
+ */
 public class BaseFragment extends Fragment implements Base {
 
     protected Context mContext;
@@ -34,7 +53,7 @@ public class BaseFragment extends Fragment implements Base {
     /**
      * 添加请求到volley队列中
      *
-     * @param request
+     * @param request request 请求
      */
     @Override
     public void volleyAdd(Request request) {
@@ -45,7 +64,11 @@ public class BaseFragment extends Fragment implements Base {
     @Override
     public void onStop() {
         super.onStop();
-        volleyQueue.cancelAll(mContext);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        volleyQueue.cancelAll(mContext);
+    }
 }

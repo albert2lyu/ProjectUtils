@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.imageutils;
 
 import android.content.Context;
@@ -14,8 +29,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-import com.sunhz.projectutils.Constance;
-
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,16 +37,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
+/**
+ * 图片处理相关类
+ * Created by Spencer (www.spencer-dev.com) on 15/2/20.
+ */
 public class ImageUtils {
 
+    private ImageUtils() {
+
+    }
+
     /**
-     * 质量压缩方法
+     * 质量压缩
      *
-     * @param image
-     * @return
+     * @param image bitmap
+     * @return 压缩后的bitmap
      */
     public static Bitmap compressImage(Bitmap image) {
 
@@ -52,10 +71,10 @@ public class ImageUtils {
     }
 
     /**
-     * 图片按比例大小压缩方法
+     * 图片按比例大小压缩
      *
      * @param image （根据Bitmap图片压缩）
-     * @return
+     * @return 压缩后的bitmap
      */
     public static Bitmap compressScale(Bitmap image) {
 
@@ -102,10 +121,10 @@ public class ImageUtils {
     }
 
     /**
-     * 图片按比例大小压缩方法
+     * 图片按比例大小压缩
      *
      * @param srcPath （根据路径获取图片并压缩）
-     * @return
+     * @return 压缩后的bitmap
      */
     public static Bitmap getimage(String srcPath) {
 
@@ -141,9 +160,9 @@ public class ImageUtils {
     /**
      * 将bitmap,按比例放大缩小
      *
-     * @param bitmap
+     * @param bitmap  bitmap
      * @param density 如果density为0,则返回原图大小
-     * @return bitmap
+     * @return 缩放后的bitmap
      */
     public static Bitmap scaleBitmap(Bitmap bitmap, float density) {
         if (bitmap == null) {
@@ -163,7 +182,7 @@ public class ImageUtils {
      * @param bitmap 将被缩放的图片
      * @param width  新bitmap的宽度
      * @param height 新bitmap的高度
-     * @return
+     * @return 缩放后的bitmap
      */
     public static Bitmap scaledBitmap(Bitmap bitmap, int width, int height) {
         return Bitmap.createScaledBitmap(bitmap, width, height, true);
@@ -172,9 +191,9 @@ public class ImageUtils {
     /**
      * 将bitmap,按比例放大缩小
      *
-     * @param drawable
-     * @param density  如果dexsity为0,则返回原图大小
-     * @return
+     * @param drawable drawable
+     * @param density  如果 density 为0,则返回原图大小
+     * @return 缩放后的bitmap
      */
     public static Drawable scaledBitmap(Drawable drawable, float density) {
         return bitmapToDrawable(scaleBitmap(drawableToBitmap(drawable), density));
@@ -186,7 +205,7 @@ public class ImageUtils {
      * @param drawable 将被缩放的图片
      * @param width    新drawable的宽
      * @param height   新drawable的高
-     * @return
+     * @return 缩放后的bitmap
      */
     public static Drawable scaledDrawable(Drawable drawable, int width, int height) {
         return bitmapToDrawable(scaledBitmap(drawableToBitmap(drawable), width, height));
@@ -196,8 +215,8 @@ public class ImageUtils {
     /**
      * byte数组 转换成 Drawable
      *
-     * @param byteArray
-     * @return
+     * @param byteArray 字节数组
+     * @return drawable
      */
     public static Drawable byteArrayToDrawable(byte[] byteArray) {
         ByteArrayInputStream ins = new ByteArrayInputStream(byteArray);
@@ -207,8 +226,8 @@ public class ImageUtils {
     /**
      * drawable 转换成 byte数组
      *
-     * @param drawable
-     * @return
+     * @param drawable drawable
+     * @return 字节数组
      */
     public static byte[] drawableToByteArray(Drawable drawable) {
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
@@ -221,8 +240,8 @@ public class ImageUtils {
     /**
      * bitmap 转换为 byte数组
      *
-     * @param bitmap
-     * @return
+     * @param bitmap bitmap
+     * @return 字节数组
      */
     public static byte[] bitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -233,8 +252,8 @@ public class ImageUtils {
     /**
      * byte数组 转换为 bitmap
      *
-     * @param byteArray
-     * @return
+     * @param byteArray 字节数组
+     * @return bitmap
      */
     public static Bitmap byteArrayToBitmap(byte[] byteArray) {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
@@ -244,23 +263,28 @@ public class ImageUtils {
     /**
      * Bitmap 转换为 Drawable
      *
-     * @param bitmap
+     * @param bitmap bitmap
      * @return Drawable
      */
     public static Drawable bitmapToDrawable(Bitmap bitmap) {
+        BitmapDrawable bd = new BitmapDrawable(bitmap);
+        bd.setTargetDensity(bitmap.getDensity());
         return new BitmapDrawable(bitmap);
     }
 
     /**
      * Drawable 转换为 Bitmap
      *
-     * @param drawable
+     * @param drawable drawable
      * @return Bitmap
      */
     public static Bitmap drawableToBitmap(Drawable drawable) {
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+        int w = drawable.getIntrinsicWidth();
+        int h = drawable.getIntrinsicHeight();
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+        Bitmap bitmap = Bitmap.createBitmap(w, h, config);
         Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.setBounds(0, 0, w, h);
         drawable.draw(canvas);
         return bitmap;
     }
@@ -269,6 +293,7 @@ public class ImageUtils {
     /**
      * bitmap 转换成 InputStream
      *
+     * @param bitmap bitmap
      * @return InputStream
      */
     public static InputStream bitmapToInputStream(Bitmap bitmap) {
@@ -280,8 +305,8 @@ public class ImageUtils {
     /**
      * drawable 转换成 InputStream
      *
-     * @param drawable
-     * @return
+     * @param drawable drawable
+     * @return 流
      */
     public static InputStream drawableToInputStream(Drawable drawable) {
         return bitmapToInputStream(drawableToBitmap(drawable));
@@ -292,7 +317,7 @@ public class ImageUtils {
      *
      * @param bitmap bitmap
      * @param file   文件存储路径
-     * @throws IOException
+     * @throws IOException 保存失败
      */
     public static void bitmapToFile(Bitmap bitmap, File file) throws IOException {
         if (!file.exists()) {
@@ -310,15 +335,66 @@ public class ImageUtils {
             if (fileOutputStream != null)
                 fileOutputStream.close();
         }
-
-
     }
 
     /**
-     * drawble 转换成 圆角
+     * drawable to file
      *
-     * @param drawable
-     * @param pixels
+     * @param drawable drawable
+     * @param file     文件存储路径
+     * @throws IOException 保存失败
+     */
+    public static void drawableToFile(Drawable drawable, File file) throws IOException {
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        Bitmap bitmap = drawableToBitmap(drawable);
+        bitmapToFile(bitmap, file);
+    }
+
+
+    /**
+     * 将图片文件 转换成 bitmap
+     *
+     * @param filePath 文件路径
+     * @return bitmap bitmap
+     * @throws IOException 转换失败
+     */
+    public static Bitmap filtToBitmap(String filePath) throws IOException {
+        InputStream is = null;
+        try {
+            is = new FileInputStream(new File(filePath));
+            return BitmapFactory.decodeStream(is);
+        } finally {
+            is.close();
+        }
+    }
+
+    /**
+     * 将图片文件 转换成 drawable
+     *
+     * @param filePath 文件路径
+     * @return drawable drawable
+     * @throws IOException 转换失败
+     */
+    public static Drawable filtToDrawable(String filePath) throws IOException {
+        InputStream is = null;
+        try {
+            is = new FileInputStream(new File(filePath));
+            return BitmapDrawable.createFromStream(is, null);
+        } finally {
+            if (is != null)
+                is.close();
+        }
+    }
+
+
+    /**
+     * drawable 转换成 圆角
+     *
+     * @param drawable drawable
+     * @param pixels   圆角的弧度
      * @return 圆角Drawable
      */
     public static Drawable drawableToRoundCorner(Drawable drawable, int pixels) {
@@ -328,10 +404,10 @@ public class ImageUtils {
 
 
     /**
-     * 使圆角功能支持BitampDrawable
+     * 使圆角功能支持BitmapDrawable
      *
-     * @param bitmapDrawable
-     * @param pixels
+     * @param bitmapDrawable bitmapDrawable
+     * @param pixels         圆角的弧度
      * @return 圆角bitmapDrawable
      */
     public static BitmapDrawable bitmapDrawableToRoundCorner(BitmapDrawable bitmapDrawable, int pixels) {
@@ -370,8 +446,8 @@ public class ImageUtils {
     /**
      * 获取资源图片
      *
-     * @param mContext
-     * @param resId
+     * @param mContext Context
+     * @param resId    资源ID
      * @return bitmap
      */
     public static Bitmap getResourceBitmap(Context mContext, int resId) {
@@ -387,8 +463,8 @@ public class ImageUtils {
     /**
      * 获取资源图片
      *
-     * @param mContext
-     * @param resId
+     * @param mContext Context
+     * @param resId    资源ID
      * @return drawable
      */
     public static Drawable getResourceDrawable(Context mContext, int resId) {
@@ -399,7 +475,7 @@ public class ImageUtils {
     /**
      * 计算缩放比的inSampleSize
      *
-     * @param options
+     * @param options   options
      * @param reqWidth  将要缩放的宽
      * @param reqHeight 将要缩放的高
      * @return inSampleSize
@@ -417,58 +493,6 @@ public class ImageUtils {
             }
         }
         return inSampleSize;
-    }
-
-
-    /**
-     * 将图片文件 转换成 bitmap
-     *
-     * @param filePath 文件路径
-     * @return bitmao
-     * @throws IOException
-     */
-    public static Bitmap filtToBitmap(String filePath) throws IOException {
-        InputStream is = null;
-        try {
-            is = new FileInputStream(new File(filePath));
-            return BitmapFactory.decodeStream(is);
-        } finally {
-            is.close();
-        }
-    }
-
-    /**
-     * 将图片文件 转换成 drawable
-     *
-     * @param filePath 文件路径
-     * @return drawable
-     * @throws IOException
-     */
-    public static Drawable filtToDrawable(String filePath) throws IOException {
-        InputStream is = null;
-        try {
-            is = new FileInputStream(new File(filePath));
-            return BitmapDrawable.createFromStream(is, null);
-        } finally {
-            if (is != null)
-                is.close();
-        }
-    }
-
-    /**
-     * 获取网络图片
-     *
-     * @param imgUrl
-     * @return inputStream
-     * @throws IOException
-     */
-    public static InputStream getNetImage(String imgUrl) throws IOException {
-        URL url = new URL(imgUrl);
-        URLConnection urlConnection = url.openConnection();
-        urlConnection.setConnectTimeout(Constance.TimeInApplication.NET_TIMEOUT);
-        urlConnection.setReadTimeout(Constance.TimeInApplication.NET_TIMEOUT);
-        InputStream inputStream = urlConnection.getInputStream();
-        return inputStream;
     }
 
 

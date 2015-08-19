@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.fileutils;
 
 import android.content.Context;
@@ -21,7 +36,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -34,13 +48,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * 文件操作类
+ * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class FileUtils {
 
-
     private FileUtils() {
-    }
 
+    }
 
     /**
      * 写入对象到指定路径
@@ -48,10 +62,9 @@ public class FileUtils {
      * @param obj      待写入对象
      * @param fileName 文件名
      * @param filePath 文件路径
-     * @throws IOException
+     * @throws IOException 写入失败
      */
-    public static synchronized void writeObjectToFile(Serializable obj, String fileName, String filePath)
-            throws IOException {
+    public static void writeObjectToFile(Serializable obj, String fileName, String filePath) throws IOException {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
@@ -70,10 +83,10 @@ public class FileUtils {
      * @param fileName 文件名
      * @param filePath 文件路径
      * @return 读取出的对象
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException            读取失败
+     * @throws ClassNotFoundException 找不到对应对象
      */
-    public static synchronized Object readObjectToFile(String fileName, String filePath) throws IOException,
+    public static Object readObjectToFile(String fileName, String filePath) throws IOException,
             ClassNotFoundException {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -93,18 +106,18 @@ public class FileUtils {
      * @param filePath 文件的路径
      * @return 文件拓展名
      */
-    public static synchronized String getFileSuffix(String filePath) {
+    public static String getFileSuffix(String filePath) {
         return filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
     }
 
     /**
      * 判断某文件是否存在
      *
-     * @param absolutePackagePath 文件的绝对路径
+     * @param absoluteFilePath 文件的绝对路径
      * @return true:存在,false:不存在
      */
-    public static synchronized boolean isFileExist(String absolutePackagePath) {
-        return new File(absolutePackagePath).exists();
+    public static boolean isFileExist(String absoluteFilePath) {
+        return new File(absoluteFilePath).exists();
     }
 
     /**
@@ -113,7 +126,7 @@ public class FileUtils {
      * @param file 路径
      * @return true:是文件夹,false:不是文件夹
      */
-    public static synchronized boolean isDirectory(File file) {
+    public static boolean isDirectory(File file) {
         return file.isDirectory();
     }
 
@@ -151,22 +164,35 @@ public class FileUtils {
     /**
      * 获取Asset文件夹下的文本内容
      *
-     * @param fileName
-     * @return
-     * @throws IOException
+     * @param mContext Context
+     * @param fileName 文件名
+     * @return 文件内容
+     * @throws IOException 读取失败
      */
-    public static synchronized String getAssetFileContent(Context mContext, String fileName) throws Exception {
+    public static String getAssetFileContent(Context mContext, String fileName) throws Exception {
         return InputStream2String(mContext.getApplicationContext().getResources().getAssets().open(fileName));
+    }
+
+    /**
+     * 获取Asset文件夹下的文件的流
+     *
+     * @param mContext Context
+     * @param fileName 文件名
+     * @return 文件的流
+     * @throws IOException 读取失败
+     */
+    public static InputStream getAssetFileInputStream(Context mContext, String fileName) throws Exception {
+        return mContext.getApplicationContext().getResources().getAssets().open(fileName);
     }
 
     /**
      * 根据inputStream生成String 并关闭inputStream
      *
-     * @param inputStream
-     * @return
-     * @throws Exception
+     * @param inputStream 流
+     * @return 流内的文本内容
+     * @throws IOException 读取失败
      */
-    public static synchronized String InputStream2String(InputStream inputStream) throws IOException {
+    public static String InputStream2String(InputStream inputStream) throws IOException {
         if (inputStream == null) {
             throw new NullPointerException();
         }
@@ -189,27 +215,27 @@ public class FileUtils {
     /**
      * 解析xml
      *
-     * @param file
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws SAXException
+     * @param file 文件对象
+     * @return dom 对象
+     * @throws ParserConfigurationException 解析失败
+     * @throws IOException                  解析失败
+     * @throws SAXException                 解析失败
      */
-    public static synchronized Document XmlByDomj4(File file) throws ParserConfigurationException, SAXException,
-            IOException {
+    public static Document XmlByDomj4(File file) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         return db.parse(file);
     }
 
     /**
-     * 根据指定编码，读取数据
+     * 根据指定编码，读取文本文件
      *
      * @param is        字符流
      * @param encodeStr 字符编码
      * @return 内容
-     * @throws Exception
+     * @throws IOException 读取失败
      */
-    public static synchronized String read(InputStream is, String encodeStr) throws IOException {
+    public static String read(InputStream is, String encodeStr) throws IOException {
         ByteArrayOutputStream out = null;
         try {
             out = new ByteArrayOutputStream();
@@ -229,17 +255,17 @@ public class FileUtils {
     /**
      * 根据默认编码,读取文本文件
      *
-     * @param file
-     * @return str
-     * @throws IOException
+     * @param file 文件对象
+     * @return 文件内容
+     * @throws IOException 读取失败
      */
-    public static synchronized String read(File file) throws IOException {
+    public static String read(File file) throws IOException {
         InputStreamReader inputReader = null;
         BufferedReader bufferReader = null;
-        OutputStream outputStream = null;
+        InputStream inputStream = null;
         StringBuffer strBuffer = new StringBuffer();
         try {
-            InputStream inputStream = new FileInputStream(file);
+            inputStream = new FileInputStream(file);
             inputReader = new InputStreamReader(inputStream);
             bufferReader = new BufferedReader(inputReader);
 
@@ -250,9 +276,9 @@ public class FileUtils {
                 strBuffer.append(line);
             }
         } finally {
-            if (inputReader != null) inputReader.close();
             if (bufferReader != null) bufferReader.close();
-            if (outputStream != null) outputStream.close();
+            if (inputReader != null) inputReader.close();
+            if (inputStream != null) inputStream.close();
         }
         return strBuffer.toString();
     }
@@ -260,11 +286,11 @@ public class FileUtils {
     /**
      * 写入文本
      *
-     * @param file
-     * @param writeData
-     * @throws IOException
+     * @param file      文件对象
+     * @param writeData 写入内容
+     * @throws IOException 写入失败
      */
-    public static synchronized void write(File file, String writeData) throws IOException {
+    public static void write(File file, String writeData) throws IOException {
         FileWriter fw = null;
         BufferedWriter writer = null;
         try {
@@ -280,12 +306,13 @@ public class FileUtils {
     /**
      * 将raw中的初始文件保存到指定目录下
      *
+     * @param mContext     Context
      * @param rawId        raw中文件的id
      * @param fileSavePath 转储的文件路径文件名称
      * @return true:保存成功
-     * @throws IOException
+     * @throws IOException 保存失败
      */
-    public static synchronized boolean InitFileToSDCard(Context mContext, int rawId, String fileSavePath) throws IOException {
+    public static boolean InitFileToSDCard(Context mContext, int rawId, String fileSavePath) throws IOException {
         InputStream inputStream = null;
         try {
             inputStream = mContext.getApplicationContext().getResources().openRawResource(rawId); // 这里就是Raw文件引用位置
@@ -299,12 +326,13 @@ public class FileUtils {
     /**
      * 将Assets中的初始文件保存到指定目录下
      *
+     * @param mContext       Context
      * @param assetsFileName Assets中文件的名称
      * @param fileSavePath   转储的文件路径文件名称
      * @return true:保存成功
-     * @throws Exception
+     * @throws IOException 保存失败
      */
-    public static synchronized boolean InitAssetsFileToSDCard(Context mContext, String assetsFileName, String fileSavePath)
+    public static boolean InitAssetsFileToSDCard(Context mContext, String assetsFileName, String fileSavePath)
             throws IOException {
         if (assetsFileName == null) {
             return false;
@@ -322,12 +350,11 @@ public class FileUtils {
     /**
      * 将数据流保存到指定文件
      *
-     * @param inputStream
-     * @param fileSavePath
-     * @throws IOException
+     * @param inputStream  数据流
+     * @param fileSavePath 文件路径,包含文件名称
+     * @throws IOException 保存失败
      */
-    public static synchronized void SaveInputStreamToFile(InputStream inputStream, String fileSavePath)
-            throws IOException {
+    public static void SaveInputStreamToFile(InputStream inputStream, String fileSavePath) throws IOException {
         File file = new File(fileSavePath);
         if (!file.exists()) {
             file.createNewFile();
@@ -353,9 +380,9 @@ public class FileUtils {
      *
      * @param sourceFile 源文件
      * @param targetFile 目标文件
-     * @throws IOException
+     * @throws IOException 复制失败
      */
-    public static synchronized void copyFile(File sourceFile, File targetFile) throws IOException {
+    public static void copyFile(File sourceFile, File targetFile) throws IOException {
         BufferedInputStream inBuff = null;
         BufferedOutputStream outBuff = null;
         try {
@@ -381,13 +408,13 @@ public class FileUtils {
     }
 
     /**
-     * 复制文件夹(不包含该文件夹，只有该文件夹中的全部子文件或文件夹)
+     * 复制文件夹(不包含当前文件夹，只有该文件夹中的全部子文件或文件夹)
      *
      * @param sourceDir 源文件夹
      * @param targetDir 目标文件夹
-     * @throws IOException
+     * @throws IOException 复制失败
      */
-    public static synchronized void copyDirectiory(String sourceDir, String targetDir) throws IOException {
+    public static void copyDirectiory(String sourceDir, String targetDir) throws IOException {
         // 新建目标目录
         (new File(targetDir)).mkdirs();
         // 获取源文件夹当前下的文件或目录
@@ -397,8 +424,7 @@ public class FileUtils {
                 // 源文件
                 File sourceFile = file[i];
                 // 目标文件
-                File targetFile = new File(new File(targetDir).getAbsolutePath() + File.separator
-                        + file[i].getName());
+                File targetFile = new File(new File(targetDir).getAbsolutePath() + File.separator + file[i].getName());
                 copyFile(sourceFile, targetFile);
             }
             if (file[i].isDirectory()) {
@@ -415,22 +441,22 @@ public class FileUtils {
      * 返回文件夹下所有文件的绝对路径
      *
      * @param strPath 目标文件夹
-     * @return
+     * @return 所有文件的绝对路径
      */
-    public static synchronized List<String> refreshFileList(String strPath) {
-        List<String> filelist = new ArrayList<String>();
+    public static List<String> refreshFileList(String strPath) {
+        List<String> fileList = new ArrayList<String>();
         File dir = new File(strPath);
         File[] files = dir.listFiles();
 
-        if (files == null) return filelist;
+        if (files == null) return fileList;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
-                filelist.addAll(refreshFileList(files[i].getAbsolutePath()));
+                fileList.addAll(refreshFileList(files[i].getAbsolutePath()));
             } else {
-                filelist.add(files[i].getAbsolutePath());
+                fileList.add(files[i].getAbsolutePath());
             }
         }
-        return filelist;
+        return fileList;
     }
 
     /**
@@ -439,30 +465,30 @@ public class FileUtils {
      * @param strPath 文件路径
      * @return 路径下所有文件的名字
      */
-    public static synchronized List<String> queryFileNameList(String strPath) {
-        List<String> filelist = new ArrayList<String>();
+    public static List<String> queryFileNameList(String strPath) {
+        List<String> fileList = new ArrayList<String>();
         File dir = new File(strPath);
         File[] files = dir.listFiles();
 
-        if (files == null) return filelist;
+        if (files == null) return fileList;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory()) {
-                filelist.addAll(refreshFileList(files[i].getName()));
+                fileList.addAll(refreshFileList(files[i].getName()));
             } else {
-                filelist.add(files[i].getName());
+                fileList.add(files[i].getName());
             }
         }
-        return filelist;
+        return fileList;
     }
 
     /**
-     * 将文件创建为一个流
+     * 将文件创建为一个InputStream流
      *
-     * @param file 文件路径
-     * @return 流对象
-     * @throws IOException
+     * @param file 文件对象
+     * @return InputStream流对象
+     * @throws IOException 流创建失败
      */
-    public static synchronized FileInputStream openInputStream(File file) throws IOException {
+    public static FileInputStream openInputStream(File file) throws IOException {
         if (file.exists()) {
             if (file.isDirectory()) {
                 throw new IOException("File '" + file + "' exists but is a directory");
@@ -477,13 +503,13 @@ public class FileUtils {
     }
 
     /**
-     * 将文本文件中行的集合返回
+     * 将文本文件中的行以集合形式返回
      *
-     * @param file 文本文件路径
+     * @param file 文本对象
      * @return 文本文件中行的集合
-     * @throws IOException
+     * @throws IOException 读取失败
      */
-    public static synchronized List<String> readLines(File file) throws IOException {
+    public static List<String> readLines(File file) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
@@ -494,14 +520,14 @@ public class FileUtils {
     }
 
     /**
-     * 按照指定编码,将文本文件中行的集合返回
+     * 按照指定编码,将文本文件中的行以集合形式返回
      *
-     * @param file     文本文件路径
+     * @param file     文本对象
      * @param encoding 编码
      * @return 文本文件中行的集合
-     * @throws IOException
+     * @throws IOException 读取失败
      */
-    public static synchronized List<String> readLines(File file, String encoding) throws IOException {
+    public static List<String> readLines(File file, String encoding) throws IOException {
         InputStream in = null;
         try {
             in = openInputStream(file);
@@ -512,36 +538,36 @@ public class FileUtils {
     }
 
     /**
-     * 将文本文件的流中的内容以行集合的方式返回
+     * 将inputStream中的文本转成集合(每一行是集合中的一个item)
      *
      * @param input 文本文件的流
      * @return 内容的行集合
-     * @throws IOException
+     * @throws IOException 读取失败
      */
-    public static synchronized List<String> readLines(InputStream input) throws IOException {
+    public static List<String> readLines(InputStream input) throws IOException {
         return readLines(new InputStreamReader(input));
     }
 
     /**
-     * 使用指定的编码,将文本文件的流中的内容以行集合的方式返回
+     * 使用指定的编码,将inputStream中的文本转成集合(每一行是集合中的一个item)
      *
      * @param input    文本文件的流
      * @param encoding 编码
      * @return 内容的行集合
-     * @throws IOException
+     * @throws IOException 读取失败
      */
-    public static synchronized List<String> readLines(InputStream input, String encoding) throws IOException {
+    public static List<String> readLines(InputStream input, String encoding) throws IOException {
         return readLines(new InputStreamReader(input, encoding));
     }
 
     /**
-     * 文本文件的流中的内容以行集合的方式返回
+     * 将Reader中的文本转成集合(每一行是集合中的一个item)
      *
      * @param input 文本文件的流
      * @return 内容的行集合
-     * @throws IOException
+     * @throws IOException 读取失败
      */
-    public static synchronized List<String> readLines(Reader input) throws IOException {
+    public static List<String> readLines(Reader input) throws IOException {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(input);
@@ -561,11 +587,11 @@ public class FileUtils {
     /**
      * 取得文件大小
      *
-     * @param file 文件路径
+     * @param file 文件对象
      * @return 若文件不存在, 返回-1.若文件存在,则正常返回文件大小.
-     * @throws Exception
+     * @throws IOException 获取大小失败
      */
-    public static synchronized long getFileSizes(File file) throws IOException {
+    public static long getFileSizes(File file) throws IOException {
         long size = -1;
         if (file.exists()) {
             FileInputStream fis = null;
@@ -582,13 +608,12 @@ public class FileUtils {
     /**
      * 获取文件夹大小
      *
-     * @param file 文件夹路径
+     * @param file 文件对象
      * @return 若文件夹不存在, 则返回-1.若文件夹存在,但文件夹内无文件,则返回0.若文件夹存在,并文件夹内有文件,则正常返回文件夹大小
      * .
-     * @throws Exception
+     * @throws IOException 获取文件夹大小失败
      */
-    public static synchronized long getDirectorySize(File file) throws Exception// 取得文件夹大小
-    {
+    public static long getDirectorySize(File file) throws IOException {
         long size = -1;
         if (file.isDirectory() && file.exists()) {
             File fileList[] = file.listFiles();
@@ -613,7 +638,7 @@ public class FileUtils {
      * @param fileSize 文件大小
      * @return 文件大小和单位
      */
-    public static synchronized String formetFileSize(long fileSize) {
+    public static String formetFileSize(long fileSize) {
         DecimalFormat df = new DecimalFormat("#.00");
         String fileSizeString = "";
         if (fileSize < 1024) {
@@ -634,7 +659,7 @@ public class FileUtils {
      * @param file 文件夹路径
      * @return 文件个数(不包含文件夹)
      */
-    public static synchronized long getFileInDirectoryNumber(File file) {
+    public static long getFileInDirectoryNumber(File file) {
         long fileNumber = 0;
         File flist[] = file.listFiles();
         fileNumber = flist.length;
@@ -654,7 +679,7 @@ public class FileUtils {
      * @param from 原始后缀名(包含.)
      * @param to   修改后的后缀名(包含.)
      */
-    public static synchronized void reNameAllFileInDirectory(String path, String from, String to) {
+    public static void reNameAllFileInDirectory(String path, String from, String to) {
         File f = new File(path);
         File[] fs = f.listFiles();
         for (int i = 0; i < fs.length; ++i) {
@@ -664,8 +689,7 @@ public class FileUtils {
             } else {
                 String name = fileTemp.getName();
                 if (name.endsWith(from)) {
-                    fileTemp.renameTo(new File(fileTemp.getParent() + "/"
-                            + name.substring(0, name.indexOf(from)) + to));
+                    fileTemp.renameTo(new File(fileTemp.getParent() + "/" + name.substring(0, name.indexOf(from)) + to));
                 }
             }
         }
@@ -676,9 +700,9 @@ public class FileUtils {
      *
      * @param inputStream 数据流
      * @return byte数组
-     * @throws IOException
+     * @throws IOException 转换失败
      */
-    public static synchronized byte[] inputStreamToByteArray(InputStream inputStream) throws IOException {
+    public static byte[] inputStreamToByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = null;
         try {
             byteArrayOutputStream = new ByteArrayOutputStream();
@@ -700,18 +724,28 @@ public class FileUtils {
      * @param byteArray 待转换byte数组
      * @return InputStream
      */
-    public static synchronized InputStream byteArrayToInputStream(byte[] byteArray) {
+    public static InputStream byteArrayToInputStream(byte[] byteArray) {
         return new ByteArrayInputStream(byteArray);
     }
 
     /**
      * 获取文件的最后修改时间
-     * <p/>
-     * return 0，为文件不存在
      *
-     * @return long
+     * @param file 文件对象
+     * @return 返回 0，为文件不存在
      */
-    public static synchronized long getFileLastModifiedTime(File file) {
+    public static long getFileLastModifiedTime(File file) {
+        return file.lastModified();
+    }
+
+    /**
+     * 获取文件的最后修改时间
+     *
+     * @param filePath 文件路径
+     * @return 返回 0，为文件不存在
+     */
+    public static long getFileLastModifiedTime(String filePath) {
+        File file = new File(filePath);
         return file.lastModified();
     }
 

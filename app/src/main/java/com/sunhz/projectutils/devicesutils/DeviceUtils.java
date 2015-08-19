@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.devicesutils;
 
 import android.content.Context;
@@ -7,7 +22,7 @@ import android.telephony.TelephonyManager;
 
 /**
  * 获取设备信息
- * Created by Spencer on 15/2/25.
+ * Created by Spencer (www.spencer-dev.com) on 15/2/25.
  */
 public class DeviceUtils {
 
@@ -19,9 +34,9 @@ public class DeviceUtils {
      * 获取deviceID
      *
      * @param mContext Context
-     * @return deviceID, system version > 5.0 获取 ANDROID_ID , system version < 5.0 获取 DeviceId
+     * @return deviceID, system version 大于 5.0 获取 ANDROID_ID , system version 小于 5.0 获取 DeviceId
      */
-    public static synchronized String getDeviceID(Context mContext) {
+    public static  String getDeviceID(Context mContext) {
         String deviceId = ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         if (deviceId == null) {
             deviceId = Settings.Secure.getString(mContext.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -34,7 +49,7 @@ public class DeviceUtils {
      *
      * @return 固定返回『android』
      */
-    public static synchronized String getDevicePlant() {
+    public static  String getDevicePlant() {
         return "android";
     }
 
@@ -43,7 +58,7 @@ public class DeviceUtils {
      *
      * @return 设备型号
      */
-    public static synchronized String getDeviceModel() {
+    public static  String getDeviceModel() {
         return Build.MODEL;
     }
 
@@ -52,7 +67,7 @@ public class DeviceUtils {
      *
      * @return sdk level
      */
-    public static synchronized int getDeviceOS() {
+    public static  int getDeviceOS() {
         return Build.VERSION.SDK_INT;
     }
 
@@ -61,7 +76,7 @@ public class DeviceUtils {
      *
      * @return 手机主板类型
      */
-    public static synchronized String getBoard() {
+    public static  String getBoard() {
         return Build.BOARD;
     }
 
@@ -70,7 +85,7 @@ public class DeviceUtils {
      *
      * @return 系统定制商
      */
-    public static synchronized String getBrand() {
+    public static  String getBrand() {
         return Build.BRAND;
     }
 
@@ -80,16 +95,17 @@ public class DeviceUtils {
      *
      * @return CPU指令集
      */
-    public static synchronized String getCPU_ABI() {
+    public static  String getCPU_ABI() {
         return Build.CPU_ABI;
     }
+
 
     /**
      * 获取设备参数
      *
      * @return 设备参数
      */
-    public static synchronized String getDevice() {
+    public static  String getDevice() {
         return Build.DEVICE;
     }
 
@@ -98,7 +114,7 @@ public class DeviceUtils {
      *
      * @return 显示屏参数
      */
-    public static synchronized String getDisplay() {
+    public static  String getDisplay() {
         return Build.DISPLAY;
     }
 
@@ -107,7 +123,7 @@ public class DeviceUtils {
      *
      * @return 硬件名称
      */
-    public static synchronized String getFingerprint() {
+    public static  String getFingerprint() {
         return Build.FINGERPRINT;
     }
 
@@ -116,7 +132,7 @@ public class DeviceUtils {
      *
      * @return HOST
      */
-    public static synchronized String getHost() {
+    public static  String getHost() {
         return Build.HOST;
     }
 
@@ -125,7 +141,7 @@ public class DeviceUtils {
      *
      * @return 修订版本
      */
-    public static synchronized String getID() {
+    public static  String getID() {
         return Build.ID;
     }
 
@@ -134,7 +150,7 @@ public class DeviceUtils {
      *
      * @return 硬件制造商
      */
-    public static synchronized String getManufacturer() {
+    public static  String getManufacturer() {
         return Build.MANUFACTURER;
     }
 
@@ -143,7 +159,7 @@ public class DeviceUtils {
      *
      * @return 手机制造商
      */
-    public static synchronized String getProduct() {
+    public static  String getProduct() {
         return Build.PRODUCT;
     }
 
@@ -152,7 +168,7 @@ public class DeviceUtils {
      *
      * @return 描述build的标签
      */
-    public static synchronized String getTags() {
+    public static  String getTags() {
         return Build.TAGS;
     }
 
@@ -161,7 +177,7 @@ public class DeviceUtils {
      *
      * @return builder类型
      */
-    public static synchronized String getType() {
+    public static  String getType() {
         return Build.TYPE;
     }
 }

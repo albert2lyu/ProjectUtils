@@ -1,7 +1,21 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.logutils;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 import com.sunhz.projectutils.cacheutils.CacheUtils;
@@ -12,16 +26,23 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
+/**
+ * LogUtils
+ * Created by Spencer (www.spencer-dev.com) on 15/2/27.
+ */
 public class LogUtils {
+
+    private LogUtils() {
+
+    }
 
     private static final String LOG_FOLDER_NAME = "log";
 
-    private LogUtils() {
-    }
-
-
     /**
      * 保存错误信息到文件中
+     *
+     * @param mContext Context
+     * @param ex       异常
      */
     public static void writeExceptionLog(Context mContext, Throwable ex) {
         Writer info = new StringWriter();
@@ -39,14 +60,14 @@ public class LogUtils {
         try {
             long timestamp = System.currentTimeMillis();
             String fileName = "ex-" + timestamp;
-            String fileFolderPath = CacheUtils.getInstance(mContext.getApplicationContext()).getOtherCachePath() + LOG_FOLDER_NAME;
+            String fileFolderPath = CacheUtils.getInstance(mContext.getApplicationContext()).getOtherCachePathStr() + LOG_FOLDER_NAME;
             if (!new File(fileFolderPath).exists()) {
                 new File(fileFolderPath).mkdirs();
             }
             String filePath = fileFolderPath + File.separator + fileName;
             FileUtils.write(new File(filePath), result);
         } catch (Exception e) {
-            Log.e("", "an error occured while writing report file...", e);
+            LogUtils.e(e, "an error occurred while writing report file...");
         }
     }
 

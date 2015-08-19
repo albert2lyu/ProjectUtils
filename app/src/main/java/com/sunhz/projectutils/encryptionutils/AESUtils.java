@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.sunhz.projectutils.encryptionutils;
 
 import android.text.TextUtils;
@@ -7,7 +22,15 @@ import com.sunhz.projectutils.Constance;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * AES加/解密工具类
+ * Created by Spencer (www.spencer-dev.com) on 15/2/21.
+ */
 public class AESUtils {
+
+    private AESUtils() {
+
+    }
 
     private static final String AES = "AES";
 
@@ -16,7 +39,7 @@ public class AESUtils {
      *
      * @param sSrc 待解密内容
      * @return 解密后的内容
-     * @throws Exception
+     * @throws Exception 解密失败
      */
     public static String Decrypt(String sSrc) throws Exception {
         // 判断Key是否正确
@@ -41,7 +64,7 @@ public class AESUtils {
      *
      * @param sSrc 待加密内容
      * @return 加密后的结果
-     * @throws Exception
+     * @throws Exception 加密失败
      */
     public static String Encrypt(String sSrc) throws Exception {
         // 判断Key是否正确
