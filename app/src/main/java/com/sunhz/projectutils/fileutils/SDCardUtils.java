@@ -81,7 +81,6 @@ public class SDCardUtils {
      *
      * @param currentFileSize current file size
      * @return Returns whether to save
-     * @throws Exception save failure
      */
     public static boolean isAvailableStorage(long currentFileSize)  {
         if (!checkSDCardIsExist()) {
