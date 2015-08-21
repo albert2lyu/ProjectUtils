@@ -16,14 +16,14 @@
 package com.sunhz.projectutils.netcheckutils;
 
 /**
- * 网络类型枚举类
+ * network type enum
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public enum NetAuthorityEnum {
-    unNetConnect, // 无网连接
-    WifiConnect, // wifi网络
-    Net2GConnect, // 2G网络
-    Net3GConnect, // 3G网络
-    Net4GConnect, // 4G网络
-    NotknowNetType; // 无法判断其网络类型
+    unNetConnect, // no connection
+    WifiConnect, // wifi connection
+    Net2GConnect, // 2G connection
+    Net3GConnect, // 3G connection
+    Net4GConnect, // 4G connection
+    NetworkTypeUnrecognized // Network type Unrecognized
 }

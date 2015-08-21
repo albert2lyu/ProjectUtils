@@ -85,7 +85,7 @@ public class CheckInternetUtils {
             } else if (netType == ConnectivityManager.TYPE_MOBILE && judgeNetWorkTypeIs2G(netSubtype) && !mTelephony.isNetworkRoaming()) { // 2G
                 return NetAuthorityEnum.Net2GConnect;
             } else { // Network types can not judge
-                return NetAuthorityEnum.NotknowNetType;
+                return NetAuthorityEnum.NetworkTypeUnrecognized;
             }
         }
         return NetAuthorityEnum.unNetConnect;
