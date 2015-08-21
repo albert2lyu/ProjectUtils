@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.sunhz.projectutils.logutils.LogUtils;
 import com.sunhz.projectutils.toastutils.ToastUtils;
 
 /**
- * 用于程序异常时处理,保存错误日志等
+ * Program for exception handling, save error logs
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
@@ -66,10 +66,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     /**
-     * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成. 开发者可以根据自己的情况来自定义异常处理逻辑
+     * Custom error handling, error information is sent to collect bug reports and other operations are completed here.
+     * Developers can customize according to their own circumstances exception handling logic
      *
      * @param ex
-     * @return true:如果处理了该异常信息;否则返回false
+     * @return true : Handles the exception information , false : Do not handle the exception information
      */
     private boolean handleException(Throwable ex) {
         if (ex == null) {
@@ -82,7 +83,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 Looper.prepare();
                 ToastUtils.showToast(mContext, R.string.application_crash_alter_text);
                 Looper.loop();
-                // 关闭所有activity
+                // close all activity
                 ActivityManager.closeAllActivity();
             }
 

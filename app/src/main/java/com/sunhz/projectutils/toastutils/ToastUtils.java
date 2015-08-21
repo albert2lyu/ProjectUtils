@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 /**
- * toastUtils , 在UI线程中显示toast和非UI线程中显示toast 
+ * toastUtils
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 
@@ -33,10 +33,10 @@ public class ToastUtils {
     }
 
     /**
-     * 描述：Toast提示文本.
+     * show toast
      *
      * @param mContext Context
-     * @param text     文本
+     * @param text     text
      */
     public static void showToast(Context mContext, String text) {
         if (!TextUtils.isEmpty(text)) {
@@ -46,10 +46,10 @@ public class ToastUtils {
     }
 
     /**
-     * 描述：Toast提示文本.
+     * show toast
      *
      * @param mContext Context
-     * @param resId    文本的资源ID
+     * @param resId    text resource id
      */
     public static void showToast(Context mContext, int resId) {
         Toast.makeText(mContext.getApplicationContext(), mContext.getApplicationContext().getResources().getText(resId),
@@ -57,10 +57,10 @@ public class ToastUtils {
     }
 
     /**
-     * 描述：在线程中提示文本信息.
+     * show toast on sub-thread
      *
      * @param mActivity Activity
-     * @param resId     要提示的字符串资源ID
+     * @param resId     text resource id
      */
     public static void showToastInThread(final Activity mActivity, final int resId) {
         mActivity.runOnUiThread(new Runnable() {
@@ -73,10 +73,10 @@ public class ToastUtils {
     }
 
     /**
-     * 描述：在线程中提示文本信息.
+     * show toast on sub-thread
      *
      * @param mActivity Activity
-     * @param text      文本
+     * @param text      text
      */
     public static void showToastInThread(final Activity mActivity, final String text) {
         mActivity.runOnUiThread(new Runnable() {

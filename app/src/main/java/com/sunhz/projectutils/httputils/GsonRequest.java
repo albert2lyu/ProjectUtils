@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,8 @@ import java.io.UnsupportedEncodingException;
 
 
 /**
- * 对volley的request进行了针对gson的封装
- * 可自动根据json结果区分是否返回对象或集合
- * GsonRequest ficusk
+ * The request to volley a wrapper for gson of
+ * Automatically whether to return an object or collection according to the results of distinction json
  *
  * @author ficusk  Last active on 30 Apr 2013 https://gist.github.com/ficusk/5474673
  * Created by Spencer (www.spencer-dev.com) on 15/2/10.
@@ -56,12 +55,12 @@ public class GsonRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            if (json.startsWith("[")) { // 是个集合
+            if (json.startsWith("[")) { // is list
                 return Response.success((T) GsonUtils.jsonToObjectList(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
-            } else if (json.startsWith("{")) { // 是个对象
+            } else if (json.startsWith("{")) { // is object
                 return Response.success(GsonUtils.jsonToObject(json, clazz), HttpHeaderParser.parseCacheHeaders(response));
             } else {
-                return Response.error(new VolleyError("json解析出错"));
+                return Response.error(new VolleyError("json Parse error"));
             }
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));

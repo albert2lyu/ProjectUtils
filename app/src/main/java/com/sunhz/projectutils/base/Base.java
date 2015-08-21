@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.sunhz.projectutils.base;
 import com.android.volley.Request;
 
 /**
- * Base activity, Base fragment中的共有方法
+ * Co-owner methods in Base activity and Base fragment
  * Created by Spencer (www.spencer-dev.com) on 15/4/7.
  */
 public interface Base {

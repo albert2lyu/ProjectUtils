@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import android.provider.MediaStore;
 import java.io.File;
 
 /**
- * 多媒体相关工具类
+ * Multimedia Tools
  * Created by Spencer (www.spencer-dev.com) on 2015/1/30.
  */
 public class MediaUtils {
@@ -45,10 +45,10 @@ public class MediaUtils {
     }
 
     /**
-     * 向媒体库中插入一条数据,进行媒体更新
+     * Insert a row into the media library and media updates
      *
-     * @param file                       待插入媒体文件在手机中的绝对路径
-     * @param mediaScanCompletedCallBack 插入完成后的回调
+     * @param file                       file
+     * @param mediaScanCompletedCallBack  insert completion callback
      */
     public void mediaScan(File file, final MediaScanCompletedCallBack mediaScanCompletedCallBack) {
         MediaScannerConnection.scanFile(mContext, new String[]{file.getAbsolutePath()}, null,
@@ -62,12 +62,12 @@ public class MediaUtils {
 
 
     /**
-     * 删除文件并将其在媒体库中删除
+     * Delete the file and delete it in the media library
      *
-     * @param file                         文件对象
-     * @param uri                          查询uri 例: 图片 MediaUtils.getImageUri();
-     * @param where                        查询条件 例: 图片 MediaUtils.getImageWhere();
-     * @param mediaDeleteCompletedCallBack 若不需要使用, 可传 null
+     * @param file                         file
+     * @param uri                          Query uri Example: Photo MediaUtils.getImageUri ();
+     * @param where                        Query conditions of Example: Photo MediaUtils.getImageWhere ();
+     * @param mediaDeleteCompletedCallBack If you do not use, you can pass null
      */
     public void deleteFileAndDeleteFileInMedia(File file, Uri uri, String where, MediaDeleteCompletedCallBack mediaDeleteCompletedCallBack) {
         String filePath = file.getAbsolutePath();
@@ -80,68 +80,68 @@ public class MediaUtils {
     }
 
     /**
-     * 获取图片uri
+     * get image uri
      *
-     * @return 图片uri
+     * @return image uri
      */
     public static Uri getImageUri() {
         return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
     }
 
     /**
-     * 获取视频uri
+     * get video uri
      *
-     * @return 视频uri
+     * @return video uri
      */
     public static Uri getVideoUri() {
         return MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
     }
 
     /**
-     * 获取音频uri
+     * get audio uri
      *
-     * @return 音频uri
+     * @return audio uri
      */
     public static Uri getAudioUri() {
         return MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     }
 
     /**
-     * 获取图片where
+     * get image where
      *
-     * @return 图片where
+     * @return image where
      */
     public static String getImageWhere() {
         return MediaStore.Images.Media.DATA;
     }
 
     /**
-     * 获取视频where
+     * get video where
      *
-     * @return 视频where
+     * @return video where
      */
     public static String getVideoWhere() {
         return MediaStore.Video.Media.DATA;
     }
 
     /**
-     * 获取音频where
+     * get audio where
      *
-     * @return 音频where
+     * @return audio where
      */
     public static String getAudioWhere() {
         return MediaStore.Audio.Media.DATA;
     }
 
     /**
-     * 插入媒体库,完成时回调
+     * Insert a media library, upon completion callback
      */
     public interface MediaScanCompletedCallBack {
         void onScanCompleted(String path, Uri uri);
     }
 
     /**
-     * 从媒体库删除, 完成时回调
+     * Remove from the media library, the completion callback
      */
     public interface MediaDeleteCompletedCallBack {
         void onDeleteCompleted();

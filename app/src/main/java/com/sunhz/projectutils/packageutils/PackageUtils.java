@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 包管理工具
+ * package manager tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class PackageUtils {
@@ -48,13 +48,13 @@ public class PackageUtils {
     }
 
     /**
-     * 安装本地apk
+     * install local apk
      *
-     * @param apkFilePath 本地apk路径
+     * @param apkFilePath local apk file path
      */
     public void install(String apkFilePath) {
         if (TextUtils.isEmpty(apkFilePath)) {
-            throw new IllegalArgumentException("apk file path 不能为空");
+            throw new IllegalArgumentException("apk file path Can not null");
         }
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -65,13 +65,13 @@ public class PackageUtils {
 
 
     /**
-     * 卸载本地apk
+     * uninstall local apk
      *
-     * @param packageName 本地apk包名
+     * @param packageName local apk package name
      */
     public void unInstall(String packageName) {
         if (TextUtils.isEmpty(packageName)) {
-            throw new IllegalArgumentException("package name 不能为空");
+            throw new IllegalArgumentException("package name Can not null");
         }
 
         Intent intent = new Intent();
@@ -82,9 +82,9 @@ public class PackageUtils {
     }
 
     /**
-     * 获取应用全部包名
+     * get current phone all application package name
      *
-     * @return 包名集合
+     * @return package name list
      */
     public List<String> getAllPackageName() {
         PackageManager packageManager = mContext.getPackageManager();
@@ -97,18 +97,17 @@ public class PackageUtils {
     }
 
     /**
-     * 判断当前手机中,是否已经安装某些包名的程序
-     * @param packageNames 要检查的包名数组
+     * Analyzing the current phone, whether or not already installed some packages the names of the
+     * @param packageNames package array
      *
-     * @return 包名集合
+     * @return Has been installed return true, is not installed return false
      */
     public boolean judgePackageNamesInPhoneApp(String... packageNames) {
         if (packageNames == null || packageNames.length == 0) {
-            throw new IllegalArgumentException("packageNames 不能为 null 或 packageNames 的 length 不能为0");
+            throw new IllegalArgumentException("packageNames Can not null or packageNames  length not 0");
         }
 
         PackageManager packageManager = mContext.getPackageManager();
-        // 获取所有已安装程序的包信息
         List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(0);
         if (packageInfoList != null) {
 
@@ -127,18 +126,18 @@ public class PackageUtils {
     }
 
     /**
-     * 获取当前app包名
+     * get current app package name
      *
-     * @return 当前app包名
+     * @return current app package name
      */
     public String getMyApplicationPackageName() {
         return mContext.getPackageName();
     }
 
     /**
-     * 获取当前app的版本名
+     * get current app version name
      *
-     * @return 如果获取失败，返回 ""(『空字符串』)
+     * @return if get failure，return ""
      */
     public String getMyApplicationVersionName() {
         try {
@@ -150,9 +149,9 @@ public class PackageUtils {
     }
 
     /**
-     * 获取当前app的版本号
+     * get current app version code
      *
-     * @return 如果获取失败，返回『-1』
+     * @return if get failure，return -1
      */
     public int getMyApplicationVersionCode() {
         try {

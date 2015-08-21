@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * SD卡相关工具类
+ * sd card tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class SDCardUtils {
@@ -34,37 +34,36 @@ public class SDCardUtils {
 
 
     /**
-     * 返回sd卡的路径
+     * get sd card path
      *
-     * @return sd卡路径
+     * @return sd card path
      */
     public static String getSDCardPath() {
         return Environment.getExternalStorageDirectory().getPath();
     }
 
     /**
-     * 检测Sd卡是否存在
+     * the existence of sd card
      *
-     * @return true:存在,false:不存在
+     * @return true : exist ,false : not exist
      */
-    public static boolean checkSDCard() {
+    public static boolean checkSDCardIsExist() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
     /**
-     * 检查sd卡是否可写
+     * Check that the sd card can write
      *
-     * @return true:可写入,false:不可写入
+     * @return true : can write ,false : not can write
      */
-    public static boolean isSdCardWrittenable() {
-        return android.os.Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED);
+    public static boolean isSdCardWritable() {
+        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
     }
 
     /**
-     * 获取sd卡的可用存储大小 剩下的空间
+     * Get sd card available storage size
      *
-     * @return sd卡剩余空间
+     * @return sd card available storage size
      */
     public static long getAvailableStorage() {
         String storageDirectory = null;
@@ -78,31 +77,31 @@ public class SDCardUtils {
     }
 
     /**
-     * 判断当前的sd空间是否可保存该文件
+     * Determine whether the current sd card space to save the file
      *
-     * @param currentFileSize 当前文件大小
-     * @return 返回是否可保存
-     * @throws Exception 保存失败
+     * @param currentFileSize current file size
+     * @return Returns whether to save
+     * @throws Exception save failure
      */
-    public static boolean isAvailableStorage(long currentFileSize) throws Exception {
-        // / 检测sd卡是否存在
-        if (!checkSDCard()) {
-            throw new Exception("sd卡不存在");
+    public static boolean isAvailableStorage(long currentFileSize)  {
+        if (!checkSDCardIsExist()) {
+            return false;
         }
-        // 检查sd卡是否可读
-        if (!isSdCardWrittenable()) {
-            throw new Exception("sd卡不能执行写入操作");
+
+        if (!isSdCardWritable()) {
+            return false;
         }
+
         long availableSize = getAvailableStorage();
         return Float.compare(availableSize, currentFileSize) == 1;
     }
 
     /**
-     * 在SD卡上创建文件
+     * Create a file in the SD card
      *
-     * @param fileName 要创建的文件名
-     * @return 创建得到的文件
-     * @throws IOException 创建失败
+     * @param fileName file name
+     * @return Created files
+     * @throws IOException create failure
      */
     public static File createSDFile(String fileName) throws IOException {
         File file = new File(getSDCardPath() + File.separator + fileName);
@@ -111,10 +110,10 @@ public class SDCardUtils {
     }
 
     /**
-     * 在SD卡上创建目录,可多层级目录一起创建
+     * Create a directory in the SD card, you can create multi-level directory together
      *
-     * @param absoluteDirName 要创建的目录名
-     * @return 创建得到的目录
+     * @param absoluteDirName Directory name to be created
+     * @return Create a directory to get
      */
     public static File createAbsoluteSDDir(String absoluteDirName) {
         File dir = new File(getSDCardPath(), absoluteDirName);

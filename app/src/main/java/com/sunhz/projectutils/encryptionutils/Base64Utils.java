@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package com.sunhz.projectutils.encryptionutils;
 
 /**
- * base64加/解密工具类
+ * base64 encoding / decoding tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public final class Base64Utils {
@@ -92,10 +92,10 @@ public final class Base64Utils {
     }
 
     /**
-     * 解密
+     * decoding
      *
-     * @param binaryData 待解密字节数组
-     * @return 解密后的内容
+     * @param binaryData content
+     * @return decoding content
      */
     public static String encode(byte[] binaryData) {
 
@@ -165,10 +165,10 @@ public final class Base64Utils {
     }
 
     /**
-     * 加密
+     * encoding
      *
-     * @param decode 待加密的内容
-     * @return 加密后的字节数组
+     * @param decode content
+     * @return encoding content
      */
     public static byte[] decode(String decode) {
 

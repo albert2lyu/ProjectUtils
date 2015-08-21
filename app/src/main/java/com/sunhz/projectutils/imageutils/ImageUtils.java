@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * 图片处理相关类
+ * Image Processing tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/20.
  */
 public class ImageUtils {
@@ -49,124 +49,85 @@ public class ImageUtils {
     }
 
     /**
-     * 质量压缩
+     * Picture quality compression
      *
-     * @param image bitmap
-     * @return 压缩后的bitmap
+     * @param bitmap bitmap
+     * @return Quality bitmap
      */
-    public static Bitmap compressImage(Bitmap image) {
+    public static Bitmap compressImage(Bitmap bitmap) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         int options = 90;
 
-        while (baos.toByteArray().length / 1024 > 100) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
-            baos.reset(); // 重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;// 每次都减少10
+        while (baos.toByteArray().length / 1024 > 100) {
+            baos.reset();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);
+            options -= 10;
         }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
-        return bitmap;
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
+        Bitmap result = BitmapFactory.decodeStream(isBm, null, null);
+        return result;
     }
 
     /**
-     * 图片按比例大小压缩
      *
-     * @param image （根据Bitmap图片压缩）
-     * @return 压缩后的bitmap
+     * Photo compression ratio of the size
+     *
+     * @param image bitmap
+     * @param height image height
+     * @param width image width
+     *              @param config bitmap config
+     * @return Compressed bitmap
      */
-    public static Bitmap compressScale(Bitmap image) {
+    public static Bitmap compressScale(Bitmap image, float height, float width,Bitmap.Config config) {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-        // 判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
         if (baos.toByteArray().length / 1024 > 1024) {
-            baos.reset();// 重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, 80, baos);// 这里压缩50%，把压缩后的数据存放到baos中
+            baos.reset();
+            image.compress(Bitmap.CompressFormat.JPEG, 80, baos);
         }
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
         BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
         newOpts.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
         newOpts.inJustDecodeBounds = false;
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
 
-        // 现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float hh = 800f;// 这里设置高度为800f
-        float ww = 480f;// 这里设置宽度为480f
+        float hh = height;
+        float ww = width;
 
-        // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;// be=1表示不缩放
-        if (w > h && w > ww) {// 如果宽度大的话根据宽度固定大小缩放
+        int be = 1;
+        if (w > h && w > ww) {
             be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) { // 如果高度高的话根据高度固定大小缩放
+        } else if (w < h && h > hh) {
             be = (int) (newOpts.outHeight / hh);
         }
         if (be <= 0)
             be = 1;
-        newOpts.inSampleSize = be; // 设置缩放比例
-        // newOpts.inPreferredConfig = Config.RGB_565;//降低图片从ARGB888到RGB565
+        newOpts.inSampleSize = be;
+        newOpts.inPreferredConfig = config;
 
-        // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
         isBm = new ByteArrayInputStream(baos.toByteArray());
         bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
 
-        return compressImage(bitmap);// 压缩好比例大小后再进行质量压缩
-
-        //return bitmap;
-    }
-
-    /**
-     * 图片按比例大小压缩
-     *
-     * @param srcPath （根据路径获取图片并压缩）
-     * @return 压缩后的bitmap
-     */
-    public static Bitmap getimage(String srcPath) {
-
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        // 开始读入图片，此时把options.inJustDecodeBounds 设回true了
-        newOpts.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(srcPath, newOpts);// 此时返回bm为空
-
-        newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-
-        // 现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float hh = 800f;// 这里设置高度为800f
-        float ww = 480f;// 这里设置宽度为480f
-
-        // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;// be=1表示不缩放
-        if (w > h && w > ww) {// 如果宽度大的话根据宽度固定大小缩放
-            be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) {// 如果高度高的话根据宽度固定大小缩放
-            be = (int) (newOpts.outHeight / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        newOpts.inSampleSize = be;// 设置缩放比例
-        // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-        bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
-        return compressImage(bitmap);// 压缩好比例大小后再进行质量压缩
+        return compressImage(bitmap);
     }
 
 
     /**
-     * 将bitmap,按比例放大缩小
+     * The bitmap, in proportion to zoom
      *
      * @param bitmap  bitmap
-     * @param density 如果density为0,则返回原图大小
-     * @return 缩放后的bitmap
+     * @param density If the density is 0, then return the original image size
+     * @return Bitmap scaled
      */
     public static Bitmap scaleBitmap(Bitmap bitmap, float density) {
         if (bitmap == null) {
-            throw new IllegalArgumentException("bitmap 为null");
+            throw new IllegalArgumentException("bitmap can not null");
         }
         if (density == 0) {
             density = 1.0f;
@@ -177,35 +138,35 @@ public class ImageUtils {
     }
 
     /**
-     * 将bitmap,按 width * height 缩放
+     * The bitmap, by scaling width * height
      *
-     * @param bitmap 将被缩放的图片
-     * @param width  新bitmap的宽度
-     * @param height 新bitmap的高度
-     * @return 缩放后的bitmap
+     * @param bitmap bitmap
+     * @param width  new bitmap width
+     * @param height new bitmap height
+     * @return Bitmap scaled
      */
     public static Bitmap scaledBitmap(Bitmap bitmap, int width, int height) {
         return Bitmap.createScaledBitmap(bitmap, width, height, true);
     }
 
     /**
-     * 将bitmap,按比例放大缩小
+     * drawable, in proportion to zoom
      *
      * @param drawable drawable
-     * @param density  如果 density 为0,则返回原图大小
-     * @return 缩放后的bitmap
+     * @param density  If the density is 0, then return the original image size
+     * @return drawable scaled
      */
-    public static Drawable scaledBitmap(Drawable drawable, float density) {
+    public static Drawable scaledDrawable(Drawable drawable, float density) {
         return bitmapToDrawable(scaleBitmap(drawableToBitmap(drawable), density));
     }
 
     /**
-     * 将drawable,按width * height 缩放
+     * The drawable, by scaling width * height
      *
-     * @param drawable 将被缩放的图片
-     * @param width    新drawable的宽
-     * @param height   新drawable的高
-     * @return 缩放后的bitmap
+     * @param drawable drawable
+     * @param width    new drawable width
+     * @param height   new drawable height
+     * @return drawable scaled
      */
     public static Drawable scaledDrawable(Drawable drawable, int width, int height) {
         return bitmapToDrawable(scaledBitmap(drawableToBitmap(drawable), width, height));
@@ -213,9 +174,9 @@ public class ImageUtils {
 
 
     /**
-     * byte数组 转换成 Drawable
+     * byte array converter to drawable
      *
-     * @param byteArray 字节数组
+     * @param byteArray byte array
      * @return drawable
      */
     public static Drawable byteArrayToDrawable(byte[] byteArray) {
@@ -224,10 +185,10 @@ public class ImageUtils {
     }
 
     /**
-     * drawable 转换成 byte数组
+     * drawable converter to byte array
      *
      * @param drawable drawable
-     * @return 字节数组
+     * @return byte array
      */
     public static byte[] drawableToByteArray(Drawable drawable) {
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
@@ -238,10 +199,10 @@ public class ImageUtils {
 
 
     /**
-     * bitmap 转换为 byte数组
+     * bitmap converter to byte array
      *
      * @param bitmap bitmap
-     * @return 字节数组
+     * @return byte array
      */
     public static byte[] bitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -250,9 +211,9 @@ public class ImageUtils {
     }
 
     /**
-     * byte数组 转换为 bitmap
+     * byte array converter to bitmap
      *
-     * @param byteArray 字节数组
+     * @param byteArray byte array
      * @return bitmap
      */
     public static Bitmap byteArrayToBitmap(byte[] byteArray) {
@@ -261,7 +222,7 @@ public class ImageUtils {
 
 
     /**
-     * Bitmap 转换为 Drawable
+     * Bitmap converter to Drawable
      *
      * @param bitmap bitmap
      * @return Drawable
@@ -273,7 +234,7 @@ public class ImageUtils {
     }
 
     /**
-     * Drawable 转换为 Bitmap
+     * Drawable converter to Bitmap
      *
      * @param drawable drawable
      * @return Bitmap
@@ -291,7 +252,7 @@ public class ImageUtils {
 
 
     /**
-     * bitmap 转换成 InputStream
+     * bitmap converter to  InputStream
      *
      * @param bitmap bitmap
      * @return InputStream
@@ -303,21 +264,21 @@ public class ImageUtils {
     }
 
     /**
-     * drawable 转换成 InputStream
+     * drawable converter to InputStream
      *
      * @param drawable drawable
-     * @return 流
+     * @return inputStream
      */
     public static InputStream drawableToInputStream(Drawable drawable) {
         return bitmapToInputStream(drawableToBitmap(drawable));
     }
 
     /**
-     * bitmap to file
+     * bitmap converter to file
      *
      * @param bitmap bitmap
-     * @param file   文件存储路径
-     * @throws IOException 保存失败
+     * @param file   file
+     * @throws IOException save failure
      */
     public static void bitmapToFile(Bitmap bitmap, File file) throws IOException {
         if (!file.exists()) {
@@ -341,8 +302,8 @@ public class ImageUtils {
      * drawable to file
      *
      * @param drawable drawable
-     * @param file     文件存储路径
-     * @throws IOException 保存失败
+     * @param file     file
+     * @throws IOException save failure
      */
     public static void drawableToFile(Drawable drawable, File file) throws IOException {
         if (!file.exists()) {
@@ -355,11 +316,11 @@ public class ImageUtils {
 
 
     /**
-     * 将图片文件 转换成 bitmap
+     * image file converter to bitmap
      *
-     * @param filePath 文件路径
+     * @param filePath file path
      * @return bitmap bitmap
-     * @throws IOException 转换失败
+     * @throws IOException converter failure
      */
     public static Bitmap filtToBitmap(String filePath) throws IOException {
         InputStream is = null;
@@ -372,11 +333,11 @@ public class ImageUtils {
     }
 
     /**
-     * 将图片文件 转换成 drawable
+     * image file converter to drawable
      *
-     * @param filePath 文件路径
+     * @param filePath file path
      * @return drawable drawable
-     * @throws IOException 转换失败
+     * @throws IOException save failure
      */
     public static Drawable filtToDrawable(String filePath) throws IOException {
         InputStream is = null;
@@ -391,11 +352,11 @@ public class ImageUtils {
 
 
     /**
-     * drawable 转换成 圆角
+     * drawable converter to RoundCorner drawable
      *
      * @param drawable drawable
-     * @param pixels   圆角的弧度
-     * @return 圆角Drawable
+     * @param pixels   Rounded radian
+     * @return Rounded Drawable
      */
     public static Drawable drawableToRoundCorner(Drawable drawable, int pixels) {
         return bitmapToDrawable(bitmapToRoundCorner(drawableToBitmap(drawable), pixels));
@@ -404,11 +365,11 @@ public class ImageUtils {
 
 
     /**
-     * 使圆角功能支持BitmapDrawable
+     * Make fillet feature supports BitmapDrawable
      *
      * @param bitmapDrawable bitmapDrawable
-     * @param pixels         圆角的弧度
-     * @return 圆角bitmapDrawable
+     * @param pixels         rounded radian
+     * @return rounded bitmapDrawable
      */
     public static BitmapDrawable bitmapDrawableToRoundCorner(BitmapDrawable bitmapDrawable, int pixels) {
         Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -417,11 +378,11 @@ public class ImageUtils {
     }
 
     /**
-     * 把bitmap变成圆角
+     * bitmap converter to RoundCorner bitmap
      *
-     * @param bitmap 需要修改的图片
-     * @param pixels 圆角的弧度
-     * @return 圆角bitmap
+     * @param bitmap bitmap
+     * @param pixels rounded radian
+     * @return rounded bitmap
      */
     public static Bitmap bitmapToRoundCorner(Bitmap bitmap, int pixels) {
 
@@ -444,10 +405,10 @@ public class ImageUtils {
     }
 
     /**
-     * 获取资源图片
+     * get resource bitmap
      *
      * @param mContext Context
-     * @param resId    资源ID
+     * @param resId    resource ID
      * @return bitmap
      */
     public static Bitmap getResourceBitmap(Context mContext, int resId) {
@@ -455,16 +416,15 @@ public class ImageUtils {
         opt.inPreferredConfig = Bitmap.Config.RGB_565;
         opt.inPurgeable = true;
         opt.inInputShareable = true;
-        // 获取资源图片
         InputStream is = mContext.getApplicationContext().getResources().openRawResource(resId);
         return BitmapFactory.decodeStream(is, null, opt);
     }
 
     /**
-     * 获取资源图片
+     * get resource drawable
      *
      * @param mContext Context
-     * @param resId    资源ID
+     * @param resId    resource ID
      * @return drawable
      */
     public static Drawable getResourceDrawable(Context mContext, int resId) {
@@ -473,11 +433,11 @@ public class ImageUtils {
 
 
     /**
-     * 计算缩放比的inSampleSize
+     * Calculate zoom rate of inSampleSize
      *
      * @param options   options
-     * @param reqWidth  将要缩放的宽
-     * @param reqHeight 将要缩放的高
+     * @param reqWidth  Will be scaled width
+     * @param reqHeight Will be scaled height
      * @return inSampleSize
      */
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {

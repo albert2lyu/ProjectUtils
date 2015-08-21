@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 /**
- * 使用Gson,进行基本解析
+ * gson Utils
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class GsonUtils {
@@ -32,15 +32,15 @@ public class GsonUtils {
     }
 
     /**
-     * 对象 转换成 string
+     * object converter String
      *
-     * @param t   待转换对象
-     * @param <T> 泛型
+     * @param t   t
+     * @param <T> t
      * @return json
      */
     public static <T> String objectToJson(T t) {
         if (t == null) {
-            throw new IllegalArgumentException("t 不能为空");
+            throw new IllegalArgumentException("t can not null");
         }
         Gson gson = new Gson();
         return gson.toJson(t);
@@ -48,32 +48,32 @@ public class GsonUtils {
 
 
     /**
-     * string 转换成 对象
+     * string converter object
      *
-     * @param json   json内容
-     * @param clazzT 需要转换成的类型
-     * @param <T>    泛型
+     * @param json   json
+     * @param clazzT converter to class
+     * @param <T>    t
      * @return object
      */
     public static <T> T jsonToObject(String json, Class<T> clazzT) {
         if (TextUtils.isEmpty(json) || clazzT == null) {
-            throw new IllegalArgumentException("json 不能为空");
+            throw new IllegalArgumentException("json can not null");
         }
         Gson gson = new Gson();
         return gson.fromJson(json, clazzT);
     }
 
     /**
-     * 将json转为list
+     * json converter list
      *
      * @param json   json
-     * @param classT 需要的List的泛型类型 如:List T , 就在classT参数处,填写Object.class
-     * @param <T>    泛型
-     * @return List T 泛型集合
+     * @param classT List of generic type needs such as: List T, classT parameters in place, fill T.class
+     * @param <T>    t
+     * @return List T t
      */
     public static <T> List<T> jsonToObjectList(String json, Class<T> classT) {
         if (TextUtils.isEmpty(json) || classT == null) {
-            throw new IllegalArgumentException("json 不能为空");
+            throw new IllegalArgumentException("json can not null");
         }
         Gson gson = new Gson();
         return gson.fromJson(json, new ListOfSomething<T>(classT));

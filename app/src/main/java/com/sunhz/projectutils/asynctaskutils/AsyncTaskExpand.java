@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,24 +18,23 @@ package com.sunhz.projectutils.asynctaskutils;
 import android.os.AsyncTask;
 
 /**
- * 拓展的AsyncTask,随意控制线程并串行
+ * Expand AsyncTask , Random control thread Parallel Serial
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
     /**
-     * 并行
+     * Parallel
      */
     public static final boolean PARALLEL = true;
     /**
-     * 串行
+     * Serial
      */
     public static final boolean SERIAL = false;
     private boolean flag = SERIAL;
 
     /**
-     * 控制是否并行
-     *
+     * control thread Parallel or Serial
      * @param flag AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
      */
     public AsyncTaskExpand(boolean flag) {
@@ -44,12 +43,6 @@ public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTas
     }
 
 
-    /**
-     * 以 AsyncTask 为基础进行了封装
-     *
-     * @param params params
-     * @return AsyncTask
-     */
     public AsyncTask<Params, Progress, Result> executeExpand(Params... params) {
         if (flag) {
             return super.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package com.sunhz.projectutils.uploadmanager;
 
 /**
- * 自定义的上传管理器,可以和界面进行绑定,进行UI更新
+ * Custom upload manager, and interfaces can be bound to carry out UI update
  * Created by Spencer (www.spencer-dev.com) on 15/2/4.
  */
 public class UploadManager {

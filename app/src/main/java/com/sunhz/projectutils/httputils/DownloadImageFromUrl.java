@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.sunhz.projectutils.httputils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.Constant;
 import com.sunhz.projectutils.asynctaskutils.AsyncTaskExpand;
 
 import java.io.IOException;
@@ -27,7 +27,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * 通过url地址,下载单张网络图片
+ * By url address, download a image on network
  * Created by Spencer (www.spencer-dev.com) on 15/2/17.
  */
 public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> {
@@ -36,10 +36,10 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
     private DownloadCallBack downloadCallBack;
 
     /**
-     * 控制是否并行
+     * Control parallel, serial
      *
      * @param flag             AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
-     * @param downloadCallBack 下载后的 call back
+     * @param downloadCallBack After the download is complete the call back
      */
     public DownloadImageFromUrl(boolean flag, DownloadCallBack downloadCallBack) {
         super(flag);
@@ -76,17 +76,17 @@ public class DownloadImageFromUrl extends AsyncTaskExpand<String, Void, Bitmap> 
     }
 
     /**
-     * 获取网络图片
+     * By url address, download a image on network
      *
-     * @param imgUrl 图片url
-     * @return inputStream 流
-     * @throws IOException 获取失败
+     * @param imgUrl network image address
+     * @return inputStream inputStream
+     * @throws IOException get failure
      */
     public  static InputStream getNetImage(String imgUrl) throws IOException {
         URL url = new URL(imgUrl);
         URLConnection urlConnection = url.openConnection();
-        urlConnection.setConnectTimeout(Constance.TimeInApplication.NET_TIMEOUT);
-        urlConnection.setReadTimeout(Constance.TimeInApplication.NET_TIMEOUT);
+        urlConnection.setConnectTimeout(Constant.TimeInApplication.NET_TIMEOUT);
+        urlConnection.setReadTimeout(Constant.TimeInApplication.NET_TIMEOUT);
         InputStream inputStream = urlConnection.getInputStream();
         return inputStream;
     }

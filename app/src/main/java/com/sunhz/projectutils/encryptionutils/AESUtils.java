@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@ package com.sunhz.projectutils.encryptionutils;
 
 import android.text.TextUtils;
 
-import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.Constant;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * AES加/解密工具类
+ * AES encoding / decoding tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class AESUtils {
@@ -35,22 +35,22 @@ public class AESUtils {
     private static final String AES = "AES";
 
     /**
-     * 解密
+     * decoding
      *
-     * @param sSrc 待解密内容
-     * @return 解密后的内容
-     * @throws Exception 解密失败
+     * @param sSrc content
+     * @return decoding content
+     * @throws Exception decoding failure
      */
     public static String Decrypt(String sSrc) throws Exception {
         // 判断Key是否正确
-        if (TextUtils.isEmpty(Constance.Encryption.AES_UTILS_CLIENT_KEY)) {
-            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY 不能为空");
+        if (TextUtils.isEmpty(Constant.Encryption.AES_UTILS_CLIENT_KEY)) {
+            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY Can not be null");
         }
         // 判断Key是否为16位
-        if (Constance.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
-            throw new IllegalArgumentException("Key长度不是16位");
+        if (Constant.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
+            throw new IllegalArgumentException("Key Length is not 16");
         }
-        byte[] raw = Constance.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
+        byte[] raw = Constant.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
@@ -60,22 +60,22 @@ public class AESUtils {
     }
 
     /**
-     * 加密
+     * encoding
      *
-     * @param sSrc 待加密内容
-     * @return 加密后的结果
-     * @throws Exception 加密失败
+     * @param sSrc content
+     * @return encoding content
+     * @throws Exception encoding failure
      */
     public static String Encrypt(String sSrc) throws Exception {
         // 判断Key是否正确
-        if (TextUtils.isEmpty(Constance.Encryption.AES_UTILS_CLIENT_KEY)) {
-            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY 不能为空");
+        if (TextUtils.isEmpty(Constant.Encryption.AES_UTILS_CLIENT_KEY)) {
+            throw new NullPointerException("Constance.Encryption.AES_UTILS_CLIENT_KEY Can not be null");
         }
         // 判断Key是否为16位
-        if (Constance.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
-            throw new IllegalArgumentException("Key长度不是16位");
+        if (Constant.Encryption.AES_UTILS_CLIENT_KEY.length() != 16) {
+            throw new IllegalArgumentException("Key Length is not 16");
         }
-        byte[] raw = Constance.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
+        byte[] raw = Constant.Encryption.AES_UTILS_CLIENT_KEY.getBytes("ASCII");
         SecretKeySpec skeySpec = new SecretKeySpec(raw, AES);
         Cipher cipher = Cipher.getInstance(AES);
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);

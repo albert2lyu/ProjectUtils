@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * GsonUtils依赖
- * 解决方案参考:http://stackoverflow.com/questions/14139437/java-type-generic-as-argument-for-gson
+ * GsonUtils depend
+ * Solution Reference : http://stackoverflow.com/questions/14139437/java-type-generic-as-argument-for-gson
  * Created by Spencer (www.spencer-dev.com) on 15/2/27.
  */
 public class ListOfSomething<X> implements ParameterizedType {

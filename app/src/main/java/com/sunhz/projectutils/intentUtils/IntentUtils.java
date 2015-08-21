@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * intentUtils 跳转 activity 的 utils
+ * intentUtils
  * Created by Spencer (www.spencer-dev.com) on 15/2/20.
  */
 public class IntentUtils {
@@ -29,10 +29,10 @@ public class IntentUtils {
     }
 
     /**
-     * 快捷跳转 activity
+     * jump activity
      *
      * @param mContext Context
-     * @param clazz    要跳转到的 activity class对象
+     * @param clazz    Will jump activity class
      */
     public static void startActivity(Context mContext, Class clazz) {
         Intent intent = new Intent(mContext.getApplicationContext(), clazz);
@@ -41,11 +41,11 @@ public class IntentUtils {
     }
 
     /**
-     * 快捷跳转 activity 并携带参数
+     * jump activity carry params
      *
      * @param mContext    Context
-     * @param clazz       要跳转到的 activity class对象
-     * @param getArgument 传参 call back
+     * @param clazz       Will jump activity class
+     * @param getArgument params call back
      */
     public static void startActivityCarryArgments(Context mContext, Class clazz, GetArgument getArgument) {
         Intent intent = new Intent(mContext.getApplicationContext(), clazz);
@@ -55,10 +55,10 @@ public class IntentUtils {
     }
 
     /**
-     * 快捷跳转 activity,清空 activity 栈
+     * jump activity,clear activity stack
      *
      * @param mContext Context
-     * @param clazz    要跳转到的 activity class对象
+     * @param clazz    Will jump activity class
      */
     public static void startActivityClearTask(Context mContext, Class clazz) {
         Intent intent = new Intent(mContext.getApplicationContext(), clazz);
@@ -67,11 +67,11 @@ public class IntentUtils {
     }
 
     /**
-     * 快捷跳转 activity 并携带参数,清空 activity 栈
+     * jump activity carry params,clear activity stack
      *
      * @param mContext    Context
-     * @param clazz       要跳转到的 activity class对象
-     * @param getArgument 传参 call back
+     * @param clazz       Will jump activity class
+     * @param getArgument params call back
      */
     public static void startActivityClearTaskCarryArgments(Context mContext, Class clazz, GetArgument getArgument) {
         Intent intent = new Intent(mContext.getApplicationContext(), clazz);
@@ -80,6 +80,9 @@ public class IntentUtils {
         mContext.startActivity(intent);
     }
 
+    /**
+     * params call back
+     */
     public interface GetArgument {
         void getArgument(Intent intent);
     }

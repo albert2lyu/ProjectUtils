@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import android.graphics.Point;
 import android.util.DisplayMetrics;
 
 /**
- * 像素相关操作累
+ * Pixel operations tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class DensityUtils {
@@ -30,11 +30,11 @@ public class DensityUtils {
     }
 
     /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     * dp converter to px
      *
      * @param mContext Context
-     * @param dpValue  需要计算的dp值
-     * @return 计算完成后的px值
+     * @param dpValue  before computing dp
+     * @return after computing px
      */
     public static int dip2px(Context mContext, float dpValue) {
         float scale = mContext.getApplicationContext().getResources().getDisplayMetrics().density;
@@ -42,11 +42,11 @@ public class DensityUtils {
     }
 
     /**
-     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     * px converter to dp
      *
      * @param mContext Context
-     * @param pxValue  需要计算的px值
-     * @return 计算完成后的dp值
+     * @param pxValue  before computing px
+     * @return after computing dp
      */
     public static int px2dip(Context mContext, float pxValue) {
         float scale = mContext.getApplicationContext().getResources().getDisplayMetrics().density;
@@ -54,11 +54,11 @@ public class DensityUtils {
     }
 
     /**
-     * * 将px值转换为sp值，保证文字大小不变
+     * px converter to sp, To ensure that the same text size
      *
      * @param mContext Context
-     * @param pxValue  需要计算的px值
-     * @return 计算完成后的sp值
+     * @param pxValue   before computing px
+     * @return after computing sp
      */
     public static int px2sp(Context mContext, float pxValue) {
         float fontScale = mContext.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
@@ -66,11 +66,11 @@ public class DensityUtils {
     }
 
     /**
-     * 将sp值转换为px值，保证文字大小不变
+     * sp converter to px, To ensure that the same text size
      *
      * @param mContext Context
-     * @param spValue  需要计算的sp值
-     * @return 计算完成后的px值
+     * @param spValue  before computing sp
+     * @return after computing px
      */
     public static int sp2px(Context mContext, float spValue) {
         float fontScale = mContext.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
@@ -78,10 +78,10 @@ public class DensityUtils {
     }
 
     /**
-     * 获取屏幕宽度和高度，单位为px
+     * Gets the screen width and height, the unit is px
      *
      * @param mContext Context
-     * @return point.x : 宽度,point.y : 高度
+     * @return point.x : width ,point.y : height
      */
     public static Point getScreenMetrics(Context mContext) {
         DisplayMetrics dm = mContext.getApplicationContext().getResources().getDisplayMetrics();
@@ -92,10 +92,10 @@ public class DensityUtils {
     }
 
     /**
-     * 获取屏幕长宽比
+     * Get screen aspect ratio
      *
      * @param mContext Context
-     * @return 长宽比
+     * @return screen aspect ratio
      */
     public static float getScreenRate(Context mContext) {
         Point P = getScreenMetrics(mContext.getApplicationContext());

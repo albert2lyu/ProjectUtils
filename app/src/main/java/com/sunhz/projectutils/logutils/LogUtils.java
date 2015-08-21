@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,10 @@ public class LogUtils {
     private static final String LOG_FOLDER_NAME = "log";
 
     /**
-     * 保存错误信息到文件中
+     * save exception info save to file
      *
      * @param mContext Context
-     * @param ex       异常
+     * @param ex       exception
      */
     public static void writeExceptionLog(Context mContext, Throwable ex) {
         Writer info = new StringWriter();

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 package com.sunhz.projectutils.cacheutils;
 
 /**
- * 缓存类型
+ * cache type
  * Created by Spencer (www.spencer-dev.com) on 5/4/15.
  */
 public enum CacheType {
-    DATA, // 数据类型
-    IMAGE, // 图片类型
-    OTHER // 其他类型
+    DATA, // data type
+    IMAGE, // image type
+    OTHER // other type
 }

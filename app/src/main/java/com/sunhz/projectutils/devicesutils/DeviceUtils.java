@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 /**
- * 获取设备信息
+ * get device info
  * Created by Spencer (www.spencer-dev.com) on 15/2/25.
  */
 public class DeviceUtils {
@@ -31,12 +31,12 @@ public class DeviceUtils {
 
 
     /**
-     * 获取deviceID
+     * get device ID
      *
      * @param mContext Context
-     * @return deviceID, system version 大于 5.0 获取 ANDROID_ID , system version 小于 5.0 获取 DeviceId
+     * @return deviceID (system version 5.0 or more get ANDROID_ID , system version  5.0 or less get Device Id
      */
-    public static  String getDeviceID(Context mContext) {
+    public static String getDeviceID(Context mContext) {
         String deviceId = ((TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         if (deviceId == null) {
             deviceId = Settings.Secure.getString(mContext.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -44,140 +44,108 @@ public class DeviceUtils {
         return deviceId;
     }
 
-    /**
-     * 获取系统类型
-     *
-     * @return 固定返回『android』
-     */
-    public static  String getDevicePlant() {
-        return "android";
-    }
 
     /**
-     * 获取设备型号
+     * get device name
      *
-     * @return 设备型号
+     * @return device name
      */
-    public static  String getDeviceModel() {
+    public static String getDeviceModel() {
         return Build.MODEL;
     }
 
     /**
-     * 获取sdk level
+     * get sdk level
      *
      * @return sdk level
      */
-    public static  int getDeviceOS() {
+    public static int getDeviceSDKLevel() {
         return Build.VERSION.SDK_INT;
     }
 
     /**
-     * 获取手机主板类型
+     * get Device Chip Type
      *
-     * @return 手机主板类型
+     * @return Device Chip Type
      */
-    public static  String getBoard() {
+    public static String getDeviceBoard() {
         return Build.BOARD;
     }
 
     /**
-     * 获取android系统定制商
+     * Get system customization Suppliers
      *
-     * @return 系统定制商
+     * @return system customization Suppliers
      */
-    public static  String getBrand() {
+    public static String getDeviceBrand() {
         return Build.BRAND;
     }
 
 
     /**
-     * 获取CPU指令集
+     * get CPU ABI
      *
-     * @return CPU指令集
+     * @return get CPU ABI
      */
-    public static  String getCPU_ABI() {
+    public static String getCPU_ABI() {
         return Build.CPU_ABI;
     }
 
 
     /**
-     * 获取设备参数
+     * get rom version,such as Samsung note3 n9008 acquired hlte (hlte generic version, hltekor for the Korean version)
+     * may be different for each mobile phone
      *
-     * @return 设备参数
+     * @return rom version
      */
-    public static  String getDevice() {
+    public static String getDevice() {
         return Build.DEVICE;
     }
 
     /**
-     * 获取显示屏参数
+     * Get internal version number
      *
-     * @return 显示屏参数
+     * @return internal version number
      */
-    public static  String getDisplay() {
+    public static String getDeviceDisplay() {
         return Build.DISPLAY;
     }
 
     /**
-     * 获取硬件名称
+     * get fingerprint collection device, the device containing a variety of information
      *
-     * @return 硬件名称
+     * @return fingerprint collection device, the device containing a variety of information
      */
-    public static  String getFingerprint() {
+    public static String getDeviceFingerprint() {
         return Build.FINGERPRINT;
     }
 
     /**
-     * 获取HOST
+     * get compile the host system
      *
-     * @return HOST
+     * @return compile the host system
      */
-    public static  String getHost() {
+    public static String getDeviceHost() {
         return Build.HOST;
     }
 
     /**
-     * 获取修订版本
+     * get Revised version of the system
      *
-     * @return 修订版本
+     * @return Revised version of the system
      */
-    public static  String getID() {
+    public static String getID() {
         return Build.ID;
     }
 
     /**
-     * 获取硬件制造商
+     * get hardware manufacturers
      *
-     * @return 硬件制造商
+     * @return hardware manufacturers
      */
-    public static  String getManufacturer() {
+    public static String getDeviceManufacturer() {
         return Build.MANUFACTURER;
     }
 
-    /**
-     * 获取手机制造商
-     *
-     * @return 手机制造商
-     */
-    public static  String getProduct() {
-        return Build.PRODUCT;
-    }
 
-    /**
-     * 获取描述build的标签
-     *
-     * @return 描述build的标签
-     */
-    public static  String getTags() {
-        return Build.TAGS;
-    }
-
-    /**
-     * 获取builder类型
-     *
-     * @return builder类型
-     */
-    public static  String getType() {
-        return Build.TYPE;
-    }
 }

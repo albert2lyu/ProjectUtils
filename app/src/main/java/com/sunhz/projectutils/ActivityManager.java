@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 /**
- * activity 管理器
+ * activity manager tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class ActivityManager {
@@ -32,7 +32,7 @@ public class ActivityManager {
     private static ArrayList<Activity> actList = new ArrayList<Activity>();
 
     /**
-     * 关掉所有activity
+     * close all activity
      */
     public synchronized static void closeAllActivity() {
         for (int i = 0; i < actList.size(); i++) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@
 package com.sunhz.projectutils;
 
 /**
- * 常量池
+ * Constant pool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
-public final class Constance {
+public final class Constant {
 
 
     /**
@@ -27,23 +27,23 @@ public final class Constance {
      */
     public static final class Encryption {
         /**
-         * AES_UTILS_CLIENT_KEY 是AES加密的Key，Key的长度必须为16位
+         * AES_UTILS_CLIENT_KEY is AES encoding  Key，Key length is 16
          */
         public final static String AES_UTILS_CLIENT_KEY = "";
     }
 
 
     /**
-     * 程序中,各种时间控制
+     * Program, the time control
      */
     public static final class TimeInApplication {
         /**
-         * 网络超时, 默认3秒
+         * Network timeout, default 3 seconds
          */
         public final static int NET_TIMEOUT = 10000;
 
         /**
-         * 缓存失效时间, 默认一天
+         * Cache invalidation time, the default one day
          */
         public final static int CACHE_FAIL_TIME = 1000 * 60 * 60 * 24; // 一天
     }

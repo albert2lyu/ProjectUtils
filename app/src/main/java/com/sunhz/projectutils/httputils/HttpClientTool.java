@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package com.sunhz.projectutils.httputils;
 
 
-import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.Constant;
 import com.sunhz.projectutils.fileutils.FileUtils;
 
 import org.apache.http.HttpResponse;
@@ -36,63 +36,60 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 封装了HttpClient对网络的操作
+ * Encapsulates the operation of the network HttpClientTool
  * Created by Spencer (www.spencer-dev.com) on 15/2/19.
  */
-public class HttpClient {
+public class HttpClientTool {
 
     /**
-     * get方式访问网络,需要在子线程中使用
+     * get access to the network, you need to use in the sub-thread
      *
      * @param url url
-     * @return 响应数据流
-     * @throws IOException 在状态码返回非200的情况,便会抛出异常
+     * @return response inputStream
+     * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
     public static InputStream getInputStreamInUIThread(String url) throws IOException {
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
-        // 请求超时
-        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
-        // 读取超时
-        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
         HttpGet request = new HttpGet(url);
         HttpResponse response = client.execute(request);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             return response.getEntity().getContent();
         } else {
-            throw new IllegalArgumentException("getInputStreamInUIThread 返回状态码为" + response.getStatusLine().getStatusCode());
+            throw new IllegalArgumentException("getInputStreamInUIThread response status code is " + response.getStatusLine().getStatusCode());
         }
     }
 
 
     /**
-     * get方式访问网络,需要在子线程中使用
+     * get access to the network, you need to use in the sub-thread
      *
      * @param url url
-     * @return 响应字符串
-     * @throws IOException 在状态码返回非200的情况,或返回数据流为空,便会抛出异常
+     * @return response string
+     * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
     public static String getStringInUIThread(String url) throws IOException {
         InputStream is = getInputStreamInUIThread(url);
         if (is != null) {
-            return FileUtils.InputStream2String(is);
+            return FileUtils.inputStream2String(is);
         } else {
-            throw new IllegalArgumentException("getStringInUIThread 返回结果为null");
+            throw new IllegalArgumentException("getStringInUIThread response status code is null");
         }
     }
 
     /**
-     * post方式访问网络,需要在子线程中使用
+     * post access to the network, you need to use in the sub-thread
      *
      * @param url    url
      * @param params params
-     * @return 响应数据流
-     * @throws IOException 在状态码返回非200的情况,便会抛出异常
+     * @return response inputStream
+     * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
     public static InputStream postInputStreamInUIThread(String url, Map<String, String> params) throws IOException {
         List<NameValuePair> list = new ArrayList<NameValuePair>();
         if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
-                // 解析Map传递的参数，使用一个键值对对象BasicNameValuePair保存。
                 list.add(new BasicNameValuePair(entry.getKey(), entry
                         .getValue()));
             }
@@ -101,33 +98,31 @@ public class HttpClient {
         HttpPost httpPost = new HttpPost(url);
         httpPost.setEntity(entity);
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
-        // 请求超时
-        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
-        // 读取超时
-        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constance.TimeInApplication.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
+        client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
         HttpResponse response = client.execute(httpPost);
         if (response.getStatusLine().getStatusCode() == 200) {
             return response.getEntity().getContent();
         } else {
-            throw new IllegalArgumentException("postInputStreamInUIThread 返回状态码为" + response.getStatusLine().getStatusCode());
+            throw new IllegalArgumentException("postInputStreamInUIThread response status code is " + response.getStatusLine().getStatusCode());
         }
 
     }
 
     /**
-     * post方式访问网络,需要在子线程中使用
+     * post access to the network, you need to use in the sub-thread
      *
      * @param url    url
      * @param params params
-     * @return 响应字符串
-     * @throws IOException 在状态码返回非200的情况,或返回数据流为空,便会抛出异常
+     * @return response String
+     * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
     public static String postStringInUIThread(String url, Map<String, String> params) throws IOException {
         InputStream is = postInputStreamInUIThread(url, params);
         if (is != null) {
-            return FileUtils.InputStream2String(is);
+            return FileUtils.inputStream2String(is);
         } else {
-            throw new IllegalArgumentException("postStringInUIThread 返回结果为null");
+            throw new IllegalArgumentException("postStringInUIThread response status code is null");
         }
     }
 

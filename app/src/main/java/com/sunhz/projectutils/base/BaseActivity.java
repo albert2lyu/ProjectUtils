@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
 import com.sunhz.projectutils.ActivityManager;
-import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.Constant;
 
 /**
  * Base activity
@@ -51,15 +51,15 @@ public class BaseActivity extends FragmentActivity implements Base {
 
         this.volleyQueue = Volley.newRequestQueue(mContext);
 
-        this.policy = new DefaultRetryPolicy(Constance.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        this.policy = new DefaultRetryPolicy(Constant.TimeInApplication.NET_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 
         ActivityManager.addActivity(this);
     }
 
     /**
-     * 添加请求到volley队列中
+     * add request to volley queue
      *
-     * @param request request 请求
+     * @param request volley request
      */
     @Override
     public void volleyAdd(Request request) {

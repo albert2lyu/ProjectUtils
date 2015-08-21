@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 /**
- * 软键盘监听显示隐藏
- * 参考代码地址:http://stackoverflow.com/a/26428753/3859747
- * 对监听监听和构造函数上做了修改,核心逻辑既然使用其原始代码.
+ * listener Soft keyboard display hidden
+ * Reference code address : http://stackoverflow.com/a/26428753/3859747
+ * Listening to the monitor and constructors have been modified since their original core logic code.
  * Created by Spencer (www.spencer-dev.com) on 7/19/15.
  */
 public class KeyboardStatusUtils {
@@ -34,9 +34,9 @@ public class KeyboardStatusUtils {
     boolean keyboardVisible = false;
 
     /**
-     * 创建软键盘监听对象
-     * @param f 需要被监听的 fragment
-     * @param visibilityListener 监听器
+     * Create a soft keyboard listener objects
+     * @param f need listener fragment
+     * @param visibilityListener listener
      */
     public KeyboardStatusUtils(Fragment f, KeyboardVisibilityListener visibilityListener) {
         this.visibilityListener = visibilityListener;
@@ -44,9 +44,9 @@ public class KeyboardStatusUtils {
     }
 
     /**
-     * 创建软键盘监听对象
-     * @param a 需要被监听的 activity
-     * @param visibilityListener 监听器
+     * Create a soft keyboard listener objects
+     * @param a need listener activity object
+     * @param visibilityListener listener
      */
     public KeyboardStatusUtils(Activity a, KeyboardVisibilityListener visibilityListener) {
         this.visibilityListener = visibilityListener;
@@ -54,9 +54,9 @@ public class KeyboardStatusUtils {
     }
 
     /**
-     * 创建软键盘监听对象
-     * @param v 需要被监听的 view 对象
-     * @param visibilityListener 监听器
+     * Create a soft keyboard listener objects
+     * @param v need listener view object
+     * @param visibilityListener listener
      */
     public KeyboardStatusUtils(View v, KeyboardVisibilityListener visibilityListener) {
         this.visibilityListener = visibilityListener;

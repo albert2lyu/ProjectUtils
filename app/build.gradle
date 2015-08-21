@@ -60,6 +60,9 @@ install {
             project {
                 packaging 'aar'
                 name 'ProjectUtils For Android'
+                artifactId 'ProjectUtils For Android'
+                version = libVersionName
+
                 url siteUrl
                 licenses {
                     license {

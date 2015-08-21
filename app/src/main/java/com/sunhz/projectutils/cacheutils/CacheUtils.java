@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.sunhz.projectutils.cacheutils;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.sunhz.projectutils.Constance;
+import com.sunhz.projectutils.Constant;
 import com.sunhz.projectutils.fileutils.FileUtils;
 import com.sunhz.projectutils.fileutils.SDCardUtils;
 import com.sunhz.projectutils.packageutils.PackageUtils;
@@ -30,41 +30,42 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 数据缓存管理
- * 目录结构 : (!!!完整结构查看README.md!!!)
- * sdcard下
- * - package name (程序包名)
- * -- cache (缓存目录)
- * --- dataCache (缓存数据)
- * --- imageCache (缓存图片)
- * --- otherCache (缓存其他东西)
+ * cache manager
+ * Directory Structure : (!!!See the complete structure README.md!!!)
+ * in sdcard or machine store
+ * - application package name
+ * -- cache folder
+ * --- dataCache folder
+ * --- imageCache folder
+ * --- otherCache folder
  */
 public class CacheUtils {
+
+    // 检查文件失效时间
+    public static final Boolean CHECK_FAIL_TIME = true;
+    // 不检查文件失效时间
+    public static final Boolean NOT_CHECK_FAIL_TIME = false;
 
     /**
      * 如果缓存有效时间设置为一整天,自动计算开关
      */
     public static final boolean AUTO_C_DAY = true;
-    // 检查文件失效时间
-    public static final Boolean CHECK_FAIL_TIME = true;
-    // 不检查文件失效时间
-    public static final Boolean NOT_CHECK_FAIL_TIME = false;
     private static final long DAY = 1000 * 60 * 60 * 24; // 一天的毫秒数
-    private static final long FAIL_TIME = Constance.TimeInApplication.CACHE_FAIL_TIME;
+    private static final long FAIL_TIME = Constant.TimeInApplication.CACHE_FAIL_TIME;
+
     // 缓存文件夹名字
     private static final String ROOT_DATA_FOLDER_NAME = "cache"; // 缓存根目录文件夹
     private static final String DATA_CACHE_FOLDER_NAME = "dataCache"; // 数据缓存
     private static final String IMAGE_CACHE_FOLDER_NAME = "imageCache"; // 图片缓存
     private static final String OTHER_CACHE_FOLDER_NAME = "otherCahce"; // 其他类型缓存
-    private static CacheUtils cacheUtils;
+
     private Context mContext;
+    private static CacheUtils cacheUtils;
+
     // cache路径
     private String rootCachePath;
-
     private String dataCachePath;
-
     private String imageCachePath;
-
     private String otherCachePath;
 
 
@@ -81,10 +82,10 @@ public class CacheUtils {
     }
 
     /**
-     * 如果sd卡存在，并且可写
+     * If the sd card is present And writable,the cache into the sd card, otherwise, put the machine store.
      */
     private void init() {
-        if (SDCardUtils.checkSDCard() && SDCardUtils.isSdCardWrittenable()) {
+        if (SDCardUtils.checkSDCardIsExist() && SDCardUtils.isSdCardWritable()) {
             StringBuffer rootCachePathStringBuffer = new StringBuffer();
             rootCachePathStringBuffer.append(SDCardUtils.getSDCardPath()).
                     append(File.separator).

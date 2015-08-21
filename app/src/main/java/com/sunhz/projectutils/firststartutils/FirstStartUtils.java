@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import android.content.Context;
 import com.sunhz.projectutils.fileutils.SharePreferenceUtils;
 
 /**
- * 用来记录当前app是否是第一次启动
+ * Record whether the current app is the first start
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class FirstStartUtils {
@@ -33,7 +33,7 @@ public class FirstStartUtils {
 
 
     /**
-     * 初始化方法，需要在application的onCreate中调用
+     * Initialization method, you need to call in the application onCreate
      *
      * @param mContext Context
      */
@@ -48,11 +48,11 @@ public class FirstStartUtils {
 
 
     /**
-     * 判断当前app是否是第一次启动
-     * 需要在application的OnCreate中调用FirstStartUtils.init()方法
+     * Determine whether the current app is the first time you start
+     * FirstStartUtils.init() need to call in the application OnCreate
      *
      * @param mContext Context
-     * @return true:第一次启动,false:不是第一次启动* @return
+     * @return true:first start,false:not first start
      */
     public static boolean checkIsFirstStart(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext.getApplicationContext());
@@ -60,7 +60,7 @@ public class FirstStartUtils {
     }
 
     /**
-     * 重置标识
+     * reset first start flag
      *
      * @param mContext Context
      */

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import android.content.Context;
 import android.view.WindowManager;
 
 /**
- * 任务栏管理类
+ * status bar manager tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class StatusBarUtils {
@@ -30,10 +30,10 @@ public class StatusBarUtils {
     }
 
     /**
-     * * 获取状态栏高度
+     * Get status bar height
      *
      * @param mContext Context
-     * @return 状态栏高度
+     * @return status bar height
      */
     public static int getStatusBarHeight(Context mContext) {
         Class<?> c = null;
@@ -55,9 +55,9 @@ public class StatusBarUtils {
     }
 
     /**
-     * * 隐藏状态栏
+     * Hide Status Bar
      *
-     * @param activity 当前 activity
+     * @param activity current activity
      */
     public static void hideStatusBar(Activity activity) {
         WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
@@ -66,9 +66,9 @@ public class StatusBarUtils {
     }
 
     /**
-     * 显示状态栏
+     * Show Status Bar
      *
-     * @param activity 当前 activity
+     * @param activity current activity
      */
     public static void showStatusBar(Activity activity) {
         WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();

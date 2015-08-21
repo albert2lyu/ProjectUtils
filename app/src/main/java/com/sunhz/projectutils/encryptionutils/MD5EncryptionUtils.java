@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, Spencer 给立乐 (www.spencer-dev.com).
+ * Copyright (c) 2015, Spencer , ChinaSunHZ (www.spencer-dev.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * MD5加密工具类
+ * MD5 encoding tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class MD5EncryptionUtils {
@@ -30,12 +30,12 @@ public class MD5EncryptionUtils {
     }
 
     /**
-     * 加密
+     * encoding
      *
-     * @param string 待加密内容
-     * @return 加密后的内容
-     * @throws NoSuchAlgorithmException     加密失败
-     * @throws UnsupportedEncodingException 加密失败
+     * @param string content
+     * @return encoding content
+     * @throws NoSuchAlgorithmException     encoding Failure
+     * @throws UnsupportedEncodingException encoding Failure
      */
     public static String stringToMD5(String string) throws NoSuchAlgorithmException,
             UnsupportedEncodingException {
