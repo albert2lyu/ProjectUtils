@@ -322,7 +322,7 @@ public class ImageUtils {
      * @return bitmap bitmap
      * @throws IOException converter failure
      */
-    public static Bitmap filtToBitmap(String filePath) throws IOException {
+    public static Bitmap fileToBitmap(String filePath) throws IOException {
         InputStream is = null;
         try {
             is = new FileInputStream(new File(filePath));
@@ -339,7 +339,7 @@ public class ImageUtils {
      * @return drawable drawable
      * @throws IOException save failure
      */
-    public static Drawable filtToDrawable(String filePath) throws IOException {
+    public static Drawable fileToDrawable(String filePath) throws IOException {
         InputStream is = null;
         try {
             is = new FileInputStream(new File(filePath));

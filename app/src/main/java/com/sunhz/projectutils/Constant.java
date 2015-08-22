@@ -23,11 +23,11 @@ public final class Constant {
 
 
     /**
-     * 加密相关常量
+     * Encryption constant
      */
     public static final class Encryption {
         /**
-         * AES_UTILS_CLIENT_KEY is AES encoding  Key，Key length is 16
+         * AES_UTILS_CLIENT_KEY is AES encoding  Key, Key length is 16
          */
         public final static String AES_UTILS_CLIENT_KEY = "";
     }

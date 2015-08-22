@@ -22,7 +22,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 /**
- * 检查网络相关类
+ * check network tool
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public class CheckInternetUtils {

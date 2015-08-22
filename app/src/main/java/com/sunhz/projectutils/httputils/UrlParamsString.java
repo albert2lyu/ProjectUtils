@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * http get request 时的url参数
+ * http get request url params
  * Created by Spencer (www.spencer-dev.com) on 15/3/10.
  */
 public class UrlParamsString {

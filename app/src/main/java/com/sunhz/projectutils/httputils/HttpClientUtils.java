@@ -39,7 +39,7 @@ import java.util.Map;
  * Encapsulates the operation of the network HttpClientTool
  * Created by Spencer (www.spencer-dev.com) on 15/2/19.
  */
-public class HttpClientTool {
+public class HttpClientUtils {
 
     /**
      * get access to the network, you need to use in the sub-thread

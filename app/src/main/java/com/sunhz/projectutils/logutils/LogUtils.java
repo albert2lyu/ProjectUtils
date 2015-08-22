@@ -60,7 +60,7 @@ public class LogUtils {
         try {
             long timestamp = System.currentTimeMillis();
             String fileName = "ex-" + timestamp;
-            String fileFolderPath = CacheUtils.getInstance(mContext.getApplicationContext()).getOtherCachePathStr() + LOG_FOLDER_NAME;
+            String fileFolderPath = CacheUtils.getInstance(mContext.getApplicationContext()).getOtherCachePath() + File.separator + LOG_FOLDER_NAME;
             if (!new File(fileFolderPath).exists()) {
                 new File(fileFolderPath).mkdirs();
             }

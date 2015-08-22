@@ -20,7 +20,7 @@ package com.sunhz.projectutils.cacheutils;
  * Created by Spencer (www.spencer-dev.com) on 5/4/15.
  */
 public enum CacheType {
-    DATA, // data type
-    IMAGE, // image type
-    OTHER // other type
+    DataCache, // data type
+    MediaCache, // media type
+    OtherCache // other type
 }

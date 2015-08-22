@@ -137,7 +137,7 @@ public class PackageUtils {
     /**
      * get current app version name
      *
-     * @return if get failure，return ""
+     * @return if get failure return ""
      */
     public String getMyApplicationVersionName() {
         try {
@@ -151,7 +151,7 @@ public class PackageUtils {
     /**
      * get current app version code
      *
-     * @return if get failure，return -1
+     * @return if get failure,return -1
      */
     public int getMyApplicationVersionCode() {
         try {

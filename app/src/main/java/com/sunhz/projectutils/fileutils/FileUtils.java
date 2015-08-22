@@ -78,22 +78,23 @@ public class FileUtils {
     }
 
     /**
-     * read object from file
+     * * read object from file
      *
      * @param fileName file name
      * @param filePath file path
+     * @param <T> T
      * @return object
      * @throws IOException            read failure
      * @throws ClassNotFoundException Can not find an object corresponding class
      */
-    public static Object readObjectToFile(String fileName, String filePath) throws IOException,
+    public static <T> T readObjectToFile(String fileName, String filePath) throws IOException,
             ClassNotFoundException {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
             fis = new FileInputStream(new File(filePath, fileName));
             ois = new ObjectInputStream(fis);
-            return ois.readObject();
+            return (T) ois.readObject();
         } finally {
             if (ois != null) ois.close();
             if (fis != null) fis.close();
@@ -143,20 +144,24 @@ public class FileUtils {
     /**
      * Delete files, delete a directory, delete all the files in the directory, including himself
      *
-     * @param path  will be deleted directory or file
+     * @param path will be deleted directory or file
      * @return true: delete success,false: delete failure
      */
     public static synchronized boolean deleteDir(File path) {
-        if (path.isDirectory()) {
-            String[] children = path.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(path, children[i]));
-                if (!success) {
-                    return false;
+        if (path.exists()) {
+            if (path.isDirectory()) {
+                String[] children = path.list();
+                for (int i = 0; i < children.length; i++) {
+                    boolean success = deleteDir(new File(path, children[i]));
+                    if (!success) {
+                        return false;
+                    }
                 }
             }
+            return path.delete();
+        } else {
+            return false;
         }
-        return path.delete();
     }
 
     /**
@@ -302,8 +307,8 @@ public class FileUtils {
     /**
      * Save the raw files to the specified directory
      *
-     * @param mContext     Context
-     * @param rawId        raw id
+     * @param mContext Context
+     * @param rawId    raw id
      * @param filePath file path (include file name)
      * @return true: save success
      * @throws IOException save failure
@@ -324,7 +329,7 @@ public class FileUtils {
      *
      * @param mContext       Context
      * @param assetsFileName file name in asset
-     * @param filePath   file path (include file name)
+     * @param filePath       file path (include file name)
      * @return true:保存成功
      * @throws IOException 保存失败
      */
@@ -346,8 +351,8 @@ public class FileUtils {
     /**
      * save inputStream to file
      *
-     * @param inputStream  inputStream
-     * @param filePath file path (include file name)
+     * @param inputStream inputStream
+     * @param filePath    file path (include file name)
      * @throws IOException save failure
      */
     public static void saveInputStreamToFile(InputStream inputStream, String filePath) throws IOException {
@@ -508,7 +513,7 @@ public class FileUtils {
      *
      * @param file     file
      * @param encoding encoding
-     * @return  list in text file line
+     * @return list in text file line
      * @throws IOException read lines failure
      */
     public static List<String> readLines(File file, String encoding) throws IOException {
@@ -536,7 +541,7 @@ public class FileUtils {
      * specified encoding,InputStream text will turn into a list (each line is a list item)
      *
      * @param inputStream inputStream
-     * @param encoding encoding
+     * @param encoding    encoding
      * @return list
      * @throws IOException read failure
      */
@@ -594,9 +599,8 @@ public class FileUtils {
      *
      * @param file file
      * @return If the folder does not exist, -1 is returned.
-     *         If the folder exists, but no file in folder , then returns 0.
-     *         If the folder exists, and has the file in folder, the folder returns to normal size.
-     *
+     * If the folder exists, but no file in folder , then returns 0.
+     * If the folder exists, and has the file in folder, the folder returns to normal size.
      * @throws IOException get folder size failure
      */
     public static long getDirectorySize(File file) throws IOException {
@@ -621,7 +625,7 @@ public class FileUtils {
     /**
      * format size
      *
-     * @param size  size
+     * @param size size
      * @return size unit
      */
     public static String formetFileSize(long size) {
@@ -721,6 +725,9 @@ public class FileUtils {
      * @return file exist : return last modified , file not exist : return 0
      */
     public static long getFileLastModifiedTime(File file) {
+        if (!file.exists()) {
+            return 0;
+        }
         return file.lastModified();
     }
 
@@ -732,6 +739,9 @@ public class FileUtils {
      */
     public static long getFileLastModifiedTime(String filePath) {
         File file = new File(filePath);
+        if (!file.exists()) {
+            return 0;
+        }
         return file.lastModified();
     }
 
