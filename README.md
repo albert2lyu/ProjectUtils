@@ -33,16 +33,23 @@
 
 ## 目录结构说明
 ```
-/sdcard
- -android
-  - package name (程序包名)
-    -files
-      - cache (缓存目录)
-          - cacheData (缓存数据)
-          - cacheImage (缓存图片)
-          - cacheOther (缓存其他东西)
-              - log (程序异常崩溃日志)
+- /sdcard
+    - android
+        - package name (程序包名)
+            - files
+                - cache (缓存目录)
+                    - cacheData (缓存数据)
+                    - cacheImage (缓存图片)
+                    - cacheOther (缓存其他东西)
+                        - log (程序异常崩溃日志)
 
+- /data/data
+    - package name (程序包名)
+        - cache (缓存目录)
+            - cacheData (缓存数据)
+            - cacheImage (缓存图片)
+            - cacheOther (缓存其他东西)
+                - log (程序异常崩溃日志)
 ```
 
 ## 引用到的开源项目说明
