@@ -33,6 +33,7 @@
 
 ## 目录结构说明
 ```
+// 有SD卡, 并可以使用的情况
 - /sdcard
     - android
         - package name (程序包名)
@@ -43,6 +44,7 @@
                     - cacheOther (缓存其他东西)
                         - log (程序异常崩溃日志)
 
+// 无SD卡,或SD卡不可使用的情况
 - /data/data
     - package name (程序包名)
         - cache (缓存目录)
