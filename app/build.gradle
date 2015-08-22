@@ -125,6 +125,14 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
+        version {
+            name = 'release_' + libVersionName
+            vcsTag = 'release_' + libVersionName
+            gpg {
+                sign = true
+            }
+        }
+
     }
 }
 
