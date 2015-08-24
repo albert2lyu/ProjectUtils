@@ -5,8 +5,9 @@ apply plugin: 'com.jfrog.bintray'
 
 def libVersionCode = 1
 def libVersionName = "0.1"
-
-
+def release_libVersionName = 'release_' + libVersionName
+def siteUrl = 'https://github.com/ChinaSunHZ/ProjectUtils'
+def gitUrl = 'https://github.com/ChinaSunHZ/ProjectUtils.git'
 
 android {
     compileSdkVersion 21
@@ -46,24 +47,20 @@ dependencies {
 }
 
 
-
-
-def siteUrl = 'https://github.com/ChinaSunHZ/ProjectUtils'
-def gitUrl = 'https://github.com/ChinaSunHZ/ProjectUtils.git'
-
 group = "com.sunhz.projectutils"
+version = release_libVersionName
 
 install {
     repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
         pom {
             project {
-                packaging 'aar'
-                name 'ProjectUtils For Android'
-                artifactId 'ProjectUtils For Android'
-                version = libVersionName
+                packaging = 'aar'
+                name = 'ProjectUtils For Android'
+                artifactId = 'ProjectUtils For Android'
+                version = release_libVersionName
 
-                url siteUrl
+                url = siteUrl
+
                 licenses {
                     license {
                         name 'The Apache Software License, Version 2.0'
@@ -125,9 +122,12 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
+
         version {
-            name = 'release_' + libVersionName
-            vcsTag = 'release_' + libVersionName
+
+            name = release_libVersionName
+            vcsTag = release_libVersionName
+            released  = new Date()
             gpg {
                 sign = true
             }
