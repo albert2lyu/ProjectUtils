@@ -32,6 +32,7 @@
 >    并且 ProjectUtils 使用 LogUtils 类封装了 logger 后已经对 LogUtils 进行了统一管理。方便我们在 release 和 debug 版本间任意切换。避免了出现忘记了删除 log 语句的问题。
 
 ## 目录结构说明
+### 缓存目录结构说明
 ```
 // 有SD卡, 并可以使用的情况
 - /sdcard
