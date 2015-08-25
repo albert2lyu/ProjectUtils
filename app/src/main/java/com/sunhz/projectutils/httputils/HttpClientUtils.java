@@ -48,7 +48,7 @@ public class HttpClientUtils {
      * @return response inputStream
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static InputStream getInputStreamInUIThread(String url) throws IOException {
+    public static InputStream getInputStreamInSubThread(String url) throws IOException {
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
         client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
         client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
@@ -57,7 +57,7 @@ public class HttpClientUtils {
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             return response.getEntity().getContent();
         } else {
-            throw new IllegalArgumentException("getInputStreamInUIThread response status code is " + response.getStatusLine().getStatusCode());
+            throw new IllegalArgumentException("getInputStreamInSubThread response status code is " + response.getStatusLine().getStatusCode());
         }
     }
 
@@ -69,12 +69,12 @@ public class HttpClientUtils {
      * @return response string
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static String getStringInUIThread(String url) throws IOException {
-        InputStream is = getInputStreamInUIThread(url);
+    public static String getStringInSubThread(String url) throws IOException {
+        InputStream is = getInputStreamInSubThread(url);
         if (is != null) {
             return FileUtils.inputStream2String(is);
         } else {
-            throw new IllegalArgumentException("getStringInUIThread response status code is null");
+            throw new IllegalArgumentException("getStringInSubThread response status code is null");
         }
     }
 
@@ -86,7 +86,7 @@ public class HttpClientUtils {
      * @return response inputStream
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static InputStream postInputStreamInUIThread(String url, Map<String, String> params) throws IOException {
+    public static InputStream postInputStreamInSubThread(String url, Map<String, String> params) throws IOException {
         List<NameValuePair> list = new ArrayList<NameValuePair>();
         if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -104,7 +104,7 @@ public class HttpClientUtils {
         if (response.getStatusLine().getStatusCode() == 200) {
             return response.getEntity().getContent();
         } else {
-            throw new IllegalArgumentException("postInputStreamInUIThread response status code is " + response.getStatusLine().getStatusCode());
+            throw new IllegalArgumentException("postInputStreamInSubThread response status code is " + response.getStatusLine().getStatusCode());
         }
 
     }
@@ -117,12 +117,12 @@ public class HttpClientUtils {
      * @return response String
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static String postStringInUIThread(String url, Map<String, String> params) throws IOException {
-        InputStream is = postInputStreamInUIThread(url, params);
+    public static String postStringInSubThread(String url, Map<String, String> params) throws IOException {
+        InputStream is = postInputStreamInSubThread(url, params);
         if (is != null) {
             return FileUtils.inputStream2String(is);
         } else {
-            throw new IllegalArgumentException("postStringInUIThread response status code is null");
+            throw new IllegalArgumentException("postStringInSubThread response status code is null");
         }
     }
 
