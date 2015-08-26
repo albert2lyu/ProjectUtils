@@ -50,6 +50,6 @@
 
 * ActivityManager：提供管理 activity 以及 closeAll activity 的便捷方法。
 
-* Constant：存放常量，使用方法请查看 [项目说明](https://github.com/ChinaSunHZ/ProjectUtils/blob/master/README.md 项目说明)
+* Constant：存放常量，使用方法请查看 [项目说明](https://github.com/ChinaSunHZ/ProjectUtils/blob/master/README.md)
 
 * CrashHandler：提供了将报错信息保存下来的方法。
