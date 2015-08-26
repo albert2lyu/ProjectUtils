@@ -50,6 +50,6 @@
 
 * ActivityManager：提供管理 activity 以及 closeAll activity 的便捷方法。
 
-* Constant：存放常量，使用前需要继承 com.sunhz.projectutils.base.BaseApplication，或直接在自己已经实现的 baseApplication 的 onCreate 中调用Constant.initConstant(aes key, net time out, cache fail time);
+* Constant：存放常量，使用方法请查看 [项目说明](https://github.com/ChinaSunHZ/ProjectUtils/blob/master/README.md 项目说明)
 
 * CrashHandler：提供了将报错信息保存下来的方法。

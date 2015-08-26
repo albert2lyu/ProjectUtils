@@ -46,7 +46,6 @@ public class CacheUtils {
 
     private CacheUtils(Context mContext) {
         this.mContext = mContext.getApplicationContext();
-        initCacheUtils();
     }
 
     private static CacheUtils cacheUtils;
@@ -56,6 +55,10 @@ public class CacheUtils {
             cacheUtils = new CacheUtils(mContext);
         }
         return cacheUtils;
+    }
+
+    public void init() {
+        initCacheUtils();
     }
 
     private static final long FAIL_TIME = Constant.TimeInApplication.CACHE_FAIL_TIME;

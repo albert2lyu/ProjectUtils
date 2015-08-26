@@ -28,6 +28,8 @@ public class BaseApplication extends Application {
 
     protected Context mContext;
 
+    private static final int A_DAY = 1000 * 60 * 60 * 24;
+
     @Override
     public void onCreate() {
         super.onCreate();
