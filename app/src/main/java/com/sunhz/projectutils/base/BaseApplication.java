@@ -18,6 +18,8 @@ package com.sunhz.projectutils.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.sunhz.projectutils.Constant;
+
 /**
  * Base application
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
@@ -30,6 +32,13 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.mContext = this;
+        initConstant();
     }
+
+    protected void initConstant() {
+        // Init aes key, net time out, cache fail time.
+        Constant.initConstant("", 10000, 1000 * 60 * 60 * 24);
+    }
+
 
 }

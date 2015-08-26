@@ -29,7 +29,7 @@ public final class Constant {
         /**
          * AES_UTILS_CLIENT_KEY is AES encoding  Key, Key length is 16
          */
-        public final static String AES_UTILS_CLIENT_KEY = "";
+        public static String AES_UTILS_CLIENT_KEY = "";
     }
 
 
@@ -40,13 +40,27 @@ public final class Constant {
         /**
          * Network timeout, default 3 seconds
          */
-        public final static int NET_TIMEOUT = 10000;
+        public static int NET_TIMEOUT = 10000;
 
         /**
          * Cache invalidation time, the default one day
          */
-        public final static int CACHE_FAIL_TIME = 1000 * 60 * 60 * 24; // 一天
+        public static int CACHE_FAIL_TIME = 1000 * 60 * 60 * 24;
     }
 
-
+    /**
+     * Init project utils base constant.
+     * If you implement the base class, this method does not need to call.
+     * If you do not achieve a base class, you need implement to com.sunhz.project.base.BaseApplication class
+     * If you implement the other base class, you need to call this method in order to achieve a base class
+     *
+     * @param AESUtilsClientKey aes key , default value is "".
+     * @param netTimeOut        net time out , default value is 10s.
+     * @param cacheFailTime     cache fail time , default value is a day.
+     */
+    public static void initConstant(String AESUtilsClientKey, int netTimeOut, int cacheFailTime) {
+        Encryption.AES_UTILS_CLIENT_KEY = AESUtilsClientKey;
+        TimeInApplication.NET_TIMEOUT = netTimeOut;
+        TimeInApplication.CACHE_FAIL_TIME = cacheFailTime;
+    }
 }
