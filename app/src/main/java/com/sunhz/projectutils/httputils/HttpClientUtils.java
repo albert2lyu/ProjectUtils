@@ -48,7 +48,7 @@ public class HttpClientUtils {
      * @return response inputStream
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static InputStream getInputStreamInSubThread(String url) throws IOException {
+    public static InputStream getInputStream(String url) throws IOException {
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
         client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
         client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Constant.TimeInApplication.NET_TIMEOUT);
@@ -69,8 +69,8 @@ public class HttpClientUtils {
      * @return response string
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static String getStringInSubThread(String url) throws IOException {
-        InputStream is = getInputStreamInSubThread(url);
+    public static String getString(String url) throws IOException {
+        InputStream is = getInputStream(url);
         if (is != null) {
             return FileUtils.inputStream2String(is);
         } else {
@@ -86,7 +86,7 @@ public class HttpClientUtils {
      * @return response inputStream
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static InputStream postInputStreamInSubThread(String url, Map<String, String> params) throws IOException {
+    public static InputStream postInputStream(String url, Map<String, String> params) throws IOException {
         List<NameValuePair> list = new ArrayList<NameValuePair>();
         if (params != null && !params.isEmpty()) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -117,8 +117,8 @@ public class HttpClientUtils {
      * @return response String
      * @throws IOException In the case of non-200 status code is returned, it would have thrown
      */
-    public static String postStringInSubThread(String url, Map<String, String> params) throws IOException {
-        InputStream is = postInputStreamInSubThread(url, params);
+    public static String postString(String url, Map<String, String> params) throws IOException {
+        InputStream is = postInputStream(url, params);
         if (is != null) {
             return FileUtils.inputStream2String(is);
         } else {

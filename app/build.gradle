@@ -84,6 +84,8 @@ install {
     }
 }
 
+
+
 android.libraryVariants.all { variant ->
     if (variant.name == 'release') {
         task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
@@ -91,6 +93,10 @@ android.libraryVariants.all { variant ->
             classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath())
             options {
                 encoding "UTF-8"
+                charSet 'UTF-8'
+                title "ProjectUtils For android DOC"
+                author true
+                version true
                 links "http://docs.oracle.com/javase/7/docs/api/"
                 linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
             }
@@ -114,6 +120,8 @@ android.libraryVariants.all { variant ->
         }
     }
 }
+
+
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
