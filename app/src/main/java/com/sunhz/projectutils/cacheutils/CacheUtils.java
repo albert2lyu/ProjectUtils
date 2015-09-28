@@ -32,9 +32,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * cache manager
- * Directory Structure : (!!!See the complete structure README.md!!!)
- * in sdcard/android/[package name]/files or machine store
+ * cache 管理器
+ * 目录结构：（详细的目录结构请参看项目的 README.md 文件）
+ * in sdcard/android/[package name]/files or 手机内存
  * -- cache folder
  * --- dataCache folder
  * --- imageCache folder
@@ -85,8 +85,8 @@ public class CacheUtils {
     }
 
     /**
-     * if phone have sd card , create cache folder in sd card/android/[package name]/files/cache
-     * if phone not have sd card , create cache folder in data/data/[package name]/cache
+     * 如果手机有 sd 卡 , 创建缓存目录到 sd card/android/[package name]/files/cache
+     * 如果手机没有 sd 卡 , 创建缓存目录到 data/data/[package name]/cache
      */
     private void checkCacheFolderExists() {
 
@@ -114,7 +114,7 @@ public class CacheUtils {
     }
 
     /**
-     * check cache path, if the path not folder or not exists, create it.
+     * 检查缓存文件夹是否存在，如果不存在，或者路径下不是文件夹，删除重建
      *
      * @param file file
      */
@@ -129,7 +129,7 @@ public class CacheUtils {
     }
 
     /**
-     * get root cache file
+     * 获取 root cache file
      *
      * @return root cache file
      */
@@ -138,7 +138,7 @@ public class CacheUtils {
     }
 
     /**
-     * get data cache file
+     * 获取 data cache file
      *
      * @return data cache file
      */
@@ -147,7 +147,7 @@ public class CacheUtils {
     }
 
     /**
-     * get data cache path
+     * 获取 data cache path
      *
      * @return String type data cache path
      */
@@ -156,7 +156,7 @@ public class CacheUtils {
     }
 
     /**
-     * get media cache file
+     * 获取 media cache file
      *
      * @return media cache file
      */
@@ -165,7 +165,7 @@ public class CacheUtils {
     }
 
     /**
-     * get media cache path
+     * 获取 media cache 路径
      *
      * @return String type media cache path
      */
@@ -174,7 +174,7 @@ public class CacheUtils {
     }
 
     /**
-     * get other cache file
+     * 获取 other cache 路径
      *
      * @return other cache file
      */
@@ -184,7 +184,7 @@ public class CacheUtils {
 
 
     /**
-     * get other cache path
+     * 获取 other cache 路径
      *
      * @return String type other cache path
      */
@@ -193,25 +193,25 @@ public class CacheUtils {
     }
 
     /**
-     * check cache exists and fail time
+     * 检查缓存是否存在，是否过期
      *
-     * @param cacheFileName cache file name
      * @param cacheType     cache type, CacheType.XXX
-     * @param useExactTime  use exact time , true: use, false: do not use
-     * @return true:exists,not fail. false:not exists/fail/exists but fail
+     * @param cacheFileName cache file name
+     * @param useExactTime  使用精确时间查询缓存是否失效：true，false：不使用精确时间查询缓存是否失效
+     * @return true：存在且没失效. false：缓存不存在或缓存以失效
      */
-    public boolean checkCacheExistsAndFailTime(String cacheFileName, CacheType cacheType, boolean useExactTime) {
-        return checkCacheExists(cacheFileName, cacheType) && useExactTime ? checkCacheFailTimeUseExactTime(cacheFileName, cacheType) : checkCacheFailTimeNotUseExactTime(cacheFileName, cacheType);
+    public boolean checkCacheExistsAndFailTime(CacheType cacheType, String cacheFileName, boolean useExactTime) {
+        return checkCacheExists(cacheType, cacheFileName) && useExactTime ? checkCacheFailTimeUseExactTime(cacheType, cacheFileName) : checkCacheFailTimeNotUseExactTime(cacheType, cacheFileName);
     }
 
     /**
-     * check cache exists
+     * 检查缓存是否存在
      *
-     * @param cacheFileName cache file name
      * @param cacheType     cache type, CacheType.XXX
-     * @return true exists, false not exists
+     * @param cacheFileName cache file name
+     * @return true：存在, false：不存在
      */
-    public boolean checkCacheExists(String cacheFileName, CacheType cacheType) {
+    public boolean checkCacheExists(CacheType cacheType, String cacheFileName) {
 
         switch (cacheType) {
             case DataCache:
@@ -226,14 +226,14 @@ public class CacheUtils {
     }
 
     /**
-     * check cache file whether failure
+     * 检查缓存是否失效
      *
-     * @param cacheFileName cache file name
      * @param cacheType     cache type, CacheType.XXX
-     * @return true: cache fail, false: cache not fail
+     * @param cacheFileName cache file name
+     * @return true：缓存已经失效, false：缓存未失效
      */
-    public boolean checkCacheFailTimeUseExactTime(String cacheFileName, CacheType cacheType) {
-        if (!checkCacheExists(cacheFileName, cacheType)) {
+    public boolean checkCacheFailTimeUseExactTime(CacheType cacheType, String cacheFileName) {
+        if (!checkCacheExists(cacheType, cacheFileName)) {
             return false;
         }
         long lastModified = 0;
@@ -257,13 +257,13 @@ public class CacheUtils {
     }
 
     /**
-     * For a day as a unit, check cache fail time, over the same day zero expired
+     * 以一天为单位检查缓存是否失效
      *
-     * @param cacheFileName cache file name
      * @param cacheType     cache type, CacheType.XXX
-     * @return true: cache fail, false: cache not fail
+     * @param cacheFileName cache file name
+     * @return true：缓存失效, false：缓存未失效
      */
-    public boolean checkCacheFailTimeNotUseExactTime(String cacheFileName, CacheType cacheType) {
+    public boolean checkCacheFailTimeNotUseExactTime(CacheType cacheType, String cacheFileName) {
 
         long lastModified = 0;
         switch (cacheType) {
@@ -338,6 +338,7 @@ public class CacheUtils {
      */
     private void clearCache(File file) {
         FileUtils.deleteDir(file);
+        checkCacheFolderExists();
     }
 
 
@@ -522,6 +523,7 @@ public class CacheUtils {
 
     /**
      * under cache type get cache file object
+     *
      * @param cacheType cache type, CacheType.XXX
      * @return cache file object
      */

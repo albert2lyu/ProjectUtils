@@ -45,6 +45,12 @@ public class GsonRequest<T> extends Request<T> {
         this.listener = listener;
     }
 
+    public GsonRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(method, url, errorListener);
+        this.clazz = clazz;
+        this.listener = listener;
+    }
+
 
     @Override
     protected void deliverResponse(T response) {

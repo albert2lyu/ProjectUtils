@@ -117,4 +117,7 @@ public class SharePreferenceUtils {
         mContext.getSharedPreferences(spName, Context.MODE_PRIVATE | Context.MODE_MULTI_PROCESS).edit().clear().commit();
     }
 
+    public void deleteValue(String spName, String key) {
+        mContext.getSharedPreferences(spName, Context.MODE_PRIVATE | Context.MODE_MULTI_PROCESS).edit().remove(key).commit();
+    }
 }

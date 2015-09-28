@@ -44,12 +44,21 @@
 * Toast：提供了 ToastUtils。提供了在子线程，主线程中显示 Toast 的便捷操作。
 
 * View：提供了 DensityUtils、KeyboardStatusUtils、StatusBarUtils。
-	* DensityUtils 用来获取屏幕信息，如分辨率，长宽，px 转 dp，dp 转 px，sp 转 px，px 转 dp 等操作。
-	* KeyboardStatusUtils 用来监听软键盘是否弹出、收回，并提供相应 callBack 以方便使用。
-	* StatusBarUtils 用来获取状态栏高度，选择是否隐藏以及显示状态栏的便捷操作。
+	* DensityUtils：用来获取屏幕信息，如分辨率，长宽，px 转 dp，dp 转 px，sp 转 px，px 转 dp 等操作。
+	* KeyboardStatusUtils：用来监听软键盘是否弹出、收回，并提供相应 callBack 以方便使用。
+	* StatusBarUtils：用来获取状态栏高度，选择是否隐藏以及显示状态栏的便捷操作。
+	* CountDownButtonHelper：快速完成 button 的倒计时操作。
 
 * ActivityManager：提供管理 activity 以及 closeAll activity 的便捷方法。
 
 * Constant：存放常量，使用方法请查看 [项目说明](https://github.com/ChinaSunHZ/ProjectUtils/blob/master/README.md)
 
 * CrashHandler：提供了将报错信息保存下来的方法。
+
+* SoftInputUtils：提供了软键盘的开关方法。
+
+* FixInputMethodManagerLeak：修复某些手机的 InputMethodManager 造成的内存泄露问题。
+
+* FixClipboardUIManagerLeak：修复某些手机的 ClipboardUIManager 造成的内存泄漏问题。
+
+* BrightnessUtils：快速设置、还原屏幕亮度。

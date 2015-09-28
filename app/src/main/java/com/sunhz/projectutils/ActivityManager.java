@@ -41,6 +41,10 @@ public class ActivityManager {
                 activity.finish();
             }
         }
+        ExitProcessThread exitProcessThread = new ExitProcessThread();
+        exitProcessThread.setName("ExitProcessThread");
+        exitProcessThread.start();
+
     }
 
     public synchronized static void addActivity(Activity activity) {
@@ -53,6 +57,37 @@ public class ActivityManager {
 
     public synchronized static ArrayList<Activity> getAllActivity() {
         return actList;
+    }
+
+    public synchronized static boolean hasActivity(Class clazz) {
+        boolean result = false;
+        int activitySize = actList.size();
+        for (int i = 0; i < activitySize; i++) {
+            System.out.println(actList.get(i).getClass().getSimpleName());
+            if (actList.get(i).getClass().equals(clazz)) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+
+    private static class ExitProcessThread extends Thread {
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            android.os.Process.killProcess(android.os.Process.myPid());
+
+            System.exit(0);
+        }
     }
 
 }

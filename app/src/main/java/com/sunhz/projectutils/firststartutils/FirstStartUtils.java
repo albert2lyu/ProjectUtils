@@ -20,7 +20,8 @@ import android.content.Context;
 import com.sunhz.projectutils.fileutils.SharePreferenceUtils;
 
 /**
- * Record whether the current app is the first start
+ * Record whether the current app is the first start.
+ * true is first, false is not first.
  * Created by Spencer (www.spencer-dev.com) on 15/2/21.
  */
 public class FirstStartUtils {
@@ -40,9 +41,9 @@ public class FirstStartUtils {
     public static void init(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext.getApplicationContext());
         if (!sharePreferenceUtils.contains(FIRST_START_FLAG, FIRST_START_FLAG)) {
-            sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
-        } else {
             sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
+        } else {
+            sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
         }
     }
 
@@ -56,7 +57,7 @@ public class FirstStartUtils {
      */
     public static boolean checkIsFirstStart(Context mContext) {
         SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext.getApplicationContext());
-        return !sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG);
+        return sharePreferenceUtils.getBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
     }
 
     /**
@@ -69,4 +70,14 @@ public class FirstStartUtils {
         preferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.TRUE);
     }
 
+    /**
+     * Manually change the start times, change not first.
+     *
+     * @param mContext Context
+     */
+    public static void changeNotFirst(Context mContext) {
+        SharePreferenceUtils sharePreferenceUtils = SharePreferenceUtils.getInstance(mContext);
+        sharePreferenceUtils.saveBoolean(FIRST_START_FLAG, FIRST_START_FLAG, Boolean.FALSE);
+    }
 }
+

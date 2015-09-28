@@ -47,6 +47,9 @@
     // 如果项目不需要使用 AES 加密工具，就不需要设置 AES 加密方式的 key，可以忽略上面方法， 直接调用下面方法。
     Constant.initNetTimeOutAndCacheFailTime(1000,BaseApplication.A_DAY);
 
+    // Fix ClipboardUIManager memory leak
+    FixClipboardUIManagerLeak.fixClipboardUIManagerLeak(this);
+
     if (!BuildConfig.DEBUG) { // 正式环境
         // 开启记录崩溃日志功能
         CrashHandler.getInstance(mContext).init();

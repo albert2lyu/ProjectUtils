@@ -38,7 +38,7 @@ public class BaseApplication extends Application {
     }
 
     protected void initConstant() {
-        // Init aes key, net time out, cache fail time.
+        // 初始化 aes key, 请求超时时间, cache 失效时间.
         Constant.initConstant("", 10000, A_DAY);
     }
 

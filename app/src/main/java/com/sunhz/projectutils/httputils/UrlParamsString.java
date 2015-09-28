@@ -26,15 +26,6 @@ import java.net.URLEncoder;
 public class UrlParamsString {
 
 
-    /**
-     * Demo
-     * UrlParamsString urlParamsString = new UrlParamsString("keyTest1","valueTest1");
-     * urlParamsString.toString(); //result = "keyTest1=valueTest1"
-     * urlParamsString.add("keyTest2","valueTest2");
-     * urlParamsString.toString(); //result = "keyTest1=valueTest1&keyTest2=valueTest2"
-     */
-
-
     private StringBuffer query = new StringBuffer();
 
     public UrlParamsString() {
@@ -45,12 +36,16 @@ public class UrlParamsString {
         encode(name, value);
     }
 
-    public synchronized void add(String name, String value) {
+    public void addFirstParams(String name, String value) {
+        encode(name, value);
+    }
+
+    public void addParams(String name, String value) {
         query.append('&');
         encode(name, value);
     }
 
-    private synchronized void encode(String name, String value) {
+    private void encode(String name, String value) {
         try {
             query.append(URLEncoder.encode(name, "UTF-8"));
             query.append('=');

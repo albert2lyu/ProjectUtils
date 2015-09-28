@@ -27,6 +27,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
 import com.sunhz.projectutils.ActivityManager;
 import com.sunhz.projectutils.Constant;
+import com.sunhz.projectutils.fixmemoryleakutils.FixInputMethodManagerLeak;
 
 /**
  * Base activity
@@ -57,7 +58,7 @@ public class BaseActivity extends FragmentActivity implements Base {
     }
 
     /**
-     * add request to volley queue
+     * 添加请求到 volley 请求队列
      *
      * @param request volley request
      */
@@ -86,6 +87,7 @@ public class BaseActivity extends FragmentActivity implements Base {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        FixInputMethodManagerLeak.fixInputMethodManagerLeak(this);
         volleyQueue.cancelAll(mContext);
         ActivityManager.removeActivity(this);
     }

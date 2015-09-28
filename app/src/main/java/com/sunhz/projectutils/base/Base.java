@@ -18,7 +18,7 @@ package com.sunhz.projectutils.base;
 import com.android.volley.Request;
 
 /**
- * Co-owner methods in Base activity and Base fragment
+ * base activity 中、base fragment 共有的方法
  * Created by Spencer (www.spencer-dev.com) on 15/4/7.
  */
 public interface Base {

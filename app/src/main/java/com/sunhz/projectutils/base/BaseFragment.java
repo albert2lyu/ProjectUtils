@@ -51,7 +51,7 @@ public class BaseFragment extends Fragment implements Base {
     }
 
     /**
-     * add request to volley queue
+     * 添加请求到 volley 请求队列
      *
      * @param request volley request
      */

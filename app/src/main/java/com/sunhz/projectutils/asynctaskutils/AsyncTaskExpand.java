@@ -18,23 +18,23 @@ package com.sunhz.projectutils.asynctaskutils;
 import android.os.AsyncTask;
 
 /**
- * Expand AsyncTask , Random control thread Parallel Serial
+ * 拓展的 AsyncTask , 自由控制并行、串行
  * Created by Spencer (www.spencer-dev.com) on 15/2/3.
  */
 public abstract class AsyncTaskExpand<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
     /**
-     * Parallel
+     * 并行
      */
     public static final boolean PARALLEL = true;
     /**
-     * Serial
+     * 串行
      */
     public static final boolean SERIAL = false;
     private boolean flag = SERIAL;
 
     /**
-     * control thread Parallel or Serial
+     * 控制线程的并行和串行
      * @param flag AsyncTaskExpend.PARALLEL or AsyncTaskExpend.SERIAL
      */
     public AsyncTaskExpand(boolean flag) {
