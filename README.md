@@ -39,10 +39,10 @@
     CacheUtils.getInstance(mContext).init();
 
     // 开启记录 app 第一次打开功能
-    FirstStartUtils.init(Context);
+    FirstStartUtils.init(mContext);
 
     // 设置项目的 AES 加密方式的 key，设置网络超时时间（请求超时，响应超时为同一时间），设置缓存失效时间
-    Constant.initConstant("xxxxxxxxxxxxxxxx", 10000, BaseApplication.A_DAY);
+    // Constant.initConstant("xxxxxxxxxxxxxxxx", 10000, BaseApplication.A_DAY);
 
     // 如果项目不需要使用 AES 加密工具，就不需要设置 AES 加密方式的 key，可以忽略上面方法， 直接调用下面方法。
     Constant.initNetTimeOutAndCacheFailTime(1000,BaseApplication.A_DAY);

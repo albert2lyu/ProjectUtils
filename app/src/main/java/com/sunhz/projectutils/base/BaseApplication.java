@@ -34,6 +34,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.mContext = this;
+
         initConstant();
     }
 

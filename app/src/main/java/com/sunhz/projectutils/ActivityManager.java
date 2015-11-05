@@ -36,7 +36,7 @@ public class ActivityManager {
      */
     public synchronized static void closeAllActivity() {
         for (int i = 0; i < actList.size(); i++) {
-            Activity activity = actList.get(i);
+            Activity activity = actList.remove(i);
             if (activity != null) {
                 activity.finish();
             }

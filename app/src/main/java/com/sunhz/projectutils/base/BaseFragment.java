@@ -58,6 +58,7 @@ public class BaseFragment extends Fragment implements Base {
     @Override
     public void volleyAdd(Request request) {
         request.setRetryPolicy(policy);
+        request.setTag(this);
         volleyQueue.add(request);
     }
 
