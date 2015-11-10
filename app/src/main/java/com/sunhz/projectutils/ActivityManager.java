@@ -36,11 +36,14 @@ public class ActivityManager {
      */
     public synchronized static void closeAllActivity() {
         for (int i = 0; i < actList.size(); i++) {
-            Activity activity = actList.remove(i);
+            Activity activity = actList.get(i);
             if (activity != null) {
                 activity.finish();
             }
         }
+        actList.clear();
+
+
         ExitProcessThread exitProcessThread = new ExitProcessThread();
         exitProcessThread.setName("ExitProcessThread");
         exitProcessThread.start();
